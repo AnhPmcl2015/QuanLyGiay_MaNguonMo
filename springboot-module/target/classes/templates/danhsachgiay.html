@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" name="viewport"
+	content="width=device-width, initial-scale=1" />
+<title>Danh sách giày</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" />
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+<link rel="stylesheet" th:href="@{/css/danhsachgiay.css}"
+	href="../../css/danhsachgiay.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-visible/1.2.0/jquery.visible.min.js"></script>
+</head>
+<body>
+	<div id="app">			
+		<div class="row">
+			<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+				<legend style="font-size: 13px;">
+					<p style="display: inline;">Danh sách giày</p>
+				</legend>
+			</div>		
+		</div>
+		<div class="row bot15">
+			<div
+				class="col-sm-3 col-md-2 col-md-offset-1 col-lg-2 col-lg-offset-1">
+				<label for="txtMaGiay">Mã giày</label> <input type="text"
+					id="txtMaGiay" class="form-control" />
+			</div>
+			<div class="col-sm-5 col-md-4 col-lg-3">
+				<label for="txtTenGiay">Tên giày</label> <input type="text"
+					id="txtTenGiay" class="form-control" />
+			</div>
+			<div class="col-xs-3 col-sm-2 col-md-2">
+				<label for="txtGioiTinh">Giới tính</label> 
+				<select id="txtGioiTinh"
+					name="txtGioiTinh" class="form-control">
+					<option value="Nam">Nam</option>
+					<option value="Nữ">Nữ</option>
+					<option value="" selected="selected">Tất cả</option>
+				</select>
+			</div>
+			<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+				<div style="margin-top:31px;">
+					<a class="btn btn-success" title="Thêm giày"
+						style="display: inline; margin-top: -20px;"
+						href="/giay"> <i class="fas fa-plus-square"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="row bot15">
+			<div class="col-xs-2 col-sm-2 col-md-2 col-md-offset-1 col-lg-2">
+				<label for="txtNhaSanXuat">Nhà sản xuất</label> 
+				<select				
+					id="txtNhaSanXuat" class="form-control">
+					<option value="Nike">Nike</option>
+					<option value="Adidas">Adidas</option>					
+				</select>
+			</div>
+			<div class="col-xs-3 col-sm-2 col-md-2">
+				<label for="txtLoaiGiay">Loại giày</label> 
+				<select 
+					data-live-search="true" data-live-search-style="startsWith"
+					id="txtLoaiGiay" class="selectpicker">
+					<optgroup>
+						<option value="Running">Running</option>
+						<option value="Air Max">Air Max</option>
+						<option value="123">123</option>
+						<option value="Adidas">Adidas</option>
+						<option value="Nike">Nike</option>				
+					</optgroup>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div
+				class="col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+				<table id="table" class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Mã giày</th>
+							<th>Tên giày</th>
+							<th>Giới tính</th>
+							<th>Loại giày</th>
+							<th>Nhà sản xuất</th>
+							<th>Chức năng</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>
+								<a href="#">AS456</a> 
+								<div class="Show">							
+									<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+									 class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>								 
+								</div>
+							</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit" data-toggle="tooltip"
+									title="Sửa">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete" title="Xóa" 
+									 data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="" data-toggle="tooltip"
+									title="Thêm chi tiết giày">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>
+								<a href="#">AS789</a> 
+								<div class="Show">							
+									<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+									 class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>								 
+								</div>
+							</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>123</td>
+							<td>Adidas</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>			
+								<a href="#">AS753</a> 
+								<div class="Show">							
+									<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+									 class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>								 
+								</div>
+							</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit" title="Sửa">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete" title="Xóa"
+									data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Yin</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+									data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>
+								<a href="#">AS456</a> 
+								<div class="Show">							
+									<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+									 class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>								 
+								</div>
+							</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>				
+								<a href="#">AS456</a> 
+								<div class="Show">							
+									<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+									 class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>								 
+								</div>
+							</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>	
+								<a href="#">AS456</a> 
+								<div class="Show">							
+									<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+									 class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>	
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>
+							 		<img src="https://c.static-nike.com/a/images/t_PDP_1280_v1/f_auto/fn6iifidemoycjc50c4x/air-max-97-glitter-shoe-CmRtjv.jpg"
+							 		class="img-responsive"/>								 
+								</div>
+							</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete"
+								data-toggle="modal" data-target="#BoxModal">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nữ</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>789</td>
+							<td>2323</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nữ</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>789</td>
+							<td>2323</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nữ</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>789</td>
+							<td>2323</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nữ</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>789</td>
+							<td>2323</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>AS456</td>
+							<td>Air213</td>
+							<td>Nữ</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>789</td>
+							<td>2323</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>
+								<button type="button" class="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button type="button" class="delete">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+								<button type="button" class="">
+									<i class="fas fa-wrench"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="BoxModal" role="dialog">
+	   <div class="modal-dialog">	         
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Thông báo</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Bạn có chắc muốn xóa không?</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-info" data-dismiss="modal" onclick="">Yes</button>
+	          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+	        </div>
+	      </div>	      
+	   </div>
+	 </div>
+	<script src="../../js/danhsachgiay.js">
+		
+	</script>
+</body>
+</html>

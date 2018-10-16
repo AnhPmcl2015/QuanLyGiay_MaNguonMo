@@ -1,0 +1,48 @@
+#app {
+	margin-top: 25px;
+}
+
+.top15 {
+	margin-top: 15px;
+}
+
+.bot15 {
+	margin-bottom: 15px;
+}
+
+.hover {
+	background-color: #D9F3FE !important;
+}
+
+.dataTables_filter {
+	display: none;
+}
+img {
+	height: 135px; 
+	width: 135px;
+	float: left;	
+}
+.Show {
+	display: block;
+	position: absolute;
+	visibility: hidden;
+	transition: visibility 0s, opacity 0.5s linear;
+	opacity: 0;
+	width: 0px;
+	height: 0px;
+}
+
+a:hover +.Show{
+	display: block;
+	position: absolute;
+	visibility: visible;
+	opacity: 1;
+	width: 100%;
+	margin-top: -160px;
+	margin-left: 50px;
+}
+td.details-control {
+    background: url('http://www.datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+

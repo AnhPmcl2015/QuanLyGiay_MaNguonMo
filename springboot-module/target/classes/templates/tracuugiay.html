@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Tra cứu giày</title>
+<link rel="stylesheet" th:href="@{/css/tracuugiay.css}"
+	href="../../css/tracuugiay.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" />
+<script
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" />
+</head>
+<body>
+	<div class="container top15">
+		<div class="row bot15">
+			<div class="col-sm-3 col-md-2  col-lg-2">
+				<label for="txtMaGiay">Mã giày</label> <input type="text"
+					id="txtMaGiay" class="form-control" />
+			</div>
+			<div class="col-sm-5 col-md-4 col-lg-3">
+				<label for="txtTenGiay">Tên giày</label> <input type="text"
+					id="txtTenGiay" class="form-control" />
+			</div>
+			<div class="col-xs-3 col-sm-2 col-md-2">
+				<label for="txtGioiTinh">Giới tính</label> <select id="txtGioiTinh"
+					name="txtGioiTinh" class="form-control">
+					<option value="Nam">Nam</option>
+					<option value="Nữ">Nữ</option>
+					<option value="" selected="selected">Tất cả</option>
+				</select>
+			</div>
+		</div>
+		<div class="row bot15">
+			<div class="col-lg-2">
+				<label for="txtMinSoLuong">Số lượng (min)</label> <input type="text"
+					name="txtMinSoLuong" class="form-control" id="txtMinSoLuong" />
+			</div>
+			<div class="col-lg-2">
+				<label for="txtMaxSoLuong">Số lượng (max)</label> <input type="text"
+					name="txtMaxSoLuong" class="form-control" id="txtMaxSoLuong" />
+			</div>
+			<div class="col-xs-2 col-sm-2 col-md-2  col-lg-2">
+				<label for="txtNhaSanXuat">Nhà sản xuất</label> <select
+					id="txtNhaSanXuat" class="form-control">
+					<option value="">Tất cả</option>
+					<option value="Nike">Nike</option>
+					<option value="Adidas">Adidas</option>
+				</select>
+			</div>
+			<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+				<label for="txtLoaiGiay">Loại giày</label> <select
+					data-live-search="true" data-live-search-style="startsWith"
+					id="txtLoaiGiay" class="selectpicker">
+					<optgroup>
+						<option value="">Tất cả</option>
+						<option value="Running">Running</option>
+						<option value="Air Max">Air Max</option>
+						<option value="123">123</option>
+						<option value="Adidas">Adidas</option>
+						<option value="Nike">Nike</option>
+					</optgroup>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<table id="table" class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID CTG</th>
+							<th>Mã giày</th>
+							<th>Tên giày</th>
+							<th>Giới tính</th>
+							<th>Loại giày</th>
+							<th>Nhà sản xuất</th>
+							<th>Số lượng</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td><a href="#">AS456</a></td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>123</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td><a href="#">AS456</a></td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>50</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td><a href="#">AS456</a></td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>10</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td><a href="#">AS456</a></td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>5</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td><a href="#">AS456</a></td>
+							<td>Air213</td>
+							<td>Nam</td>
+							<td>Running</td>
+							<td>Nike</td>
+							<td>25</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="../../js/tracuugiay.js"></script>
+</body>
+</html>
