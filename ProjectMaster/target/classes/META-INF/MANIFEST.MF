@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: web-app-ban-giay
+Implementation-Version: 1.0
+Built-By: quochung
+Implementation-Vendor-Id: org.springframework.boot
+Build-Jdk: 1.8.0_171
+Implementation-URL: http://projects.spring.io/spring-boot/web-app-ban-
+ giay/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
