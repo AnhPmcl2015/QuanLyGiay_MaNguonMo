@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/mutualCss.css">
+    <link rel="stylesheet" href="../static/css/admin.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap-theme.min.css" />
+    <script src="../static/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <script>
+        window.onload = function() {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Simple Line Chart"
+                },
+                axisY: {
+                    includeZero: false
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: [{
+                            y: 450
+                        },
+                        {
+                            y: 414
+                        },
+                        {
+                            y: 520,
+                            indexLabel: "highest",
+                            markerColor: "red",
+                            markerType: "triangle"
+                        },
+                        {
+                            y: 460
+                        },
+                        {
+                            y: 450
+                        },
+                        {
+                            y: 500
+                        },
+                        {
+                            y: 480
+                        },
+                        {
+                            y: 480
+                        },
+                        {
+                            y: 410,
+                            indexLabel: "lowest",
+                            markerColor: "DarkSlateGrey",
+                            markerType: "cross"
+                        },
+                        {
+                            y: 500
+                        },
+                        {
+                            y: 480
+                        },
+                        {
+                            y: 510
+                        }
+                    ]
+                }]
+            });
+            chart.render();
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Thống Kê</a></li>
+                <li><a href="#">Lưu trữ giày</a></li>
+                <li><a href="#">Phiếu nhập</a></li>
+                <li><a href="#">Lưu trữ phiếu nhập</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="danhSachDonHang row">
+            <section class="col-md-9 col-lg-9 table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Khách hàng</th>
+                            <th>Số Tiền</th>
+                            <th>Tình Trạng</th>
+                            <th>Chi Tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>14582</td>
+                            <td>Phan Thế Anh</td>
+                            <td>350 $</td>
+                            <td>Đang giao hàng</td>
+                            <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
+                        </tr>
+                        <tr>
+                            <td>14582</td>
+                            <td>Phan Thế Anh</td>
+                            <td>350 $</td>
+                            <td>Đang giao hàng</td>
+                            <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
+                        </tr>
+                        <tr>
+                            <td>14582</td>
+                            <td>Phan Thế Anh</td>
+                            <td>350 $</td>
+                            <td>Đang giao hàng</td>
+                            <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
+                        </tr>
+                        <tr>
+                            <td>14582</td>
+                            <td>Phan Thế Anh</td>
+                            <td>350 $</td>
+                            <td>Đang giao hàng</td>
+                            <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
+                        </tr>
+                        <tr>
+                            <td>14582</td>
+                            <td>Phan Thế Anh</td>
+                            <td>350 $</td>
+                            <td>Đang giao hàng</td>
+                            <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
+                        </tr>
+                        <tr>
+                            <td>14582</td>
+                            <td>Phan Thế Anh</td>
+                            <td>350 $</td>
+                            <td>Đang giao hàng</td>
+                            <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Total sales -->
+            <section class="col-md-3 col-lg-3">
+
+                <section id="totalSales">
+                    <section id="iconsTotalSales">
+                        <i class="fa fa-dollar-sign"></i>
+                    </section>
+
+                    <section id="detailTotalSales">
+                        <span style="font-size: 25px;">4500</span><br />
+                        <span style="font-size: 16px;">Total Sales</span>
+                    </section>
+
+                    <section id="otherDetailTotalSales">
+                        <section class="titleOtherDetail">
+                            Last week sales
+                        </section>
+
+                        <section class="detailOtherDetail">
+                            432
+                        </section>
+                    </section>
+                </section>
+            </section>
+
+            <!-- Total orders -->
+            <section class="col-md-3 col-lg-3">
+
+                <section id="totalOrders">
+                    <section id="iconsTotalOrders">
+                        <i class="fas fa-shopping-cart"></i>
+                    </section>
+
+                    <section id="detailTotalOrders">
+                        <span style="font-size: 25px;">1085</span><br />
+                        <span style="font-size: 16px;">Total Orders</span>
+                    </section>
+
+                    <section id="otherDetailTotalOrders">
+                        <section class="titleOtherDetail">
+                            New orders
+                        </section>
+
+                        <section class="detailOtherDetail">
+                            35
+                        </section>
+                    </section>
+                </section>
+            </section>
+
+            <!-- Total visitors -->
+
+            <section class="col-md-3 col-lg-3">
+
+                <section id="totalVisitors">
+                    <section id="iconsTotalVisitors">
+                        <i class="fa fa-user-alt"></i>
+                    </section>
+
+                    <section id="detailTotalVisitors">
+                        <span style="font-size: 25px;">10000</span><br />
+                        <span style="font-size: 16px;">Total Visitors</span>
+                    </section>
+
+                    <section id="otherDetailTotalVisitors">
+                        <section class="titleOtherDetail">
+                            Last week's visitors
+                        </section>
+
+                        <section class="detailOtherDetail">
+                            250
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+        <section class="thongKe row">
+            <section class="col-md-9 col-lg-9">
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            </section>
+
+            <section class="luaChon">
+                
+            </section>
+        </section>
+    </main>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+
+</html>

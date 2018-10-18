@@ -1,0 +1,14 @@
+section.sizeGuide{
+    display: grid;
+    position: relative;
+    width: 100%;
+    height: 350px;
+    align-content: center;
+    justify-content: center;
+}
+
+h1{
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}

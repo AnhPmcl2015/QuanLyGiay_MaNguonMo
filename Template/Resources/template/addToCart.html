@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/mutualCss.css">
+    <link rel="stylesheet" href="../static/css/addToCart.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap-theme.min.css" />
+    <script src="../static/js/bootstrap/bootstrap.min.js"></script>
+
+</head>
+
+<body class="container">
+    <header class="headerHoaDon">
+        <img src="../static/img/giay.jpg" alt="Logo" id="logo" />
+        <div id="search">
+            <input type="text" placeholder="Search" />
+            <img src="../static/img/icons8-search-64.png" alt="Search Icon" />
+        </div>
+        <a id="signIn">Sign in</a>
+        <div class="vlHeader"></div>
+        <span id="total">&#36;0 &#8650;</span>
+    </header>
+
+    <nav class="navHeader">
+        <div>Air Jordans</div>
+        <div class="vlNav"></div>
+        <div>Nike</div>
+        <div class="vlNav"></div>
+        <div>Adidas</div>
+        <div class="vlNav"></div>
+        <div>Yeezy</div>
+        <div class="vlNav"></div>
+        <div>Vans</div>
+    </nav>
+
+
+    <main>
+        <form method="post" action="#">
+            <section class="detailDonHang">
+                <section class="mainDetail">
+                    <section>Air Jordan2</section>
+                    <section><span>Đơn giá: </span>350$</section>
+                    <section>
+                        <span>Số Lượng: &nbsp;&nbsp;</span>
+                        <a id="minusNumber">-</a>
+                        <input type="number" name="number" min="1" max="5" value="1">
+                        <a id="plusNumber">+</a>
+                    </section>
+                    <section>
+                        <span>Tổng cộng: </span> 350$
+                    </section>
+
+                    <section>
+                        <a class="btnDelete" data-toggle="tooltip" title="Xóa">X</a>
+                    </section>
+                </section>
+
+                <section class="otherDetail">
+                    <figure class="row">
+                        <section class="col-md-3">
+                            <img src="../static/img/giay.jpg" />
+                        </section>
+
+                        <figcaption class="col-md-9">
+                            <p class="tenHang">Air Jordans</p>
+                            <p class="tenGiay">&#9679; Air Jordans 2</p>
+                        </figcaption>
+                    </figure>
+                </section>
+            </section>
+            
+            <section class="detailDonHang">
+                <section class="mainDetail">
+                    <section>Air Jordan2</section>
+                    <section><span>Đơn giá: </span>350$</section>
+                    <section>
+                        <span>Số Lượng: &nbsp;&nbsp;</span>
+                        <a id="minusNumber">-</a>
+                        <input type="number" name="number" min="1" max="5" value="1">
+                        <a id="plusNumber">+</a>
+                    </section>
+                    <section>
+                        <span>Tổng cộng: </span> 350$
+                    </section>
+
+                    <section>
+                        <a class="btnDelete" data-toggle="tooltip" title="Xóa">X</a>
+                    </section>
+                </section>
+
+                <section class="otherDetail">
+                    <figure class="row">
+                        <section class="col-md-3">
+                            <img src="../static/img/giay.jpg" />
+                        </section>
+
+                        <figcaption class="col-md-9">
+                            <p class="tenHang">Air Jordans</p>
+                            <p class="tenGiay">&#9679; Air Jordans 2</p>
+                        </figcaption>
+                    </figure>
+                </section>
+            </section>
+            
+            
+            <section class="thanhTien">
+                <section class="tongSoTien">
+                    Tổng thanh toán:<span id="tongTien">350</span> $
+                </section>
+                <button id="btnDatHang">Đặt hàng</button>
+            </section>
+        </form>
+
+    </main>
+
+    <section id="banner">
+        Logo
+    </section>
+
+    <footer class="footer">
+        <section class="contact">
+            <p><strong>Contact us at</strong></p>
+            <p>abc@gmail.com</p>
+        </section>
+
+        <section class="information">
+            <p><strong>Letter:</strong> </p>
+            <input id="inputInformation" type="text" placeholder="Enter your email" />
+            <a href="#" id="informationSignup">Sign up</a>
+        </section>
+    </footer>
+
+</body>
+
+</html>
