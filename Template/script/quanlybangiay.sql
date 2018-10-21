@@ -62,24 +62,6 @@ gia_von long,
 primary key(id_chi_tiet_phieu_nhap)
 );
 
-create table hoa_don(
-id_hoa_don int not null,
-ngay_giao datetime not null,
-tong_tien long not null,
-id_khach_hang int not null,
-primary key(id_hoa_don)
-);
-
-
-create table chi_tiet_hoa_don(
-id_chi_tiet_hoa_don int not null,
-id_hoa_don int not null,
-id_chi_tiet_giay int not null,
-so_luong_mua  int not null,
-thanh_tien long not null,
-primary key(id_chi_tiet_hoa_don)
-);
-
 create table khach_hang(
 id_khach_hang int not null,
 ten_khach_hang char(100) not null,
@@ -121,9 +103,6 @@ alter table loai_giay add foreign key(id_hang_san_xuat) references hang_san_xuat
 alter table phieu_nhap add foreign key(id_hang_san_xuat) references hang_san_xuat(id_hang_san_xuat);
 alter table chi_tiet_phieu_nhap add foreign key(id_phieu_nhap) references phieu_nhap(id_phieu_nhap);
 alter table chi_tiet_phieu_nhap add foreign key(id_chi_tiet_giay) references chi_tiet_giay(id_chi_tiet_giay);
-alter table hoa_don add foreign key(id_khach_hang) references khach_hang(id_khach_hang);
-alter table chi_tiet_hoa_don add foreign key(id_hoa_don) references hoa_don(id_hoa_don);
-alter table chi_tiet_hoa_don add foreign key(id_chi_tiet_giay) references chi_tiet_giay(id_chi_tiet_giay);
 alter table don_hang add foreign key(id_tinh_trang) references tinh_trang_don_hang(id_tinh_trang);
 alter table chi_tiet_don_hang add foreign key(id_don_hang) references don_hang(id_don_hang);
 alter table chi_tiet_don_hang add foreign key(id_chi_tiet_giay) references chi_tiet_giay(id_chi_tiet_giay);
@@ -163,7 +142,6 @@ insert into loai_giay(ma_loai_giay, ten_loai_giay, id_hang_san_xuat) values
 -- Vans
 ("VaVa","Vans", 5);
 
-
 -- Gioi tinh
 insert into gioi_tinh(id_gioi_tinh, ten_gioi_tinh) values
 (1, "Nam"),
@@ -171,17 +149,11 @@ insert into gioi_tinh(id_gioi_tinh, ten_gioi_tinh) values
 
 -- Tình Trạng
 
-create table tinh_trang_don_hang(
-id_tinh_trang int not null,
-ten_tinh_trang char(50),
-primary key(id_tinh_trang)
-);
 insert into tinh_trang_don_hang(id_tinh_trang, ten_tinh_trang) values
 (1, "Chưa xác nhận"),
 (2, "Xác nhận"),
 (3, "Đang xử lý"),
-(4, "Hoàn thành"),
+(4, "Hoàn thành"), 
 (5, "Hủy");
 
 commit;
-
