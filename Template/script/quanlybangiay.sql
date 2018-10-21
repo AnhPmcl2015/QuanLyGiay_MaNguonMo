@@ -169,5 +169,19 @@ insert into gioi_tinh(id_gioi_tinh, ten_gioi_tinh) values
 (1, "Nam"),
 (2, "Nữ");
 
+-- Tình Trạng
+
+create table tinh_trang_don_hang(
+id_tinh_trang int not null,
+ten_tinh_trang char(50),
+primary key(id_tinh_trang)
+);
+insert into tinh_trang_don_hang(id_tinh_trang, ten_tinh_trang) values
+(1, "Chưa xác nhận"),
+(2, "Xác nhận"),
+(3, "Đang xử lý"),
+(4, "Hoàn thành"),
+(5, "Hủy");
+
 commit;
 

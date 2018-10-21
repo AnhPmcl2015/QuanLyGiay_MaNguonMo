@@ -14,6 +14,14 @@
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+    <!-- datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
     <script>
         window.onload = function() {
 
@@ -81,7 +89,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Logo</a>
@@ -90,7 +98,6 @@
                 <li class="active"><a href="#">Thống Kê</a></li>
                 <li><a href="#">Lưu trữ giày</a></li>
                 <li><a href="#">Phiếu nhập</a></li>
-                <li><a href="#">Lưu trữ phiếu nhập</a></li>
             </ul>
         </div>
     </nav>
@@ -98,7 +105,7 @@
     <main>
         <section class="danhSachDonHang row">
             <section class="col-md-9 col-lg-9 table-responsive">
-                <table class="table">
+                <table class="table" id="table">
                     <thead>
                         <tr>
                             <th>Mã đơn hàng</th>
@@ -151,11 +158,32 @@
                             <td>Đang giao hàng</td>
                             <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
                         </tr>
+                        
+                        <tr>
+                            <td>14582</td>
+                            <td>Phan Thế Thà</td>
+                            <td>350 $</td>
+                            <td>Đang giao hàng</td>
+                            <td><a href="javascript:void(0)">Nhấp để xem...</a></td>
+                        </tr>
 
 
                     </tbody>
                 </table>
             </section>
+
+            <script>
+                $(document).ready(function() {
+                    $('#table').DataTable({
+                        "scrollY": "200px",
+                        "scrollCollapse": true,
+                        "paging": false,
+                        scroller: {
+                            rowHeight: '20px'
+                        }
+                    });
+                });
+            </script>
 
             <!-- Total sales -->
             <section class="col-md-3 col-lg-3">
@@ -240,7 +268,10 @@
             </section>
 
             <section class="luaChon">
-                
+                <input type="radio" name="luaChonThongKe" checked> Theo ngày<br/>
+                <input type="radio" name="luaChonThongKe"> Theo tháng<br/>
+                <input type="radio" name="luaChonThongKe"> Theo quý<br/>
+                <input type="radio" name="luaChonThongKe"> Theo năm<br/>
             </section>
         </section>
     </main>
