@@ -31,7 +31,6 @@ img {
 	width: 0px;
 	height: 0px;
 }
-
 a:hover +.Show{
 	display: block;
 	position: absolute;

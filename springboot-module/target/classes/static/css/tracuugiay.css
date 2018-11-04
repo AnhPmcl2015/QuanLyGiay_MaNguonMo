@@ -1,7 +1,3 @@
-#app {
-	margin-top: 25px;
-}
-
 .top15 {
 	margin-top: 15px;
 }
@@ -17,11 +13,13 @@
 .dataTables_filter {
 	display: none;
 }
+
 img {
-	height: 135px; 
+	height: 135px;
 	width: 135px;
-	float: left;	
+	float: left;
 }
+
 .Show {
 	display: block;
 	position: absolute;
@@ -32,7 +30,7 @@ img {
 	height: 0px;
 }
 
-a:hover +.Show{
+a:hover+.Show {
 	display: block;
 	position: absolute;
 	visibility: visible;
@@ -41,8 +39,3 @@ a:hover +.Show{
 	margin-top: -160px;
 	margin-left: 50px;
 }
-td.details-control {
-    background: url('http://www.datatables.net/examples/resources/details_open.png') no-repeat center center;
-    cursor: pointer;
-}
-

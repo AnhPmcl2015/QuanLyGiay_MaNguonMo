@@ -1,15 +1,15 @@
 $(document).ready(function() {
-	
-//	$('button[class="delete"]').on('click', function(e) {
-//		var $form = $(this).closest('form');
-//		e.preventDefault();
-//		$('#confirm').modal({
-//			backdrop : 'static',
-//			keyboard : false
-//		}).one('click', '#delete', function(e) {
-//			$form.trigger('submit');
-//		});
-//	});
+	$.fn.select2.defaults.set("theme", "bootstrap");
+	$("#txtLoaiGiay").select2({
+		placeholder : "",
+		allowClear : true,
+		width: "100%"
+	});
+	$("#txtNhaSanXuat").select2({
+		placeholder : "",
+		allowClear : true,
+		width: "100%"
+	});
 	$('#table tr').hover(function() {
 		$(this).addClass('hover');
 	}, function() {
@@ -17,11 +17,6 @@ $(document).ready(function() {
 	});
 
 	var table = $("#table").DataTable({
-		// "columnDefs" : [ {
-		// "targets" : [0],
-		// "visible" : false,
-		// "searchable" : false
-		// } ],
 		"lengthMenu" : [ [ 10, 20, -1 ], [ "10 dòng", "20 dòng", "Tất cả" ] ],
 		"pagingType" : "full_numbers",
 		"oLanguage" : {
@@ -42,12 +37,12 @@ $(document).ready(function() {
 		e.preventDefault();
 		var $row = $(this).closest("tr"), $tds = $row.find("td:nth-child(1)");
 		$.each($tds, function() {
-			var ID = $(this).text();
-			var magiay = $(this).next().text();
-			var tengiay = $(this).next().next().text();
-			var gioitinh = $(this).next().next().next().text();
-			var loaigiay = $(this).next().next().next().next().text();
-			console.log(ID + ' ' + magiay + ' ' + tengiay);
+			var text_magiay =$(this).text().trim();
+			var magiay = $(this).children(".data-id").data("id");
+			var tengiay = $(this).next().text();
+			var gioitinh = $(this).next().next().text();
+			var loaigiay = $(this).next().next().next().text();
+			console.log(text_magiay+' '+magiay + ' ' + tengiay);
 		});
 	});
 	var row_table;
@@ -55,12 +50,12 @@ $(document).ready(function() {
 		e.preventDefault();
 		var $row = $(this).closest("tr"), $tds = $row.find("td:nth-child(1)");
 		$.each($tds, function() {
-			var ID = $(this).text();
-			var magiay = $(this).next().text();
-			var tengiay = $(this).next().next().text();
-			var gioitinh = $(this).next().next().next().text();
-			var loaigiay = $(this).next().next().next().next().text();
-			console.log('del: ' + ID + ' ' + magiay + ' ' + tengiay);
+			var text_magiay =$(this).text().trim();
+			var magiay = $(this).children(".data-id").data("id");
+			var tengiay = $(this).next().text();
+			var gioitinh = $(this).next().next().text();
+			var loaigiay = $(this).next().next().next().text();
+			console.log(text_magiay+' '+magiay + ' ' + tengiay);
 		});
 		row_table = $(this).parents('tr');	
 	});
@@ -71,15 +66,15 @@ $(document).ready(function() {
 		table.column(1).search(this.value).draw();
 	});
 	$('#txtTenGiay').on('keyup', function() {
-		table.column(2).search(this.value).draw();
+		table.column(1).search(this.value).draw();
 	});
 	$('#txtGioiTinh').on('click', function() {
+		table.column(2).search(this.value).draw();
+	});
+	$('#txtLoaiGiay').on('change', function() {
 		table.column(3).search(this.value).draw();
 	});
-	$('.selectpicker').on('change', function() {
-		table.column(4).search($('.selectpicker').val()).draw();
-	});
 	$('#txtNhaSanXuat').on('change', function() {
-		table.column(5).search(this.value).draw();
+		table.column(4).search(this.value).draw();
 	});
 });

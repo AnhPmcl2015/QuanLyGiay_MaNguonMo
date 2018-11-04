@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
         HibernateJpaAutoConfiguration.class,JpaRepositoriesAutoConfiguration.class,
         DataSourceTransactionManagerAutoConfiguration.class})
 public class SpringBootWebApplication {
-
+	
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SpringBootWebApplication.class, args);
 	}

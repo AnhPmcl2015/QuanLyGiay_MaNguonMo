@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +16,10 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
 public class BeanConfig {
-	
+
 	@Autowired
 	private Environment env;
-	
+
 	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -37,7 +38,7 @@ public class BeanConfig {
 		properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
 		properties.put("current_session_context_class", //
 				env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
-		
+
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		// Package contain entity classes
 		factoryBean.setPackagesToScan(env.getProperty("spring.package.dto"));
@@ -57,4 +58,5 @@ public class BeanConfig {
 
 		return transactionManager;
 	}
+
 }
