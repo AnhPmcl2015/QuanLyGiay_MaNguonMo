@@ -1,15 +1,20 @@
 package com.shoe.converter;
 
+import org.modelmapper.ModelMapper;
+
 import com.shoe.dto.GiayDTO;
 import com.shoe.dto.GioiTinhDTO;
 import com.shoe.dto.LoaiGiayDTO;
 import com.shoe.entities.Giay;
 import com.shoe.form.GiayForm;
+import org.springframework.stereotype.Component;
 
-import org.modelmapper.ModelMapper;
-
+@Component
 public class GiayConverter {
-    public static void convertFormToDTO(GiayForm form, GiayDTO dto){
+    public void convertFormToDTO(GiayForm form, GiayDTO dto) {
+        if (form == null || dto == null) {
+            return;
+        }
         dto.setMaGiay(form.getMaGiay());
         dto.setTenGiay(form.getTenGiay());
         dto.setGhiChu(form.getGhiChu());
@@ -25,8 +30,20 @@ public class GiayConverter {
         dto.setImg3(form.getImg3());
         dto.setImg4(form.getImg4());
     }
-    public static void convertDtoToEntity(GiayDTO dto, Giay entity){
+
+    public void convertDtoToEntity(GiayDTO dto, Giay entity) {
+        if (dto == null || entity == null) {
+            return;
+        }
         ModelMapper map = new ModelMapper();
         map.map(dto, entity);
+    }
+
+    public void convertEntityToDto(Giay entity, GiayDTO dto) {
+        if (dto == null || entity == null) {
+            return;
+        }
+        ModelMapper map = new ModelMapper();
+        map.map(entity, dto);
     }
 }

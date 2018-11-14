@@ -14,7 +14,7 @@
 
     $.fn.fileinputLocales['vi'] = {
         fileSingle: 'tập tin',
-        filePlural: 'images (png,jpg)',
+        filePlural: 'các tập tin',
         browseLabel: 'Duyệt &hellip;',
         removeLabel: 'Gỡ bỏ',
         removeTitle: 'Bỏ tập tin đã chọn',
@@ -75,11 +75,11 @@
             uploadBatch: 'batch file upload',
             uploadExtra: 'form data upload'
         },
-        dropZoneTitle: 'Kéo thả hình ảnh vào đây &hellip;',
+        dropZoneTitle: 'Kéo thả tập tin vào đây &hellip;',
         dropZoneClickTitle: '<br>(hoặc click để chọn {files})',
         fileActionSettings: {
             removeTitle: 'Gỡ bỏ',
-            uploadTitle: 'Upload hình ảnh',
+            uploadTitle: 'Upload tập tin',
             uploadRetryTitle: 'Retry upload',
             downloadTitle: 'Download file',
             zoomTitle: 'Phóng lớn',

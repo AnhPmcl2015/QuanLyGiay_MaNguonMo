@@ -1,24 +1,26 @@
 package com.shoe.form;
 
-import com.shoe.entities.GioiTinh;
-import com.shoe.entities.LoaiGiay;
-
+import org.hibernate.validator.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GiayForm{
-
-	private String maGiay;
+public class GiayForm {
+    @NotEmpty
+    private String maGiay;
+    @NotEmpty
     private String tenGiay;
-	private String id_gioi_tinh;
-	private String id_loai_giay;	
-	private String ghiChu;
-	private String giaBan;
-	private String img1;
-	private String img2;
-	private String img3;
-	private String img4;
+    private String id_gioi_tinh;
+    @NotEmpty
+    private String id_loai_giay;
+    private String ghiChu;
+    private String giaBan;
+    @NotEmpty
+    private String img1;
+    private String img2;
+    private String img3;
+    private String img4;
 }
