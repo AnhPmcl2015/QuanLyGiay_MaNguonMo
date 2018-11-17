@@ -28,14 +28,13 @@ public class ShoeControllerAPI {
     @Autowired
     LoaiGiayDAO loaigiayDAO;
 
+    @Autowired
+    GioiTinhDAO gioiTinhDAO;
+
     @GetMapping("/get-list-loaigiay")
     public List<LoaiGiayDTO> getListLoaiGiay() {
-        List<LoaiGiay> listLoaiGiay = loaigiayDAO.getList();
-        List<LoaiGiayDTO> listGiayDTO = listLoaiGiay.stream()
-                .map(s -> new LoaiGiayDTO(s.getIdLoaiGiay(), s.getHangSanXuat(), s.getMaLoaiGiay(), s.getTenLoaiGiay()))
-                .collect(Collectors.toList());
 
-        return listGiayDTO;
+        return loaigiayDAO.getList();
     }
 
     @Autowired
@@ -43,10 +42,8 @@ public class ShoeControllerAPI {
 
     @GetMapping("/get-list-gioitinh")
     public List<GioiTinhDTO> getListGioiTinh() {
-        List<GioiTinh> listGioiTinh = gioitinhDAO.getList();
-        List<GioiTinhDTO> listGioiTinhDTO = listGioiTinh.stream()
-                .map(s -> new GioiTinhDTO(s.getIdGioiTinh(), s.getTenGioiTinh())).collect(Collectors.toList());
-        return listGioiTinhDTO;
+
+        return gioiTinhDAO.getList();
     }
 
     @Autowired
@@ -68,7 +65,6 @@ public class ShoeControllerAPI {
             ex.printStackTrace();
             response = new ResponseEntity<>("{\"status\":\"error format\"}", HttpStatus.BAD_REQUEST);
         }
-
         return response;
     }
 

@@ -2,9 +2,9 @@ package com.shoe.dao;
 
 import java.util.List;
 
-import com.shoe.entities.LoaiGiay;
+import com.shoe.dto.LoaiGiayDTO;
 
 
 public interface LoaiGiayDAO {
-    public List<LoaiGiay> getList();
+    public List<LoaiGiayDTO> getList();
 }

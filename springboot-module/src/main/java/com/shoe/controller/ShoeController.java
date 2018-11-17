@@ -74,7 +74,6 @@ public class ShoeController {
         List<GiayDTO> list = giayDao.getAllListNoneDel();
         model.put("list_giay", list);
         model.put("list_hsx", hangSanXuatDAO.getHangSanXuat());
-
         return new ModelAndView("danhsachgiay");
     }
 
@@ -85,9 +84,7 @@ public class ShoeController {
     public ModelAndView gotoTraCuuGiay(Map<String, Object> model) {
 
         List<ChiTietGiayDTO> chiTietGiayDTOS = chiTietGiayDAO.getAllListNoneDel();
-        chiTietGiayDTOS.forEach(i->{
-            System.out.println(i.getGiay().getIdGiay());
-        });
+        model.put("list_chitietgiay", chiTietGiayDTOS);
         return new ModelAndView("tracuugiay");
     }
 }

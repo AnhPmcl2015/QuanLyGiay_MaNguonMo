@@ -49,11 +49,22 @@ $(document).ready(function () {
     $("#table").on('click', '.edit', function (e) {
         e.preventDefault();
         var $row = $(this).closest("tr"), $tds = $row.find("td:nth-child(1)");
-        console.log($row.children(".data-id").data("id"));
         $.each($tds, function () {
-            var magiay = $(this).children(".data-id").data("id");
+            var idGiay = $(this).children(".data-id").data("id");
+            console.log(' ' + idGiay);
+        });
+        $.ajax({
+            url: '/giay',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
 
-            console.log(text_magiay + ' ' + magiay + ' ' + tengiay);
+            },
+            data: json,
+            error: function (data, textStatus, errorThrown) {
+
+            }
         });
     });
     var row_table, magiay;

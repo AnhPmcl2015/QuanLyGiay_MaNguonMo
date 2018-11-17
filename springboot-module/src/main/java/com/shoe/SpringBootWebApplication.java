@@ -9,10 +9,7 @@ import org.springframework.boot.autoconfigure.jms.JndiConnectionFactoryAutoConfi
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(exclude = {JndiConnectionFactoryAutoConfiguration.class, DataSourceAutoConfiguration.class,
-        HibernateJpaAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class,
-        DataSourceTransactionManagerAutoConfiguration.class})
-@EnableJpaRepositories("com.shoe.jpa")
+@SpringBootApplication
 public class SpringBootWebApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBootWebApplication.class, args);

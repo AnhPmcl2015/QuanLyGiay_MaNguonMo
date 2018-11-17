@@ -163,7 +163,6 @@
 
 <!-- select2 (select box) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
 <!-- Upload files img -->
 <script th:src="@{/upload-multi-firebase/fileinput.js}" type="text/javascript"></script>
 <script th:src="@{/upload-multi-firebase/vi.js}" type="text/javascript"></script>
@@ -188,6 +187,10 @@
     firebase.initializeApp(config);
 </script>
 <script>
+    var shoe = new Array();
+    var shoeurl =  {caption: "People-1.jpg", size: 576237, width: "120px", url:
+            "https://firebasestorage.googleapis.com/v0/b/chatbox-50976.appspot.com/o/images%2F456.PNG?alt=media&amp;token=9b714d49-111f-45e9-bbec-6acaeae7a382", key: 1};
+    shoe.push(shoeurl);
     $("#fileUploader").fileinput({
         language: 'vi',
         theme: 'fa',
@@ -196,9 +199,9 @@
         overwriteInitial: false,
         minFileCount: 1,
         maxFileCount: 4,
-        initialPreview:['https://firebasestorage.googleapis.com/v0/b/chatbox-50976.appspot.com/o/images%2F456.PNG?alt=media&amp;token=9b714d49-111f-45e9-bbec-6acaeae7a382'] ,
         initialPreviewAsData: true,
         allowedFileTypes: ['image'],
+        initialPreviewConfig: shoe,
         slugCallback: function (filename) {
             return filename.replace('(', '_').replace(']', '_');
         }

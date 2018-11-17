@@ -1,7 +1,8 @@
 package com.shoe.dao;
 import java.util.List;
-import com.shoe.entities.GioiTinh;
+
+import com.shoe.dto.GioiTinhDTO;
 
 public interface GioiTinhDAO {
-    public List<GioiTinh> getList();
+    public List<GioiTinhDTO> getList();
 }
