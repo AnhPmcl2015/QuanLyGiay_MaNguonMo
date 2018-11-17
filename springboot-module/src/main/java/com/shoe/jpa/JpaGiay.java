@@ -1,10 +1,10 @@
-package com.shoe.com.shoe.jpa;
+package com.shoe.jpa;
 
-import com.shoe.entities.HangSanXuat;
+import com.shoe.entities.Giay;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JpaHangSanXuat extends JpaRepository<HangSanXuat, Integer> {
+public interface JpaGiay extends JpaRepository<Giay, Integer> {
 }

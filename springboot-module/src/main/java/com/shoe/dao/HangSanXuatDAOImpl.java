@@ -1,13 +1,8 @@
 package com.shoe.dao;
 
-import com.shoe.com.shoe.jpa.JpaHangSanXuat;
+import com.shoe.jpa.JpaHangSanXuat;
 import com.shoe.converter.HangSanXuatConverter;
 import com.shoe.dto.HangSanXuatDTO;
-import com.shoe.entities.GioiTinh;
-import com.shoe.entities.HangSanXuat;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

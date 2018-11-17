@@ -1,4 +1,4 @@
-package com.shoe.com.shoe.jpa;
+package com.shoe.jpa;
 
 import com.shoe.entities.ChiTietGiay;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,23 +3,16 @@ package com.shoe.dao;
 import java.util.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 
-import com.shoe.com.shoe.jpa.JpaGiay;
+import com.shoe.jpa.JpaGiay;
 import com.shoe.converter.GiayConverter;
 import com.shoe.dto.GiayDTO;
 import com.shoe.entities.Giay;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 
 @Repository
 @Transactional
