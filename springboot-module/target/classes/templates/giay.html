@@ -24,132 +24,96 @@
 <body>
 <ol class="breadcrumb">
     <li><a href="/dsgiay">Danh sách giày</a></li>
-    <li class="active"><b>Thêm mới</b></li>
+    <li class="active"><b th:text="${title}"></b></li>
 </ol>
-<div id="App" ng-app="myApp" ng-controller="myCtrl">
-    <form action="" id="giayForm" method="POST" role="form">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <legend>Thông tin giày
-
-                    </legend>
-                    <button type="button" style="float: right;" class="btn" id="btnReset"
-                            name="btnReset"><i class="fas fa-sync-alt"></i></button>
-                    <div class="row bot15">
-                        <div class=" col-xs-12 col-sm-4 col-md-4">
-                            <label for="txtMaGiay">Mã giày</label>
-                            <input type="text" class="form-control" name="txtMaGiay" id="txtMaGiay" maxlength="20"/>
+<div>
+    <form id="giayForm" role="form">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn" id="btnReset"
+                                    name="btnReset"><i class="fas fa-sync-alt"></i></button>
                         </div>
-                        <div class="col-xs-12 col-sm-4 col-md-4">
-                            <label for="txtTenGiay">Tên giày</label>
-                            <input type="text" class="form-control" name="txtTenGiay" id="txtTenGiay" maxlength="50"/>
+                        <h4><b>Thông tin giày</b></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row bot15">
+                            <div class=" col-xs-12 col-sm-4 col-md-4">
+                                <label for="txtMaGiay">Mã giày</label>
+                                <input type="text" class="form-control" name="txtMaGiay" id="txtMaGiay"
+                                       maxlength="20"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <label for="txtTenGiay">Tên giày</label>
+                                <input type="text" class="form-control" name="txtTenGiay" id="txtTenGiay"
+                                       maxlength="50"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <label for="txtLoaiGiay">Loại giày</label>
+                                <select class="form-control select2" id="txtLoaiGiay" name="txtLoaiGiay" data-ng-model="selectedOption">
+                                    <option value=""></option>
+                                    <optgroup th:each="hsx : ${hangsanxuat}" th:attr="label=${hsx.tenHangSanXuat}">
+                                        <option th:each="lg : ${hsx.loaiGiays}"
+                                                th:attr="value=${lg.idLoaiGiay}"
+                                                th:text="${lg.tenLoaiGiay}">
+                                        </option>
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-sm-3">
-                            <label for="txtLoaiGiay">Loại giày</label>
-                            <select class="form-control select2" id="txtLoaiGiay" name="txtLoaiGiay">
-                                <option></option>
-                                <optgroup ng-repeat="(key, value) in LoaiGiay | groupBy: 'hangSanXuat.tenHangSanXuat'"
-                                          label="{{key}}">
-                                    <option ng-repeat="x in value" value="{{x.idLoaiGiay}}">
-                                        {{x.tenLoaiGiay}}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4">
+                                <label for="txtGhiChu">Ghi chú</label>
+                                <textarea name="txtGhiChu" id="txtGhiChu" class="form-control" rows="4" cols="50"
+                                          maxlength="186"></textarea>
+                            </div>
+                            <div class=" col-xs-12 col-sm-4">
+                                <label for="txtGiaBan">Giá bán</label>
+                                <input type="text" class="form-control" name="txtGiaBan" id="txtGiaBan"
+                                       maxlength="15"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                                <label for="txtGioiTinh">Giới tính</label>
+                                <select id="txtGioiTinh" class="form-control">
+                                    <option th:each="gender : ${gioitinh}" th:attr="value=${gender.idGioiTinh}"
+                                            th:text="${gender.tenGioiTinh}">
                                     </option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row bot15">
-                        <div class="col-xs-12 col-sm-4">
-                            <label for="txtGhiChu">Ghi chú</label>
-                            <textarea name="txtGhiChu" id="txtGhiChu" class="form-control" rows="4" cols="50"
-                                      maxlength="186"></textarea>
-                        </div>
-                        <div class=" col-xs-12 col-sm-4">
-                            <label for="txtGiaBan">Giá bán</label>
-                            <input type="text" class="form-control" name="txtGiaBan" id="txtGiaBan" maxlength="15"/>
-                        </div>
-                        <div class="col-xs-12 col-sm-3">
-                            <label for="txtLoaiGiay">Giới tính</label>
-                            <select id="txtGioiTinh" class="form-control">
-                                <option ng-repeat="gioitinh in GioiTinh" value="{{gioitinh.idGioiTinh}}">
-                                    {{gioitinh.tenGioiTinh}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <legend>Hình ảnh</legend>
-                    <div class="container kv-main">
-                        <div id="divUploading" hidden="true">
-                            <div class="loader"></div>
-                        </div>
-                        <div id="RequirementImg" hidden="true">
-                            Yêu cầu tải lên ít nhất 1 hình ảnh
-                        </div>
-                        <div id="divAlert" class="alert alert-success" role="alert" hidden="true">
-                            Tải ảnh lên thành công
-                        </div>
-                        <div class="form-group">
-                            <div class="file-loading">
-                                <input id="fileUploader" name="fileUploader" type="file" multiple="multiple"
-                                       class="file"
-                                       data-overwrite-initial="false" data-min-file-count="2"/>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row bot15">
-                <div class="col-xs-2 col-sm-2">
-                    <a class="btn btn-success" id="btnLuu" name="btnLuu">Lưu</a>
+            <div class="col-xs-12">
+                <legend>Hình ảnh</legend>
+                <div class="kv-main">
+                    <div id="divUploading" hidden="true">
+                        <div class="loader"></div>
+                    </div>
+                    <div id="RequirementImg" hidden="true">
+                        Yêu cầu tải lên ít nhất 1 hình ảnh
+                    </div>
+                    <div id="divAlert" class="alert alert-success" role="alert" hidden="true">
+                        Tải ảnh lên thành công
+                    </div>
+                    <div class="form-group">
+                        <div class="file-loading">
+                            <input id="fileUploader" name="fileUploader" type="file" multiple="multiple"
+                                   class="file"
+                                   data-overwrite-initial="false" data-min-file-count="2"/>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="row bot15">
+            <div class="col-xs-2 col-sm-2">
+                <a class="btn btn-success" id="btnLuu" name="btnLuu">Lưu</a>
             </div>
         </div>
     </form>
-    <div class="modal fade" id="BoxModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <a data-dismiss="modal" style="float: right; cursor: pointer;">
-                        <i class="fas fa-times"></i>
-                    </a>
-                    <h4 class="modal-title">Chi tiết giày</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-8 col-md-6">
-                            <div class="row bot15">
-                                <div class="col-md-6">
-                                    <label>Kích thước giày</label>
-                                    <input type="text" name="item" class="form-control" id="add"/>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" id="addbtn" name="addbtn" style="margin-top: 25px;"
-                                            class="btn btn-primary"><i class="fas fa-plus-square"></i></button>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <ul id="list" class="list-group">
-                                    <!-- <div style="margin-top: 5px;">
-                                        <input type="text" class="form-control" style="width: 60%; float:left;"
-                                         name="listSize[]" value="'+newitem+'" />
-                                        <input type="hidden" name="listed[]" value="" />&nbsp;
-                                        <button class="btn btn-light listelement"><i class="fas fa-trash-alt"></i></button>
-                                    </div> -->
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-info" data-dismiss="modal">Lưu</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 <!-- jquery 3.3.1 -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -188,8 +152,14 @@
 </script>
 <script>
     var shoe = new Array();
-    var shoeurl =  {caption: "People-1.jpg", size: 576237, width: "120px", url:
-            "https://firebasestorage.googleapis.com/v0/b/chatbox-50976.appspot.com/o/images%2F456.PNG?alt=media&amp;token=9b714d49-111f-45e9-bbec-6acaeae7a382", key: 1};
+    var shoeurl = {
+        caption: "People-1.jpg",
+        size: 576237,
+        width: "120px",
+        url:
+            "https://firebasestorage.googleapis.com/v0/b/chatbox-50976.appspot.com/o/images%2F456.PNG?alt=media&amp;token=9b714d49-111f-45e9-bbec-6acaeae7a382",
+        key: 1
+    };
     shoe.push(shoeurl);
     $("#fileUploader").fileinput({
         language: 'vi',

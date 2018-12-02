@@ -39,9 +39,9 @@ public class ChiTietGiayDAOImpl implements ChiTietGiayDAO {
         query.select(from).where(builder.isNull(from.get("deleteYmd")));
         TypedQuery<ChiTietGiay> typedQuery = em.createQuery(query);
         List<ChiTietGiayDTO> list = new ArrayList<>();
-        typedQuery.getResultList().forEach(i->{
+        typedQuery.getResultList().forEach(i -> {
             ChiTietGiayDTO dto = new ChiTietGiayDTO();
-            converter.convertEntityToDto(i,dto);
+            converter.convertEntityToDto(i, dto);
             list.add(dto);
         });
         return list;
@@ -50,24 +50,25 @@ public class ChiTietGiayDAOImpl implements ChiTietGiayDAO {
     @Override
     public void addDetailShoe(ChiTietGiayDTO giayDTO) {
         ChiTietGiay chiTietGiay = new ChiTietGiay();
-        converter.convertDtoToEntity(giayDTO,chiTietGiay);
+        converter.convertDtoToEntity(giayDTO, chiTietGiay);
         jpa.save(chiTietGiay);
     }
 
     @Override
     public void updateDetailShoe(ChiTietGiayDTO giayDTO) {
         ChiTietGiay chiTietGiay = new ChiTietGiay();
-        converter.convertDtoToEntity(giayDTO,chiTietGiay);
+        converter.convertDtoToEntity(giayDTO, chiTietGiay);
         jpa.save(chiTietGiay);
     }
 
     @Override
     public void deleteDetailShoe(ChiTietGiayDTO giayDTO) {
-       Optional<ChiTietGiay> chiTietGiay = jpa.findById(giayDTO.getIdChiTietGiay());
-       if(chiTietGiay.isPresent()){
-           ChiTietGiay ctgiay = chiTietGiay.get();
-           ctgiay.setDeleteYmd(Calendar.getInstance().getTime());
+
+        Optional<ChiTietGiay> chiTietGiay = jpa.findById(giayDTO.getIdChiTietGiay());
+        if (chiTietGiay.isPresent()) {
+            ChiTietGiay ctgiay = chiTietGiay.get();
+            ctgiay.setXoaFlag(true);
             jpa.save(ctgiay);
-       }
+        }
     }
 }

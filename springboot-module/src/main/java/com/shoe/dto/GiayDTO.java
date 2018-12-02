@@ -11,10 +11,10 @@ public class GiayDTO{
     private int idGiay;
 	private GioiTinhDTO gioiTinh;
 	private LoaiGiayDTO loaiGiay;
-	private String maGiay;
 	private String tenGiay;
+	private String maGiay;
 	private int soLuongBan;
-	private long giaBan;
+	private int giaBan;
 	private String ghiChu;
 	private String img1;
 	private String img2;

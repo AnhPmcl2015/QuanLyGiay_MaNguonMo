@@ -1,6 +1,4 @@
-package com.shoe.entities;
-
-import java.util.List;
+package com.shoe.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class data {
-	private List data;
+public class Authorize {
+    private String status;
+    private String token;
 }

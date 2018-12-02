@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LoaiGiayDTO {
 	private Integer idLoaiGiay;
-    private HangSanXuat hangSanXuat;
-    private String maLoaiGiay;
+    private HangSanXuatDTO hangSanXuat;
     private String tenLoaiGiay;
 }

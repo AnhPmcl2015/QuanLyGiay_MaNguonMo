@@ -8,11 +8,11 @@ import com.shoe.entities.Giay;
 
 public interface GiayDAO {
 
-    public void addShoe(GiayDTO giay);
-
-    public boolean FindByAtribute(String key, String value);
+    public void saveShoe(GiayDTO giay);
 
     public List<GiayDTO> getAllListNoneDel();
 
     public boolean deleteShoe(GiayDTO giay);
+
+    public GiayDTO getGiayById(Integer id);
 }

@@ -1,5 +1,6 @@
 package com.shoe.converter;
 
+import org.apache.commons.validator.GenericValidator;
 import org.modelmapper.ModelMapper;
 
 import com.shoe.dto.GiayDTO;
@@ -15,6 +16,9 @@ public class GiayConverter {
         if (form == null || dto == null) {
             return;
         }
+        if(GenericValidator.isInt(form.getId())){
+            dto.setIdGiay(Integer.parseInt(form.getId()));
+        }
         dto.setMaGiay(form.getMaGiay());
         dto.setTenGiay(form.getTenGiay());
         dto.setGhiChu(form.getGhiChu());
@@ -24,13 +28,18 @@ public class GiayConverter {
         GioiTinhDTO gioitinh = new GioiTinhDTO();
         gioitinh.setIdGioiTinh(Integer.parseInt(form.getId_gioi_tinh()));
         dto.setGioiTinh(gioitinh);
-        dto.setGiaBan(Long.parseLong(form.getGiaBan()));
-        dto.setImg1(form.getImg1());
-        dto.setImg2(form.getImg2());
-        dto.setImg3(form.getImg3());
-        dto.setImg4(form.getImg4());
+        dto.setGiaBan(Integer.parseInt(form.getGiaBan()));
     }
 
+    public void convertDTOtoForm(GiayDTO dto, GiayForm form){
+        form.setGhiChu(dto.getGhiChu());
+        form.setId(dto.getIdGiay()+"");
+        form.setMaGiay(dto.getMaGiay());
+        form.setTenGiay(dto.getTenGiay());
+        form.setId_gioi_tinh(dto.getGioiTinh().getIdGioiTinh()+"");
+        form.setId_loai_giay(dto.getLoaiGiay().getIdLoaiGiay()+"");
+        form.setGiaBan(dto.getGiaBan()+"");
+    }
     public void convertDtoToEntity(GiayDTO dto, Giay entity) {
         if (dto == null || entity == null) {
             return;

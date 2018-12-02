@@ -1,15 +1,20 @@
 package com.shoe.form;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import com.shoe.validator.ServiceValidator;
+import com.shoe.validator.Unique;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class GiayForm {
+
+    private String id;
     @NotEmpty
+    @Unique(fieldName = "maGiay",tableName = "Giay", service = ServiceValidator.class)
     private String maGiay;
     @NotEmpty
     private String tenGiay;
@@ -18,9 +23,4 @@ public class GiayForm {
     private String id_loai_giay;
     private String ghiChu;
     private String giaBan;
-    @NotEmpty
-    private String img1;
-    private String img2;
-    private String img3;
-    private String img4;
 }
