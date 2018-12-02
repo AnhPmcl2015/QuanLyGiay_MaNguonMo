@@ -38,7 +38,7 @@ public class Inititalizer implements CommandLineRunner {
 	private GioiTinhRepository gioiTinhRepository;
 
 	private static int count = -1;
-	private static boolean FLAG = true;
+	private static boolean FLAG = false;
 
 	@Override
 	public void run(String... args) throws Exception {
