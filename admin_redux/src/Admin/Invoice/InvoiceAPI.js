@@ -1,5 +1,5 @@
-import { request } from '../APIUtils';
-import { API_BASE_URL } from '../../Common/Constants/common';
+import { request } from '../Common/APIUtils';
+import { API_BASE_URL } from '../Common/Constant/common';
 
 const PAGE_URL = '/invoice';
 export function getOrderDetail(id) {

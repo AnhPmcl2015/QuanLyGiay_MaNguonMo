@@ -1,9 +1,8 @@
 import './Invoice.css';
 import React, { Component } from 'react';
 import { Table, Modal, Button } from 'antd';
-import { database } from "../../../firebase";
-import { getOrderDetail } from '../../../API/Private/InvoiceAPI';
-
+import { getOrderDetail } from './InvoiceAPI';
+import { database } from '../../firebase';
 
 class Invoice extends Component {
     constructor(props) {
