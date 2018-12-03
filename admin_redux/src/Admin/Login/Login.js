@@ -2,9 +2,8 @@ import './Login.css';
 import { Form, Input, Button, Icon, notification } from 'antd';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ACCESS_TOKEN } from './../Common/Constant/common';
 import { login } from './LoginAPI';
-
+import { ACCESS_TOKEN } from '../Common/Constant/common';
 
 const FormItem = Form.Item;
 
