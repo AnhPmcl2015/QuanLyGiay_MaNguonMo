@@ -33,9 +33,6 @@ import com.shoe.jwtauthentication.security.services.UserPrinciple;
 import com.shoe.payload.JwtResponse;
 import com.shoe.payload.UserSummary;
 
-
-
-// @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthRestAPIs {
@@ -54,7 +51,7 @@ public class AuthRestAPIs {
 
 	@Autowired
 	JwtProvider jwtProvider;
-	
+
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginForm) {
 		Authentication authentication = authenticationManager.authenticate(
@@ -77,8 +74,7 @@ public class AuthRestAPIs {
 		}
 
 		// Creating user's account
-		User user = new User(signupForm.getName(), signupForm.getUsername(), signupForm.getEmail(),
-				encoder.encode(signupForm.getPassword()));
+		User user = new User(signupForm.getUsername(), signupForm.getEmail(), encoder.encode(signupForm.getPassword()));
 
 		Set<String> strRoles = signupForm.getRole();
 		Set<Role> roles = new HashSet<>();
@@ -109,11 +105,12 @@ public class AuthRestAPIs {
 
 		return ResponseEntity.ok().body("User registered successfully!");
 	}
-	
-    @GetMapping("/user/me")
-    @PreAuthorize("hasRole('USER')")
-    public UserSummary getCurrentUser(@CurrentUser UserPrinciple currentUser) {
-        UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(), currentUser.getName(), currentUser.getRoles());
-        return userSummary;
-    }
+
+	@GetMapping("/user/me")
+	@PreAuthorize("hasRole('USER')")
+	public UserSummary getCurrentUser(@CurrentUser UserPrinciple currentUser) {
+		UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(),
+				currentUser.getRoles());
+		return userSummary;
+	}
 }

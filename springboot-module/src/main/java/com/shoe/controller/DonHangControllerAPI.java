@@ -58,7 +58,7 @@ public class DonHangControllerAPI {
 	}
 
 	@CrossOrigin
-	// @PreAuthorize("hasRole('PM')")
+	@PreAuthorize("hasRole('PM')")
 	@GetMapping(value = "/get-order-detail", produces = "application/json")
 	public ResponseEntity<?> getDonHang(@RequestParam("id") int idDonHang) {
 		List<ChiTietDonHangDTO> listChiTietDoHang = new ArrayList<>();
