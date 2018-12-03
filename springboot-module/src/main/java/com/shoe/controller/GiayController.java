@@ -1,28 +1,26 @@
 package com.shoe.controller;
 
-import com.shoe.ObjectToJson.ConvertToJson;
-import com.shoe.dao.HangSanXuatDAO;
-import com.shoe.dao.GiayDAO;
-import com.shoe.dao.GioiTinhDAO;
-import com.shoe.dao.LoaiGiayDAO;
-import com.shoe.dao.ChiTietGiayDAO;
-import com.shoe.dto.*;
-import com.shoe.form.SelectBox;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.apache.commons.validator.GenericValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
-import javax.validation.Valid;
-
+import com.shoe.ObjectToJson.ConvertToJson;
 import com.shoe.converter.GiayConverter;
+import com.shoe.dao.GiayDAO;
+import com.shoe.dao.LoaiGiayDAO;
+import com.shoe.dto.GiayDTO;
+import com.shoe.dto.GiayTableDTO;
 import com.shoe.form.GiayForm;
 
 @RestController
@@ -36,39 +34,12 @@ public class GiayController {
     private GiayConverter converter;
 
     @Autowired
-    private HangSanXuatDAO hangSanXuatDAO;
-
-    @Autowired
     LoaiGiayDAO loaigiayDAO;
-
-    private List<HangSanXuatSelectDTO> getListLoaiGiay() {
-        List<HangSanXuatDTO> listHSX = hangSanXuatDAO.getHangSanXuat();
-        List<LoaiGiayDTO> listLG = loaigiayDAO.getList();
-        List<HangSanXuatSelectDTO> list = new ArrayList<>();
-        for (HangSanXuatDTO hsx : listHSX) {
-            HangSanXuatSelectDTO dto = new HangSanXuatSelectDTO();
-            dto.setTenHangSanXuat(hsx.getTenHangSanXuat());
-            List<LoaiGiaySelectDTO> selectLoaiGiay = new ArrayList<>();
-            for (LoaiGiayDTO lg : listLG) {
-                LoaiGiaySelectDTO loaiGiaySelectDTO = new LoaiGiaySelectDTO();
-                if (lg.getHangSanXuat().getIdHangSanXuat() == hsx.getIdHangSanXuat()) {
-                    loaiGiaySelectDTO.setIdLoaiGiay(lg.getIdLoaiGiay());
-                    loaiGiaySelectDTO.setTenLoaiGiay(lg.getTenLoaiGiay());
-                    selectLoaiGiay.add(loaiGiaySelectDTO);
-                }
-            }
-            if (selectLoaiGiay.size() > 0) {
-                dto.setLoaiGiays(selectLoaiGiay);
-            }
-            list.add(dto);
-        }
-        return list;
-    }
 
     // thêm, sửa giày
     @PostMapping(value = "/save", consumes = "application/json")
     public ResponseEntity<String> saveGiay(@Valid @RequestBody GiayForm model, Errors error) {
-        ResponseEntity resp = null;
+    	ResponseEntity<String> resp = null;
         if (error.hasFieldErrors("maGiay")) {
             resp = new ResponseEntity<>("{\"status\":\"unique\"}", HttpStatus.BAD_REQUEST);
         } else if (error.hasErrors()) {
@@ -82,28 +53,29 @@ public class GiayController {
         return resp;
     }
 
-    @GetMapping("/sua-giay/{id}")
-    public ModelAndView getGiay(@PathVariable String id) {
-        ModelAndView modelAndView = new ModelAndView("suagiay");
-        modelAndView.addObject("title", "Cập nhật");
-        GiayDTO giay = new GiayDTO();
-        byte[] b = Base64.getDecoder().decode(id);
-        id = new String(b);
-        System.out.println(id);
-        try {
-            giay = giayDAO.getGiayById(Integer.parseInt(id));
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
+    @PostMapping(value = "/edit", consumes = "application/json")
+    public ResponseEntity<String> editGiay(@Valid @RequestBody GiayForm model, Errors error) {
+    	ResponseEntity<String> resp = null;
+        if (!giayDAO.checkUniqueOnEddit(model)) {
+            resp = new ResponseEntity<>("{\"status\":\"unique\"}", HttpStatus.BAD_REQUEST);
+        } else if (error.hasFieldErrors("tenGiay")
+                || error.hasFieldErrors("giaBan")
+                || error.hasFieldErrors("id_gioi_tinh")
+                || error.hasFieldErrors("id_loai_giay")) {
+            resp = new ResponseEntity<>("{\"status\":\"invalid\"}", HttpStatus.BAD_REQUEST);
+        } else {
+            GiayDTO dto = new GiayDTO();
+            converter.convertFormToDTO(model, dto);
+            giayDAO.saveShoe(dto);
+            resp = new ResponseEntity<>(ConvertToJson.ToJson(model), HttpStatus.OK);
         }
-        //modelAndView.addObject("gioitinh",gioiTinhDAO.getList());
-        modelAndView.addObject("hangsanxuat", getListLoaiGiay());
-        modelAndView.addObject("giay", giay);
-        return modelAndView;
+        return resp;
     }
+
 
     @PostMapping(value = "/get-giay-by-id")
     public ResponseEntity<String> saveGiay(@RequestBody String id) {
-        ResponseEntity resp = null;
+    	ResponseEntity<String> resp = null;
         if (id == null || "".equals(id.trim())) {
             resp = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

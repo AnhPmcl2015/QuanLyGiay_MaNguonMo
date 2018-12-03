@@ -1,9 +1,8 @@
 package com.shoe.dao;
 
-import com.shoe.dto.ChiTietGiayDTO;
-import com.shoe.entities.ChiTietGiay;
-
 import java.util.List;
+
+import com.shoe.dto.ChiTietGiayDTO;
 
 public interface ChiTietGiayDAO {
     public List<ChiTietGiayDTO> getAllListNoneDel();

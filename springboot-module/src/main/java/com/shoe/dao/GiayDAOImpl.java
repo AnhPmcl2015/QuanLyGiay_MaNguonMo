@@ -8,10 +8,12 @@ import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 
 import com.shoe.entities.Giay_;
+import com.shoe.form.GiayForm;
 import com.shoe.jpa.JpaGiay;
 import com.shoe.converter.GiayConverter;
 import com.shoe.dto.GiayDTO;
 import com.shoe.entities.Giay;
+import org.apache.commons.validator.GenericValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,6 +46,20 @@ public class GiayDAOImpl implements GiayDAO {
             return dto;
         }
         return null;
+    }
+
+    @Override
+    public boolean checkUniqueOnEddit(GiayForm giay) {
+        if(GenericValidator.isInt(giay.getId())){
+            Integer id = Integer.parseInt(giay.getId());
+            Optional<Giay> entity = jpa.findById(id);
+            if(entity.isPresent()){
+                Giay e = entity.get();
+                return e.getMaGiay().equals(giay.getMaGiay());
+            }
+        }
+
+        return false;
     }
 
     @Override

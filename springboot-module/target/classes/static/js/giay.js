@@ -1,3 +1,27 @@
+var app = angular.module('myApp', ['angular.filter']);
+app.controller('myCtrl', function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url: '/get-list-loaigiay'
+    }).then(function (response) {
+        if (response) {
+            $scope.LoaiGiay = response.data;
+        }
+    }, function (error) {
+
+    });
+
+    $http({
+        method: 'GET',
+        url: '/get-list-gioitinh'
+    }).then(function (response) {
+        if (response) {
+            $scope.GioiTinh = response.data;
+        }
+    }, function (error) {
+
+    });
+});
 $(document).ready(function () {
 
     var validator = $("#giayForm").validate({
@@ -96,7 +120,7 @@ $(document).ready(function () {
 
     function resetForm() {
         validator.resetForm();
-        $('#txtLoaiGiay').val(0).trigger('change.select2');
+        $('#txtLoaiGiay').val(1).trigger('change.select2');
         $("#divAlert").attr('hidden', 'true');
         $("#txtMaGiay").val('');
         $("#txtTenGiay").val('');
@@ -120,7 +144,6 @@ $(document).ready(function () {
         }
 
         var data_giay = {
-            "id": $("#idGiay").val(),
             "maGiay": $("#txtMaGiay").val().trim(),
             "tenGiay": $("#txtTenGiay").val().trim(),
             "id_gioi_tinh": $("#txtGioiTinh").val().trim(),
@@ -140,14 +163,13 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function (data) {
                 resetForm();
-                shoe = new Array();
                 alertify.success('Thêm thành công');
             },
             data: json,
             error: function (data, textStatus, errorThrown) {
                 console.log('errors', data.responseJSON);
                 if (data.responseJSON.status === 'unique') {
-                    alertify.warning('Mã giày đã tồn tại');
+                    alertify.warning('Đã tồn tại mã giày');
                 } else {
                     alertify.error('Thêm thất bại');
                 }
@@ -162,6 +184,4 @@ $(document).ready(function () {
         allowClear: true,
         placeholder: 'Chọn loại giày'
     });
-    //$('#txtLoaiGiay').val('15').trigger('change');
-
 });

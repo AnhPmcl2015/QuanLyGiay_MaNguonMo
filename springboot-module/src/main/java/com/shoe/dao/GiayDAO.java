@@ -1,10 +1,9 @@
 package com.shoe.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.shoe.dto.GiayDTO;
-import com.shoe.entities.Giay;
+import com.shoe.form.GiayForm;
 
 public interface GiayDAO {
 
@@ -15,4 +14,6 @@ public interface GiayDAO {
     public boolean deleteShoe(GiayDTO giay);
 
     public GiayDTO getGiayById(Integer id);
+
+    public boolean checkUniqueOnEddit(GiayForm giay);
 }

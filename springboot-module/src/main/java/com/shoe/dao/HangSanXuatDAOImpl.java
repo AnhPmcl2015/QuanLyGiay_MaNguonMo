@@ -1,18 +1,19 @@
 package com.shoe.dao;
 
-import com.shoe.dto.HangSanXuatSelectDTO;
-import com.shoe.dto.LoaiGiaySelectDTO;
-import com.shoe.jpa.JpaHangSanXuat;
-import com.shoe.converter.HangSanXuatConverter;
-import com.shoe.dto.HangSanXuatDTO;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.shoe.converter.HangSanXuatConverter;
+import com.shoe.dto.HangSanXuatDTO;
+import com.shoe.dto.HangSanXuatSelectDTO;
+import com.shoe.dto.LoaiGiaySelectDTO;
+import com.shoe.jpa.JpaHangSanXuat;
 
 @Repository
 @Transactional

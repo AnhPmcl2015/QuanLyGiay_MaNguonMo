@@ -18,6 +18,10 @@ import javax.persistence.Table;
 @Table(name = "chi_tiet_phieu_nhap", catalog = "quanlygiay")
 public class ChiTietPhieuNhap implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5528838752933051303L;
 	private Integer idChiTietPhieuNhap;
 	private ChiTietGiay chiTietGiay;
 	private PhieuNhap phieuNhap;

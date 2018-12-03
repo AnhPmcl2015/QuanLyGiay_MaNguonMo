@@ -1,11 +1,8 @@
 package com.shoe.dao;
 
-import com.shoe.jpa.JpaChiTietGiay;
-import com.shoe.converter.ChiTietGiayConverter;
-import com.shoe.dto.ChiTietGiayDTO;
-import com.shoe.entities.ChiTietGiay;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -13,10 +10,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.shoe.converter.ChiTietGiayConverter;
+import com.shoe.dto.ChiTietGiayDTO;
+import com.shoe.entities.ChiTietGiay;
+import com.shoe.jpa.JpaChiTietGiay;
 
 @Repository
 @Transactional

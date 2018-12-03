@@ -20,6 +20,10 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "giay", catalog = "quanlygiay", uniqueConstraints = @UniqueConstraint(columnNames = "ten_giay"))
 public class Giay implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8141491010636065677L;
 	private Integer idGiay;
 	private GioiTinh gioiTinh;
 	private LoaiGiay loaiGiay;

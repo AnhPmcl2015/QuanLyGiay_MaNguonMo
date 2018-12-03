@@ -1,26 +1,20 @@
 package com.shoe.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.shoe.converter.LoaiGiayConverter;
+import com.shoe.dto.LoaiGiayDTO;
+import com.shoe.entities.LoaiGiay;
+import com.shoe.entities.LoaiGiay_;
+import com.shoe.jpa.JpaLoaiGiay;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-
-import com.shoe.converter.HangSanXuatConverter;
-import com.shoe.converter.LoaiGiayConverter;
-import com.shoe.dto.HangSanXuatDTO;
-import com.shoe.entities.HangSanXuat;
-import com.shoe.entities.LoaiGiay_;
-import com.shoe.jpa.JpaLoaiGiay;
-import com.shoe.dto.LoaiGiayDTO;
-import com.shoe.entities.LoaiGiay;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 @Transactional

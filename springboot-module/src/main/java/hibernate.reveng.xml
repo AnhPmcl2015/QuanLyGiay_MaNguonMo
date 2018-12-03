@@ -2,9 +2,17 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
+  <table-filter match-catalog="quanlygiay" match-name="chi_tiet_don_hang"/>
   <table-filter match-catalog="quanlygiay" match-name="chi_tiet_giay"/>
+  <table-filter match-catalog="quanlygiay" match-name="chi_tiet_phieu_nhap"/>
+  <table-filter match-catalog="quanlygiay" match-name="don_hang"/>
   <table-filter match-catalog="quanlygiay" match-name="giay"/>
   <table-filter match-catalog="quanlygiay" match-name="gioi_tinh"/>
   <table-filter match-catalog="quanlygiay" match-name="hang_san_xuat"/>
+  <table-filter match-catalog="quanlygiay" match-name="khach_hang"/>
   <table-filter match-catalog="quanlygiay" match-name="loai_giay"/>
+  <table-filter match-catalog="quanlygiay" match-name="phieu_nhap"/>
+  <table-filter match-catalog="quanlygiay" match-name="tinh_trang_don_hang"/>
+  <table-filter match-catalog="quanlygiay" match-name="user_roles"/>
+  <table-filter match-catalog="quanlygiay" match-name="users"/>
 </hibernate-reverse-engineering>

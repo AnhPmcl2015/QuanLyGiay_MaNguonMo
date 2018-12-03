@@ -1,6 +1,5 @@
 package com.shoe.dto;
 
-import com.shoe.entities.Giay;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

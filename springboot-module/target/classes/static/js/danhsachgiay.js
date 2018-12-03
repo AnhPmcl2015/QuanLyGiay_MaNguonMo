@@ -47,21 +47,25 @@ $(document).ready(function () {
         }
     });
     $("#table").on('click', '.edit', function (e) {
-
         e.preventDefault();
         var $row = $(this).closest("tr"), $tds = $row.find("td:nth-child(1)");
-        var idGiay = 0, tengiay;
         $.each($tds, function () {
-            idGiay = $(this).children(".data-id").data("id");
-            tengiay
+            var idGiay = $(this).children(".data-id").data("id");
             console.log(' ' + idGiay);
         });
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for (var i = 0; i < 6; i++){
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        $(location).attr('href', '/sua-giay/' +btoa(idGiay)+'?'+encodeURI('x='+text));
+        $.ajax({
+            url: '/giay',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+
+            },
+            data: json,
+            error: function (data, textStatus, errorThrown) {
+
+            }
+        });
     });
     var row_table, magiay;
     $("#table").on('click', '.delete', function (e) {
@@ -92,35 +96,19 @@ $(document).ready(function () {
         });
 
     });
-
     $('#txtMaGiay').on('keyup', function () {
         table.column(1).search(this.value).draw();
     });
     $('#txtTenGiay').on('keyup', function () {
         table.column(1).search(this.value).draw();
     });
-    $('#txtGioiTinh').on('change', function () {
+    $('#txtGioiTinh').on('click', function () {
         table.column(2).search(this.value).draw();
     });
     $('#txtLoaiGiay').on('change', function () {
         table.column(3).search(this.value).draw();
     });
-
-    var serieHtml = $('select[name=txtLoaiGiay]').html();
     $('#txtNhaSanXuat').on('change', function () {
         table.column(4).search(this.value).draw();
-        var sel = $('#txtLoaiGiay'),
-            label = $(this).val();
-        sel.html(serieHtml);
-
-        if(label.trim() !== ''){
-            var optGroup = $('optgroup[label="' + label + '"]')[0].outerHTML;
-            sel.html(optGroup);
-            table.column(3).search($('#txtLoaiGiay').val()).draw();
-        } else{
-            $('#txtLoaiGiay').val('').trigger('change');
-            //table.search('').draw();
-        }
-
     });
 });

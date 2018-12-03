@@ -17,6 +17,10 @@ import javax.persistence.Table;
 @Table(name = "hang_san_xuat", catalog = "quanlygiay")
 public class HangSanXuat implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6138301331770705787L;
 	private Integer idHangSanXuat;
 	private String tenHangSanXuat;
 	private Boolean xoaFlag;

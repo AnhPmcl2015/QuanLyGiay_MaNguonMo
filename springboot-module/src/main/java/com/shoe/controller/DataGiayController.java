@@ -23,7 +23,7 @@ public class DataGiayController {
     @PostMapping("/get-gender")
     public ResponseEntity<String> getGioiTinh(){
         List<GioiTinhDTO> list = gioiTinhDAO.getList();
-        ResponseEntity res = new ResponseEntity<>(ConvertToJson.ToJson(list), HttpStatus.OK);
+        ResponseEntity<String> res = new ResponseEntity<>(ConvertToJson.ToJson(list), HttpStatus.OK);
         return res;
     }
 
@@ -33,7 +33,7 @@ public class DataGiayController {
     @PostMapping("/get-hang-san-xuat")
     public ResponseEntity<String> getHangSanXuat(){
         List<HangSanXuatSelectDTO> list = hangSanXuatDAO.getAllList();
-        ResponseEntity res = new ResponseEntity<>(ConvertToJson.ToJson(list), HttpStatus.OK);
+        ResponseEntity<String> res = new ResponseEntity<>(ConvertToJson.ToJson(list), HttpStatus.OK);
         return res;
     }
 }
