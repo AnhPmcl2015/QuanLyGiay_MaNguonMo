@@ -17,8 +17,6 @@ import "../../Common/Loader/loader.css";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Pagination from "../../Common/Pagination/Pagination";
-import { ToastContainer, toast } from "react-toastify";
-import { Slide } from "react-toastify";
 class ListShoe extends Component {
   state = {
     items: null,
@@ -64,51 +62,46 @@ class ListShoe extends Component {
   };
 
   onDelete = value => {
-    fetch("/admin/api/shoe/delete-giay", {
-      method: "POST",
-      body: JSON.stringify(value.idGiay)
-    })
-      .then(res => res.json())
-      .then(
-        result => {
-          if (result.status === "success") {
-            this.deleteSuccess();
-            const data = this.state.items.filter(function(s) {
-              return s != value;
-            });
-            this.setState({
-              items: data
-            });
-          }
-        },
-        error => {
-          console.log("Lỗi đăng nhập " + error);
-        }
-      );
+    // fetch("/admin/api/shoe/delete-giay", {
+    //   method: "POST",
+    //   body: JSON.stringify(value.idGiay)
+    // })
+    //   .then(res => res.json())
+    //   .then(
+    //     result => {
+    //       if (result.status === "success") {
+    //         this.deleteSuccess();
+    //         const data = this.state.items.filter(function(s) {
+    //           return s != value;
+    //         });
+    //         this.setState({
+    //           items: data
+    //         });
+    //       }
+    //     },
+    //     error => {
+    //       console.log("Lỗi đăng nhập " + error);
+    //     }
+    //   );
   };
-  deleteSuccess = () => {
-    toast.success("Xóa thành công!", {
-      position: toast.POSITION.TOP_CENTER
-    });
-  };
-  onEdit = value => {
-    this.props.GetGiayById(value.idGiay);
-    this.props.history.push("/admin/danh-sach-giay/sua-giay");
-  };
+  // onEdit = value => {
+  //   this.props.GetGiayById(value.idGiay);
+  //   this.props.history.push("/admin/danh-sach-giay/sua-giay");
+  // };
 
-  toggle = () => {
-    this.onDelete(this.state.item);
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
+  // toggle = () => {
+  //   this.onDelete(this.state.item);
+  //   this.setState({
+  //     modal: !this.state.modal
+  //   });
+  // }
 
-  toggleDelete = (value) => {
-    this.setState({
-      item: value,
-      modal: !this.state.modal
-    });
-  }
+  // toggleDelete = (value) => {
+  //   this.setState({
+  //     item: value,
+  //     modal: !this.state.modal
+  //   });
+  // }
 
   render() {
     if (this.state.items === null) {
@@ -211,19 +204,6 @@ class ListShoe extends Component {
             />
           </Col>
         </Row>
-        <ToastContainer
-          position="top-center"
-          autoClose={2500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          transition={Slide}
-          rtl={false}
-          pauseOnVisibilityChange
-          draggable
-          pauseOnHover
-        />
-
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}

@@ -15,5 +15,5 @@ public interface GiayDAO {
 
     public GiayDTO getGiayById(Integer id);
 
-    public boolean checkUniqueOnEddit(GiayForm giay);
+    public boolean checkUniqueOnEdit(GiayForm giay);
 }

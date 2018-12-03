@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, Select, message } from "antd";
-import "antd/dist/antd.css";
 const FormItem = Form.Item;
 const { TextArea } = Input;
 class EditShoeForm extends Component {

@@ -56,7 +56,7 @@ public class GiayController {
     @PostMapping(value = "/edit", consumes = "application/json")
     public ResponseEntity<String> editGiay(@Valid @RequestBody GiayForm model, Errors error) {
     	ResponseEntity<String> resp = null;
-        if (!giayDAO.checkUniqueOnEddit(model)) {
+        if (!giayDAO.checkUniqueOnEdit(model)) {
             resp = new ResponseEntity<>("{\"status\":\"unique\"}", HttpStatus.BAD_REQUEST);
         } else if (error.hasFieldErrors("tenGiay")
                 || error.hasFieldErrors("giaBan")

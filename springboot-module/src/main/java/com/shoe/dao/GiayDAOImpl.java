@@ -49,7 +49,7 @@ public class GiayDAOImpl implements GiayDAO {
     }
 
     @Override
-    public boolean checkUniqueOnEddit(GiayForm giay) {
+    public boolean checkUniqueOnEdit(GiayForm giay) {
         if(GenericValidator.isInt(giay.getId())){
             Integer id = Integer.parseInt(giay.getId());
             Optional<Giay> entity = jpa.findById(id);

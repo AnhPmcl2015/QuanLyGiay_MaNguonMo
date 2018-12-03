@@ -6,7 +6,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../create-shoe/create-shoe.css";
-import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { Select } from "antd";
 import EditShoeForm from "./edit-shoe.form";
