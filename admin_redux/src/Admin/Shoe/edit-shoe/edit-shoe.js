@@ -74,8 +74,8 @@ class EditShoe extends Component {
   }
   render() {
     if (
-      this.state.form != null &&
-      Object.keys(this.state.form.giayInfo).lenght === 0
+      this.state.form == null ||
+      Object.keys(this.state.form.giayInfo).length === 0
     ) {
       return <h2>Error</h2>;
     }

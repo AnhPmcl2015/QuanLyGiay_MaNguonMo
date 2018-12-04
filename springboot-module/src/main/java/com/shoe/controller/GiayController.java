@@ -74,7 +74,7 @@ public class GiayController {
 
 
     @PostMapping(value = "/get-giay-by-id")
-    public ResponseEntity<String> saveGiay(@RequestBody String id) {
+    public ResponseEntity<String> getGiayById(@RequestBody String id) {
     	ResponseEntity<String> resp = null;
         if (id == null || "".equals(id.trim())) {
             resp = new ResponseEntity<>(HttpStatus.NOT_FOUND);

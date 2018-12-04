@@ -2,27 +2,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { GetGiayById } from "../../../actions/giay/sua-giayAction";
 import { connect } from "react-redux";
-import {
-  Button,
-  Row,
-  Col,
-  Input,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
 import { Link } from "react-router-dom";
 import "../../Common/Loader/loader.css";
-import ReactTable from "react-table";
+import matchSorter from "match-sorter";
 import "react-table/react-table.css";
-import Pagination from "../../Common/Pagination/Pagination";
+import { Button, Table, Icon, Modal, Col, Row } from "antd";
+import Search from "antd/lib/input/Search";
+
 class ListShoe extends Component {
   state = {
     items: null,
-    search: "",
-    modal: false,
-    item: null
+    filter: null,
+    modal: false
   };
   updateClick = () => {
     console.log("click sua");
@@ -43,7 +34,8 @@ class ListShoe extends Component {
           console.log(result);
 
           this.setState({
-            items: result
+            items: result,
+            filter: result
           });
         },
         error => {
@@ -51,17 +43,42 @@ class ListShoe extends Component {
         }
       );
   }
-  componentWillReceiveProps(myProps) {
-    console.log(myProps.giayInfo);
-  }
+  componentWillReceiveProps(myProps) {}
 
   onSearchChange = e => {
+    const value = this.filter(e.target.value);
     this.setState({
-      search: e.target.value
+      filter: value
     });
   };
 
+  filter(value) {
+    return value
+      ? matchSorter(this.state.items, value, {
+          keys: ["maGiay", "tenGiay"]
+        })
+      : this.state.items;
+  }
   onDelete = value => {
+    Modal.confirm({
+      title: 'Thông báo',
+      content: 'Bạn có chắc muốn xóa không?',
+      okText: 'Đồng ý',
+      cancelText: 'Hủy',
+      onOk(){
+        console.log(value);
+        const data = this.state.items.filter(function(s) {
+          return s != value;
+        })
+        this.setState({
+          items: data
+        });
+      },
+    });
+  };
+
+  deleteShoe= () => {
+    console.log('ok')
     // fetch("/admin/api/shoe/delete-giay", {
     //   method: "POST",
     //   body: JSON.stringify(value.idGiay)
@@ -74,34 +91,20 @@ class ListShoe extends Component {
     //         const data = this.state.items.filter(function(s) {
     //           return s != value;
     //         });
-    //         this.setState({
-    //           items: data
-    //         });
+            // this.setState({
+            //   items: data
+            // });
     //       }
     //     },
     //     error => {
     //       console.log("Lỗi đăng nhập " + error);
     //     }
     //   );
+  }
+  onEdit = value => {
+    this.props.GetGiayById(value.idGiay);
+    this.props.history.push("/admin/danh-sach-giay/sua-giay");
   };
-  // onEdit = value => {
-  //   this.props.GetGiayById(value.idGiay);
-  //   this.props.history.push("/admin/danh-sach-giay/sua-giay");
-  // };
-
-  // toggle = () => {
-  //   this.onDelete(this.state.item);
-  //   this.setState({
-  //     modal: !this.state.modal
-  //   });
-  // }
-
-  // toggleDelete = (value) => {
-  //   this.setState({
-  //     item: value,
-  //     modal: !this.state.modal
-  //   });
-  // }
 
   render() {
     if (this.state.items === null) {
@@ -110,135 +113,90 @@ class ListShoe extends Component {
 
     const columns = [
       {
-        Header: "Mã giày",
-        accessor: "maGiay",
-        id: "maGiay"
+        title: "Mã giày",
+        dataIndex: "maGiay",
+        key: "maGiay",
+        onFilter: (value, record) => record.name.indexOf(value) === 0,
+        sorter: (a, b) => {
+          return a.maGiay.localeCompare(b.maGiay);
+        }
       },
       {
-        Header: "Tên giày",
-        accessor: "tenGiay",
-        id: "tenGiay"
+        title: "Tên giày",
+        dataIndex: "tenGiay",
+        key: "tenGiay",
+        sorter: (a, b) => {
+          return a.tenGiay.localeCompare(b.tenGiay);
+        }
       },
       {
-        Header: "Giới tính",
-        accessor: "tenGioiTinh"
+        title: "Giới tính",
+        dataIndex: "tenGioiTinh",
+        key: "tenGioiTinh"
       },
       {
-        Header: "Loại giày",
-        accessor: "tenLoaiGiay"
+        title: "Loại giày",
+        dataIndex: "tenLoaiGiay",
+        key: "tenLoaiGiay"
       },
       {
-        Header: "Nhà sản xuất",
-        accessor: "tenHangSanXuat"
+        title: "Nhà sản xuất",
+        dataIndex: "tenHangSanXuat",
+        key: "tenHangSanXuat"
       },
       {
-        Header: "Chức năng",
-        accessor: "idGiay",
-        Cell: row => (
-          <div align="center">
-            <Button
-              color="info"
-              className="rounded-circle"
-              onClick={() => this.onEdit(row.original)}
-            >
-              <i className="fas fa-edit" />
+        title: "Chức năng",
+        dataIndex: "idGiay",
+        render: (text, record) => (
+          <div>
+            <Button onClick={() => this.onEdit(record)}>
+              <Icon type="edit" theme="filled" />
             </Button>
-            <Button
-              color="secondary"
-              className="rounded-circle ml-1"
-              onClick={() => this.toggleDelete(row.original)}
-            >
-              <i className="far fa-trash-alt" />
+            <Button onClick={() => this.onDelete(record)} className="ml-1">
+              <Icon type="delete" theme="filled" />
             </Button>
           </div>
         )
       }
     ];
-    const data = this.state.items.filter(row => {
-      return (
-        row.maGiay.includes(this.state.search) ||
-        row.tenGiay.includes(this.state.search)
-      );
-    });
     return (
       <div>
-        <Row>
-          <Col xs={3}>
-            <Input
-              value={this.state.search}
+        <Row className="mt-1">
+          <Col xs={6}>
+            <Search
+              placeholder="Tìm kiếm mã giày/tên giày"
               onChange={this.onSearchChange}
-              type="text"
-              placeholder="Tìm kiếm"
             />
           </Col>
           <Col>
             <Link to="/admin/danh-sach-giay/them-giay">
-              <Button color="primary" className="rounded-circle float-right">
+              <Button color="primary" className="float-right">
                 <i className="far fa-plus-square" />
               </Button>
             </Link>
           </Col>
         </Row>
-        <Row className="mt-1">
-          <Col xs={12}>
-            <ReactTable
-              ref={r => (this.reactTable = r)} // get ref gọi this.reactTable
-              PaginationComponent={Pagination} // custom giao diện phần phân trang
-              data={data} // dữ liệu đổ vào table
-              columns={columns} // dữ liệu cột và header
-              defaultPageSize={5} // số records/page
-              sortable={true}
-              previousText={"<"} // custom text lùi về 1 trang
-              showPageSizeOptions={false} // hiển thị select box cho phép chọn số records hiển thị trong 1 trang
-              showPagination={true} // hiển thị phân trang
-              nextText={">"} // custom text đi tới 1 trang
-              noDataText={"Không tìm thấy"} // custom text
-              pageText={"Trang"} // custom text
-              ofText={"/"} // custom text
-              rowsText={"dòng"} // custom text
-              pageJumpText={"Đi tới trang"} // custom text
-              rowsSelectorText={"dòng/1 trang"} // custom text
-              // defaultFilterMethod={(filter, row) =>
-              //   String(row[filter.id]).includes(this.state.search)
-              // }
+        <Row className="mt-2">
+          <Col xs={24}>
+            <Table
+              dataSource={this.state.filter}
+              columns={columns}
+              pagination={{ pageSize: 10 }}
             />
           </Col>
         </Row>
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle}
-          className={this.props.className}
-        >
-          <ModalHeader toggle={this.toggle}>Thông báo</ModalHeader>
-          <ModalBody>
-            Bạn có chắc muốn xóa không?
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Đồng ý
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggle}>
-              Hủy
-            </Button>
-          </ModalFooter>
-        </Modal>
       </div>
     );
   }
 }
-
 ListShoe.propTypes = {
-  giayInfo: PropTypes.object
+  GetGiayById: PropTypes.func.isRequired
 };
 //functions props từ login action
 const mapDispatchToProps = {
   GetGiayById
 };
-//state of reducer, loginInfo là props của Component này, state là của redux
-const mapStateToProps = state => ({
-  giayInfo: state.giayInfo
-});
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ListShoe);

@@ -3,11 +3,17 @@ import { Form, Input, Button, Row, Col, Select, message } from "antd";
 const FormItem = Form.Item;
 const { TextArea } = Input;
 class EditShoeForm extends Component {
+  state = {
+    isSaveComplete: false
+  };
   handleSubmit = e => {
     e.preventDefault();
     console.log("submit");
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        this.setState({
+          isSaveComplete: true
+        });
         let form = {
           id: this.props.editForm.giayInfo.id,
           maGiay: values.maGiay,
@@ -44,7 +50,10 @@ class EditShoeForm extends Component {
       .then(res => res.json())
       .then(
         result => {
-          console.log(result);
+
+          this.setState({
+            isSaveComplete: false
+          })
           if (result.status === "unique") {
             message.warning("Mã giày đã tồn tại");
             return;
@@ -61,7 +70,7 @@ class EditShoeForm extends Component {
       );
   };
   componentDidMount() {
-    console.log(this.props.editForm);
+
   }
   render() {
     const { getFieldDecorator } = this.props.form;

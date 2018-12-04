@@ -4,13 +4,19 @@ import { Form, Input, Button, Row, Col, Select, message } from "antd";
 const FormItem = Form.Item;
 const { TextArea } = Input;
 class CreateShoeForm extends Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log("submit");
+
+  state = {
+    isSaveComplete: false
+  };
+  handleSubmit = () => {
+
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        this.setState({
+          isSaveComplete: true
+        });
         this.save(values);
-      }
+      } 
     });
   };
   isPositiveInteger = (rule, value, callback) => {
@@ -35,7 +41,9 @@ class CreateShoeForm extends Component {
       .then(res => res.json())
       .then(
         result => {
-          console.log(result);
+          this.setState({
+            isSaveComplete: false
+          })
           if (result.status === "unique") {
             message.warning("Mã giày đã tồn tại");
             return;
@@ -45,18 +53,20 @@ class CreateShoeForm extends Component {
             return;
           }
           message.success("Lưu thành công");
-        },
-        error => {
-          console.log("Lỗi save giay " + error);
+          
         }
-      );
+      ).catch(error =>{
+        console.log(error);
+      });
   };
-  componentDidMount() {}
+  componentDidMount() {
+
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
+        <Form>
           <Row gutter={16}>
             <Col xs={24} sm={8} md={8}>
               <label>Mã giày</label>
@@ -144,7 +154,7 @@ class CreateShoeForm extends Component {
               </FormItem>
             </Col>
           </Row>
-          <Button size={"large"} htmlType="submit">
+          <Button size={"large"} loading={this.state.isSaveComplete} onClick={this.handleSubmit}>
             Lưu
           </Button>
         </Form>
