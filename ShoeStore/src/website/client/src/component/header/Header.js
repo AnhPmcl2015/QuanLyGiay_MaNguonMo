@@ -1,30 +1,47 @@
 import React, {Component} from 'react';
 import './Header.css';
+import SelectGiay from './SelectGiay';
+
 import {connect} from 'react-redux';
 import * as actions from '../../redux/actions/index';
 
 
 class Header extends Component {
 
-    componentDidMount() {
-        fetch('api/ten-giay')
+    constructor(props) {
+        super(props);
+        this.handleChange = this
+            .handleChange
+            .bind(this);
+        this.getListTenGiay();
+    }
+ 
+
+    // lấy danh sách tên giày
+    async getListTenGiay() {
+        await fetch('/api/ten-giay')
             .then(response => response.json())
             .then(data => this.props.getListTenGiay(data));
+    }
 
+    handleChange(value) {
+        this.props.history.push('/chi-tiet-giay/' + value);
     }
 
     render() {
+
         var {giay} = this.props;
-        console.log(giay);
+
         return (
 
             <React.Fragment>
                 <header className="row align-items-center">
-                    <div className="col-lg-8 col-xl-10">
+                    <div className="col-10">
                         <img id="logo" src="/images/logo.png" className="mr-3" alt="Không có hình ảnh"/>
+                        <SelectGiay listTenGiay={giay.listTenGiay}/>
                     </div>
 
-                    <div className="col-lg-4 col-xl-2 text-right">
+                    <div className="col-2 text-right">
                         <ul className="list-inline">
                             <li className="list-inline-item">Đăng nhập |</li>
                             <li className="list-inline-item">$0

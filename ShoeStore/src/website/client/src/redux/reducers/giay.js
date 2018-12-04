@@ -1,14 +1,37 @@
 import * as types from '../constants/ActionTypes';
 
 var initialState = {
-    listTenGiay: []
+    listTenGiay: [],
+    listGiayNoiBac: [],
+    listGiayBanChay: []
 }
 
 var myReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.LIST_TEN_GIAY:
-            state.listTenGiay = action.listTenGiay;
-            return state;
+            {
+                // var listTenGiay = state.listTenGiay; action.listTenGiay.forEach(tenGiay => {
+                //   listTenGiay.push(tenGiay); }); var newState = {     ...state, listTenGiay:
+                // listTenGiay }
+                return {
+                    ...state,
+                    listTenGiay: action.listTenGiay
+                };
+            }
+        case types.LIST_GIAY_NOI_BAC:
+            {
+                return {
+                    ...state,
+                    listGiayNoiBac: action.listGiayNoiBac
+                }
+            }
+        case types.LIST_GIAY_BAN_CHAY:
+            {
+                return {
+                    ...state,
+                    listGiayBanChay: action.listGiayBanChay
+                }
+            }
         default:
             return state;
     }
