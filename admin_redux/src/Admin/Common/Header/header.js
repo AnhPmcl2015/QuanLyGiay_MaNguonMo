@@ -8,7 +8,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
+  Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -35,6 +35,7 @@ class Header extends Component {
           <NavbarBrand>
             <Link to="/about">About</Link>
           </NavbarBrand>
+          <Button type="danger" onClick={() => this.props.onLogout()}>Dang xuat</Button>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

@@ -11,25 +11,25 @@ class Invoice extends Component {
             dataSourceOrders: null,
             dataSourceOrderDetail: null,
             isLoading: false,
-            visibleDetail: false,
+            visibleModalDetail: false,
             selectedOrder: Object,
         };
     }
 
     showModal = (record) => {
         this.setState({
-            visibleDetail: true,
+            visibleModalDetail: true,
             selectedOrder: record
         });
         this.loadOrderDetail(record.orderId);
     }
 
     handleOk = () => {
-        this.setState({ visible: false });
+        this.setState({ visibleModalDetail: false });
     }
 
     handleCancel = () => {
-        this.setState({ visible: false });
+        this.setState({ visibleModalDetail: false });
     }
 
     loadOrderDetail(orderId) {
@@ -59,7 +59,7 @@ class Invoice extends Component {
     }
 
     componentDidMount() {
-        database.ref("/orders").once('value', (snapshot) => {
+        database.ref("/orders").on('value', (snapshot) => {
             var orders = [];
             snapshot.forEach(function (childSnapshot) {
                 var value = childSnapshot.val();
@@ -105,7 +105,7 @@ class Invoice extends Component {
                 <Modal
                     title={'Thông tin đơn hàng #' + selectedOrder.orderId}
                     width={1000}
-                    visible={this.state.visibleDetail}
+                    visible={this.state.visibleModalDetail}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[
