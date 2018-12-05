@@ -88,6 +88,7 @@ class App extends Component {
         <Header isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
           onLogout={this.handleLogout} />
+          
         <Switch>
           <Route path="/login" render={(props) => this.state.isAuthenticated ?
             <BadRequest /> : <Login onLogin={this.handleLogin} {...props} />}></Route>

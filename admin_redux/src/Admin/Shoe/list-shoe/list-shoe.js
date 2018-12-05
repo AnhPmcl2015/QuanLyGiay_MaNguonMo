@@ -13,7 +13,8 @@ class ListShoe extends Component {
   state = {
     items: null,
     filter: null,
-    modal: false
+    modal: false,
+    loadingTable: true
   };
   updateClick = () => {
     console.log("click sua");
@@ -35,7 +36,8 @@ class ListShoe extends Component {
 
           this.setState({
             items: result,
-            filter: result
+            filter: result,
+            loadingTable: false
           });
         },
         error => {
@@ -59,6 +61,20 @@ class ListShoe extends Component {
         })
       : this.state.items;
   }
+  // filterWithConditions(value){
+  //   let list_temp= this.state.items;
+  //   if(value){
+  //      list_temp = matchSorter(list_temp, value, {
+  //       keys: ["maGiay"]
+  //     })
+  //   }
+  //   if(value){
+  //     list_temp =  matchSorter(list_temp, value, {
+  //       keys: ["maGiay"]
+  //     })
+  //   }
+  //   this.setState({filter: list_temp})
+  // }
   onDelete = value => {
     Modal.confirm({
       title: 'Thông báo',
@@ -107,9 +123,9 @@ class ListShoe extends Component {
   };
 
   render() {
-    if (this.state.items === null) {
-      return <div className="loader" />;
-    }
+    // if (this.state.items === null) {
+    //   return <div className="loader" />;
+    // }
 
     const columns = [
       {
@@ -182,6 +198,7 @@ class ListShoe extends Component {
               dataSource={this.state.filter}
               columns={columns}
               pagination={{ pageSize: 10 }}
+              loading={this.state.loadingTable}
             />
           </Col>
         </Row>
