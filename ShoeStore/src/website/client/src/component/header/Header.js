@@ -5,7 +5,6 @@ import SelectGiay from './SelectGiay';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/actions/index';
 
-
 class Header extends Component {
 
     constructor(props) {
@@ -13,9 +12,16 @@ class Header extends Component {
         this.handleChange = this
             .handleChange
             .bind(this);
-        this.getListTenGiay();
+
     }
- 
+
+    componentDidMount() {
+
+        if (this.props.giay.listTenGiay.length === 0) {
+
+            this.getListTenGiay();
+        }
+    }
 
     // lấy danh sách tên giày
     async getListTenGiay() {
@@ -25,7 +31,10 @@ class Header extends Component {
     }
 
     handleChange(value) {
-        this.props.history.push('/chi-tiet-giay/' + value);
+        this
+            .props
+            .history
+            .push('/chi-tiet-giay/' + value);
     }
 
     render() {

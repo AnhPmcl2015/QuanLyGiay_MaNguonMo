@@ -20,3 +20,10 @@ export const list_giay_ban_chay = (listGiayBanChay) => {
         listGiayBanChay
     }
 }
+
+export const list_loai_giay = (listLoaiGiay) => {
+    return {
+        type: types.LIST_LOAI_GIAY,
+        listLoaiGiay
+    }
+}

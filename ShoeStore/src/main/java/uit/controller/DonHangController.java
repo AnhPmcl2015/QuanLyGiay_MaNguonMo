@@ -24,7 +24,8 @@ import uit.repository.GiayRepository;
 import uit.repository.LoaiGiayRepository;
 
 @RestController()
-@RequestMapping("/api/don-hang")
+@RequestMapping("/chi-tiet-giay")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DonHangController {
 
 	@Autowired
@@ -40,7 +41,6 @@ public class DonHangController {
 	private GiayConverter giayConverter;
 
 	@GetMapping("/thong-tin-giay/{id}")
-	@CrossOrigin(origins = "http://localhost:3000")
 	public ResponseEntity<ThongTinGiayDto> getThongTinGiay(@PathVariable String id) {
 		Optional<Giay> optGiay = this.giayRepository.findById(Integer.parseInt(id));
 
@@ -57,7 +57,6 @@ public class DonHangController {
 	}
 
 	@GetMapping("/thong-tin-giay/hang-san-xuat/{idHangGiay}")
-	@CrossOrigin(origins="http://localhost:3000")
 	public Collection<GiayDto> getListGiayNoiBat(@PathVariable String idHangGiay) {
 		
 		List<GiayDto> listGiayDto = new ArrayList<>();

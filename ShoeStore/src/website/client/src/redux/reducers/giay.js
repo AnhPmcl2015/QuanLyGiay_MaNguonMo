@@ -3,7 +3,8 @@ import * as types from '../constants/ActionTypes';
 var initialState = {
     listTenGiay: [],
     listGiayNoiBac: [],
-    listGiayBanChay: []
+    listGiayBanChay: [],
+    listLoaiGiay: []
 }
 
 var myReducer = (state = initialState, action) => {
@@ -11,7 +12,7 @@ var myReducer = (state = initialState, action) => {
         case types.LIST_TEN_GIAY:
             {
                 // var listTenGiay = state.listTenGiay; action.listTenGiay.forEach(tenGiay => {
-                //   listTenGiay.push(tenGiay); }); var newState = {     ...state, listTenGiay:
+                //  listTenGiay.push(tenGiay); }); var newState = {     ...state, listTenGiay:
                 // listTenGiay }
                 return {
                     ...state,
@@ -30,6 +31,14 @@ var myReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     listGiayBanChay: action.listGiayBanChay
+                }
+            }
+
+        case types.LIST_LOAI_GIAY:
+            {
+                return {
+                    ...state,
+                    listLoaiGiay: action.listLoaiGiay
                 }
             }
         default:

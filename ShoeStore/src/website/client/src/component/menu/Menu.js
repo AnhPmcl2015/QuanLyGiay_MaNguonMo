@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import MenuItem from './MenuItem';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/actions/index';
 
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    Nav
-} from 'reactstrap';
+import {Collapse, Navbar, NavbarToggler, Nav} from 'reactstrap';
 class Menu extends Component {
 
     constructor(props) {
@@ -14,64 +11,7 @@ class Menu extends Component {
 
         this.state = {
             isOpen: false,
-            loaiGiay: [
-                {
-                    tenLoaiGiay: 'Air Jordans',
-                    loaiGiayCon: [
-                        {
-                            maGiay: '1',
-                            ten: 'Air Jordans 1'
-                        }, {
-                            maGiay: '2',
-                            ten: 'Air Jordans 2'
-                        }
-                    ]
-                }, {
-                    tenLoaiGiay: 'Nike',
-                    loaiGiayCon: [
-                        {
-                            maGiay: '1',
-                            ten: 'Nike 1'
-                        }, {
-                            maGiay: '2',
-                            ten: 'Nike 2'
-                        }
-                    ]
-                }, {
-                    tenLoaiGiay: 'Adidas',
-                    loaiGiayCon: [
-                        {
-                            maGiay: '1',
-                            ten: 'Adidas 1'
-                        }, {
-                            maGiay: '2',
-                            ten: 'Adidas 2'
-                        }
-                    ]
-                }, {
-                    tenLoaiGiay: 'Yeezy',
-                    loaiGiayCon: [
-                        {
-                            maGiay: '1',
-                            ten: 'Yeezy 1'
-                        }, {
-                            maGiay: '2',
-                            ten: 'Yeezy 2'
-                        }
-                    ]
-                }, {
-                    tenLoaiGiay: 'Vans',
-                    loaiGiayCon: [
-                        {
-                            maGiay: '1',
-                            ten: 'Vans 1'
-                        }, {
-                            maGiay: '2',
-                            ten: 'Vans 2'
-                        }
-                    ]
-                }
-            ]
+            loaiGiay: [],
         };
     }
     toggle = () => {
@@ -80,10 +20,28 @@ class Menu extends Component {
         });
     }
 
+    componentDidMount() {
+
+        if (this.props.giay.listLoaiGiay.length === 0) {
+
+            this.getListLoaiGiay();
+        }
+    }
+
+    // lấy danh sách Loại giày
+    async getListLoaiGiay() {
+        await fetch('/api/ten-giay')
+            .then(response => response.json())
+            .then(data => this.props.getListLoaiGiay(data));
+    }
+
     render() {
-        var menuItem = this.state.loaiGiay.map((giay, index) => {
-            return <MenuItem key={index} loaiGiay={giay}/>
-        });
+        var menuItem = this
+            .state
+            .loaiGiay
+            .map((giay, index) => {
+                return <MenuItem key={index} loaiGiay={giay}/>
+            });
         return (
             <React.Fragment>
                 <Navbar color="dark" dark expand="md">
@@ -100,4 +58,16 @@ class Menu extends Component {
     }
 }
 
-export default Menu;
+const mapStateToProps = (state) => {
+    return {giay: state.giay}
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        getListLoaiGiay: (listLoaiGiay) => {
+            dispatch(actions.list_loai_giay(listLoaiGiay));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

@@ -50,11 +50,10 @@ class ShoeDetail extends Component {
     }
 
 
-
     async setShoeDetail() {
 
         if (this.props.match.params.id !== '0' && this.state.preIdGiay !== this.props.match.params.id) {
-            await fetch(`http://localhost:8080/api/don-hang/thong-tin-giay/${this.props.match.params.id}`)
+            await fetch(`/thong-tin-giay/${this.props.match.params.id}`)
                 .then(response => response.json())
                 .then(data => this.setState({thongTinGiay: data, preIdGiay: data.idGiay}));
         }
@@ -70,7 +69,7 @@ class ShoeDetail extends Component {
 
     async getListDanhSachNoiBac(idHangSanXuat) {
         if (this.state.preIdHangSanXuat !== idHangSanXuat) {
-            await fetch('http://localhost:8080/api/don-hang/thong-tin-giay/hang-san-xuat/' + idHangSanXuat)
+            await fetch('/thong-tin-giay/hang-san-xuat/' + idHangSanXuat)
                 .then(response => response.json())
                 .then(data => this.setState({danhSachNoiBat: data, preIdHangSanXuat: idHangSanXuat}));
         }
