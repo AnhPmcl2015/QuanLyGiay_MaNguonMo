@@ -15,6 +15,7 @@ class EditShoe extends Component {
     loaiGiays: null,
     gioiTinhs: null,
     form: null
+
   };
   componentWillReceiveProps(myProps) {
     this.setState({
@@ -73,14 +74,15 @@ class EditShoe extends Component {
       );
   }
   render() {
+   
+    if (this.state.gioiTinhs === null || this.state.loaiGiays === null) {
+      return <div className="loader" />;
+    }
     if (
       this.state.form == null ||
       Object.keys(this.state.form.giayInfo).length === 0
     ) {
       return <h2>Error</h2>;
-    }
-    if (this.state.gioiTinhs === null || this.state.loaiGiays === null) {
-      return <div className="loader" />;
     }
     let optionsGT = this.state.gioiTinhs.map(i => (
       <Option value={String(i.value)} key={i.value}>
@@ -96,7 +98,6 @@ class EditShoe extends Component {
         ))}
       </OptGroup>
     ));
-    console.log(this.state.form);
     return (
       <div>
         <Breadcrumb>

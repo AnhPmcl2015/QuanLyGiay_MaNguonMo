@@ -3,6 +3,7 @@ package com.shoe.dao;
 import java.util.List;
 
 import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeImage;
 import com.shoe.form.GiayForm;
 
 public interface GiayDAO {
@@ -16,4 +17,6 @@ public interface GiayDAO {
     public GiayDTO getGiayById(Integer id);
 
     public boolean checkUniqueOnEdit(GiayForm giay);
+
+    public ShoeImage getImageById(Integer id);
 }

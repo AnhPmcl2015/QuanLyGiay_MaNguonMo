@@ -5,8 +5,10 @@ import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 
+import com.shoe.dto.ShoeImage;
 import com.shoe.entities.Giay_;
 import com.shoe.form.GiayForm;
 import com.shoe.jpa.JpaGiay;
@@ -61,6 +63,22 @@ public class GiayDAOImpl implements GiayDAO {
 
         return false;
     }
+
+    @Override
+    public ShoeImage getImageById(Integer id) {
+        ShoeImage img = new ShoeImage();
+        Optional<Giay> giayOpt = jpa.findById(id);
+        if(giayOpt.isPresent()){
+            Giay giay = giayOpt.get();
+            img.setId(giay.getIdGiay()+"");
+            img.setImg1(giay.getImg1());
+            img.setImg2(giay.getImg2());
+            img.setImg3(giay.getImg3());
+            img.setImg4(giay.getImg4());
+        }
+        return img;
+    }
+
 
     @Override
     public List<GiayDTO> getAllListNoneDel() {

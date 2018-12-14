@@ -169,7 +169,7 @@ class EditShoeForm extends Component {
               </FormItem>
             </Col>
           </Row>
-          <Button size={"large"} htmlType="submit">
+          <Button size={"large"} htmlType="submit" loading={this.state.isSaveComplete}>
             Lưu
           </Button>
         </Form>

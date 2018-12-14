@@ -19,6 +19,7 @@ import Invoice from './Admin/Invoice/Invoice';
 import PrivateRoute from './PrivateRoute';
 import LoadingIndicator from './Admin/Common/LoadingIndicator/LoadingIndicator';
 import GoodsReceipt from './Admin/GoodsReceipt/GoodsReceipt';
+import UploadImg from "./Admin/Shoe/upload-img/upload-img";
 
 notification.config({
   placement: 'topRight',
@@ -88,7 +89,7 @@ class App extends Component {
         <Header isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
           onLogout={this.handleLogout} />
-          
+
         <Switch>
           <Route path="/login" render={(props) => this.state.isAuthenticated ?
             <BadRequest /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
@@ -99,6 +100,10 @@ class App extends Component {
           <Route
             path="/admin/danh-sach-giay/sua-giay"
             component={EditShoe}
+          />
+          <Route
+            path="/admin/danh-sach-giay/anh-giay"
+            component={UploadImg}
           />
           <Route path="/admin/danh-sach-giay" component={ListShoe} />
           <PrivateRoute path="/hoadon" component={Invoice} authenticated={this.state.isAuthenticated}></PrivateRoute>

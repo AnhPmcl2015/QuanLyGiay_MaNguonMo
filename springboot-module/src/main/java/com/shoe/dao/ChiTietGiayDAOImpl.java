@@ -11,6 +11,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
+import com.shoe.entities.ChiTietGiay_;
+import com.shoe.entities.Giay_;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,15 +31,19 @@ public class ChiTietGiayDAOImpl implements ChiTietGiayDAO {
     @Autowired
     private JpaChiTietGiay jpa;
 
+
+
     @Autowired
     private EntityManager em;
 
     @Override
-    public List<ChiTietGiayDTO> getAllListNoneDel() {
+    public List<ChiTietGiayDTO> getAllListNoneDelByIdGiay(Integer id) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<ChiTietGiay> query = builder.createQuery(ChiTietGiay.class);
         Root<ChiTietGiay> from = query.from(ChiTietGiay.class);
-        query.select(from).where(builder.isNull(from.get("deleteYmd")));
+        query.select(from)
+                .where(builder.isFalse(from.get(ChiTietGiay_.xoaFlag)))
+                .where(builder.equal(from.get(ChiTietGiay_.giay).get(Giay_.ID_GIAY),id));
         TypedQuery<ChiTietGiay> typedQuery = em.createQuery(query);
         List<ChiTietGiayDTO> list = new ArrayList<>();
         typedQuery.getResultList().forEach(i -> {
@@ -49,9 +55,10 @@ public class ChiTietGiayDAOImpl implements ChiTietGiayDAO {
     }
 
     @Override
-    public void addDetailShoe(ChiTietGiayDTO giayDTO) {
+    public void saveDetailShoe(ChiTietGiayDTO giayDTO) {
         ChiTietGiay chiTietGiay = new ChiTietGiay();
         converter.convertDtoToEntity(giayDTO, chiTietGiay);
+        chiTietGiay.setXoaFlag(false);
         jpa.save(chiTietGiay);
     }
 

@@ -23,3 +23,22 @@ export const GetGiayById = idGiayData => dispatch => {
             }
         )
 };
+
+export const getImageByIdGiay = idGiay => dispatch => {
+    fetch("/admin/api/shoe/get-img-by-id", {
+        method: "POST",
+        body: JSON.stringify(idGiay),
+    })
+        .then(res => res.json())
+        .then(
+            result => {
+                dispatch({
+                    type: getGiayById.GET_IMAGE_GIAY,
+                    payload: result
+                })
+            },
+            error => {
+                console.log("Lỗi get image " + error);
+            }
+        );
+};

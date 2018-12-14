@@ -1,19 +1,28 @@
 package com.shoe.controller;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.shoe.Bus.ImageBus;
+import com.shoe.dto.ShoeImage;
 import org.apache.commons.validator.GenericValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.shoe.ObjectToJson.ConvertToJson;
 import com.shoe.converter.GiayConverter;
@@ -22,6 +31,8 @@ import com.shoe.dao.LoaiGiayDAO;
 import com.shoe.dto.GiayDTO;
 import com.shoe.dto.GiayTableDTO;
 import com.shoe.form.GiayForm;
+import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/admin/api/shoe")
@@ -39,7 +50,7 @@ public class GiayController {
     // thêm, sửa giày
     @PostMapping(value = "/save", consumes = "application/json")
     public ResponseEntity<String> saveGiay(@Valid @RequestBody GiayForm model, Errors error) {
-    	ResponseEntity<String> resp = null;
+        ResponseEntity<String> resp = null;
         if (error.hasFieldErrors("maGiay")) {
             resp = new ResponseEntity<>("{\"status\":\"unique\"}", HttpStatus.BAD_REQUEST);
         } else if (error.hasErrors()) {
@@ -55,7 +66,7 @@ public class GiayController {
 
     @PostMapping(value = "/edit", consumes = "application/json")
     public ResponseEntity<String> editGiay(@Valid @RequestBody GiayForm model, Errors error) {
-    	ResponseEntity<String> resp = null;
+        ResponseEntity<String> resp = null;
         if (!giayDAO.checkUniqueOnEdit(model)) {
             resp = new ResponseEntity<>("{\"status\":\"unique\"}", HttpStatus.BAD_REQUEST);
         } else if (error.hasFieldErrors("tenGiay")
@@ -75,7 +86,7 @@ public class GiayController {
 
     @PostMapping(value = "/get-giay-by-id")
     public ResponseEntity<String> getGiayById(@RequestBody String id) {
-    	ResponseEntity<String> resp = null;
+        ResponseEntity<String> resp = null;
         if (id == null || "".equals(id.trim())) {
             resp = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -121,5 +132,47 @@ public class GiayController {
         return response;
     }
 
+    @PostMapping("/get-img-by-id")
+    public ResponseEntity<String> getImgById(@RequestBody String id) {
+        ResponseEntity<String> response = null;
+        if (GenericValidator.isInt(id)) {
+            ShoeImage img = giayDAO.getImageById(Integer.parseInt(id));
+            response = new ResponseEntity<>(ConvertToJson.ToJson(img), HttpStatus.OK);
+        }
+        return response;
+    }
+
+
+    @Autowired
+    private ImageBus imgBus;
+
+    @PostMapping(value = "/upload-img", consumes = {"multipart/form-data"})
+    public ResponseEntity<String> uploadImg(@RequestParam("file") MultipartFile[] files,
+                                            @RequestParam("idGiay") String idGiay) throws IOException {
+        ResponseEntity<String> resp = null;
+
+        if (files.length <= 4) {
+            //imgBus.saveImage(files, idGiay);
+            resp = new ResponseEntity<>(ConvertToJson.ToJson(idGiay), HttpStatus.OK);
+        } else {
+            resp = new ResponseEntity<>(ConvertToJson.ToJson(idGiay), HttpStatus.BAD_REQUEST);
+        }
+
+        return resp;
+    }
+
+    @PostMapping(value = "/save-img")
+    public ResponseEntity<String> saveImg(@RequestParam("file") String[] files,
+                                          @RequestParam("idGiay") String idGiay,
+                                          @RequestParam("filepart") MultipartFile[] filePart) throws IOException {
+        ResponseEntity<String> resp = null;
+        if (filePart.length <= 4) {
+            imgBus.saveImage(files,filePart, idGiay);
+            resp = new ResponseEntity<>("{\"status\":\"success\"}", HttpStatus.OK);
+        } else {
+            resp = new ResponseEntity<>("{\"status\":\"faild\"}",HttpStatus.BAD_REQUEST);
+        }
+        return resp;
+    }
 
 }

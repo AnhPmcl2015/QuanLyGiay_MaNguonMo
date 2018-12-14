@@ -107,12 +107,11 @@ user_id int,
 role_id int
 );
 create table users(
-id_user int not null auto_increment,
+id_user int auto_increment primary key,
 email varchar(45) unique,
 username varchar(45) unique,
 password varchar(256) not null
 );
-
 -- Foreign key
 alter table giay add foreign key(id_gioi_tinh) references gioi_tinh(id_gioi_tinh);
 alter table giay add foreign key(id_loai_giay) references loai_giay(id_loai_giay);

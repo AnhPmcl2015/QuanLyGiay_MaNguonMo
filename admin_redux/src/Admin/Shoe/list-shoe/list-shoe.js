@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { GetGiayById } from "../../../actions/giay/sua-giayAction";
+import { GetGiayById, getImageByIdGiay } from "../../../actions/giay/sua-giayAction";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../Common/Loader/loader.css";
 import matchSorter from "match-sorter";
 import "react-table/react-table.css";
-import { Button, Table, Icon, Modal, Col, Row } from "antd";
+import { Button, Table, Icon, Modal, Col, Row, Popconfirm, message, Tooltip } from "antd";
 import Search from "antd/lib/input/Search";
+import UploadImg from "../upload-img/upload-img";
+import DetailShoe from "../detail-shoe/detail-shoe";
 
 class ListShoe extends Component {
   state = {
     items: null,
     filter: null,
     modal: false,
-    loadingTable: true
-  };
-  updateClick = () => {
-    console.log("click sua");
-    this.props.GetGiayById(1);
+    loadingTable: true,
+    shoe: null
   };
   async componentDidMount() {
     // lấy dữ liệu từ Server
@@ -32,7 +31,6 @@ class ListShoe extends Component {
       .then(res => res.json())
       .then(
         result => {
-          console.log(result);
 
           this.setState({
             items: result,
@@ -45,7 +43,7 @@ class ListShoe extends Component {
         }
       );
   }
-  componentWillReceiveProps(myProps) {}
+  componentWillReceiveProps(myProps) { }
 
   onSearchChange = e => {
     const value = this.filter(e.target.value);
@@ -57,76 +55,59 @@ class ListShoe extends Component {
   filter(value) {
     return value
       ? matchSorter(this.state.items, value, {
-          keys: ["maGiay", "tenGiay"]
-        })
+        keys: ["maGiay", "tenGiay"]
+      })
       : this.state.items;
   }
-  // filterWithConditions(value){
-  //   let list_temp= this.state.items;
-  //   if(value){
-  //      list_temp = matchSorter(list_temp, value, {
-  //       keys: ["maGiay"]
-  //     })
-  //   }
-  //   if(value){
-  //     list_temp =  matchSorter(list_temp, value, {
-  //       keys: ["maGiay"]
-  //     })
-  //   }
-  //   this.setState({filter: list_temp})
-  // }
-  onDelete = value => {
-    Modal.confirm({
-      title: 'Thông báo',
-      content: 'Bạn có chắc muốn xóa không?',
-      okText: 'Đồng ý',
-      cancelText: 'Hủy',
-      onOk(){
-        console.log(value);
-        const data = this.state.items.filter(function(s) {
-          return s != value;
-        })
-        this.setState({
-          items: data
-        });
-      },
-    });
-  };
 
-  deleteShoe= () => {
-    console.log('ok')
-    // fetch("/admin/api/shoe/delete-giay", {
-    //   method: "POST",
-    //   body: JSON.stringify(value.idGiay)
-    // })
-    //   .then(res => res.json())
-    //   .then(
-    //     result => {
-    //       if (result.status === "success") {
-    //         this.deleteSuccess();
-    //         const data = this.state.items.filter(function(s) {
-    //           return s != value;
-    //         });
-            // this.setState({
-            //   items: data
-            // });
-    //       }
-    //     },
-    //     error => {
-    //       console.log("Lỗi đăng nhập " + error);
-    //     }
-    //   );
+  deleteShoe(value) {
+
+    fetch("/admin/api/shoe/delete-giay", {
+      method: "POST",
+      body: JSON.stringify(value.idGiay)
+    })
+      .then(res => res.json())
+      .then(
+        result => {
+          if (result.status === "success") {
+            const data = this.state.items.filter(s => {
+              console.log(s);
+              return s !== value;
+            })
+            this.setState({
+              items: data,
+              filter: data
+            });
+            message.success('Xóa thành công')
+          }
+        },
+        error => {
+          console.log("Lỗi đăng nhập " + error);
+        }
+      );
   }
   onEdit = value => {
     this.props.GetGiayById(value.idGiay);
     this.props.history.push("/admin/danh-sach-giay/sua-giay");
   };
 
-  render() {
-    // if (this.state.items === null) {
-    //   return <div className="loader" />;
-    // }
+  showDetailShoe(value) {
+    this.setState({
+      modal: true,
+      shoe: value
+    })
+  }
 
+  onCancel = () => {
+    this.setState({
+      modal: false
+    })
+  }
+  showImage(value) {
+    this.props.getImageByIdGiay(value.idGiay)
+    this.props.history.push("/admin/danh-sach-giay/anh-giay");
+  }
+  render() {
     const columns = [
       {
         title: "Mã giày",
@@ -165,12 +146,22 @@ class ListShoe extends Component {
         dataIndex: "idGiay",
         render: (text, record) => (
           <div>
-            <Button onClick={() => this.onEdit(record)}>
+            <Button onClick={() => this.onEdit(record)} placeholder="Sửa">
               <Icon type="edit" theme="filled" />
             </Button>
-            <Button onClick={() => this.onDelete(record)} className="ml-1">
-              <Icon type="delete" theme="filled" />
+            <Popconfirm placement="topRight" title="Bạn có chắc muốn xóa không?" onConfirm={() => this.deleteShoe(record)} okText="Đồng ý" cancelText="Hủy">
+              <Button className="ml-1" placeholder="Xóa">
+                <Icon type="delete" theme="filled" />
+              </Button>
+            </Popconfirm>
+            <Button className="ml-1" placeholder="Hình ảnh" onClick={() => this.showImage(record)}>
+              <Icon type="picture" />
             </Button>
+            <Tooltip placement="topLeft" title="Thêm size giày" >
+              <Button className="ml-1" onClick={() => this.showDetailShoe(record)}>
+                <Icon type="plus-circle" />
+              </Button>
+            </Tooltip>
           </div>
         )
       }
@@ -187,7 +178,7 @@ class ListShoe extends Component {
           <Col>
             <Link to="/admin/danh-sach-giay/them-giay">
               <Button color="primary" className="float-right">
-                <i className="far fa-plus-square" />
+                <Icon type="plus-square" />
               </Button>
             </Link>
           </Col>
@@ -199,19 +190,36 @@ class ListShoe extends Component {
               columns={columns}
               pagination={{ pageSize: 10 }}
               loading={this.state.loadingTable}
+              rowKey="maGiay"
             />
           </Col>
         </Row>
+        <Modal
+          title="Size giày"
+          visible={this.state.modal}
+          width={800}
+          // onOk={this.handleOk}
+          // confirmLoading={confirmLoading}
+          footer={[
+            <div></div>,
+          ]}
+          onCancel={this.onCancel}
+          key="imageShoe"
+        >
+          <DetailShoe shoe={this.state.shoe} />
+        </Modal>
       </div>
     );
   }
 }
 ListShoe.propTypes = {
-  GetGiayById: PropTypes.func.isRequired
+  GetGiayById: PropTypes.func.isRequired,
+  getImageByIdGiay: PropTypes.func.isRequired
 };
 //functions props từ login action
 const mapDispatchToProps = {
-  GetGiayById
+  GetGiayById,
+  getImageByIdGiay
 };
 export default connect(
   null,
