@@ -12,6 +12,7 @@ class UploadImg extends Component {
     state = {
         pictures: [],
         oldImgs: null,
+        isSaveComplete: false
     }
     componentWillMount() {
 
@@ -55,6 +56,10 @@ class UploadImg extends Component {
             message.warning('Hình ảnh không được rỗng!')
             return;
         }
+        if(this.state.pictures.length < 4){
+            message.warning('Phải tải lên đúng 4 tấm ảnh!')
+            return;
+        }
         if (this.state.pictures.length == 4) {
             let data = new FormData();
             let count = 0;
@@ -81,6 +86,9 @@ class UploadImg extends Component {
                     result => {
                         if (result.status === 'success') {
                             message.success('Tải ảnh lên thành công!');
+                            this.setState({
+                                isSaveComplete: true
+                            })
                         } else {
                             message.error('Tải ảnh lên thất bại')
                         }
@@ -149,7 +157,7 @@ class UploadImg extends Component {
                         </div>
                     )}
                 </Dropzone>
-                <Button type="button" className="mt-2" onClick={this.onUpload}><Icon type="upload" /></Button>
+                <Button type="button" className="mt-2" onClick={this.onUpload} loading={this.state.isSaveComplete}><Icon type="upload" /></Button>
             </div>
         );
     }
