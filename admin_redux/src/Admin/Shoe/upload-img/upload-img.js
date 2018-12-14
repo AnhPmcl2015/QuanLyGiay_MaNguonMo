@@ -51,7 +51,8 @@ class UploadImg extends Component {
 
     }
 
-     onUpload = async ()  => {
+     onUpload = ()  => {
+
         if (this.state.pictures.length == 0) {
             message.warning('Hình ảnh không được rỗng!')
             return;
@@ -61,6 +62,9 @@ class UploadImg extends Component {
             return;
         }
         if (this.state.pictures.length == 4) {
+            this.setState({
+                isSaveComplete: true
+            })
             let data = new FormData();
             let count = 0;
             this.state.pictures.forEach(i => {
@@ -87,7 +91,7 @@ class UploadImg extends Component {
                         if (result.status === 'success') {
                             message.success('Tải ảnh lên thành công!');
                             this.setState({
-                                isSaveComplete: true
+                                isSaveComplete: false
                             })
                         } else {
                             message.error('Tải ảnh lên thất bại')

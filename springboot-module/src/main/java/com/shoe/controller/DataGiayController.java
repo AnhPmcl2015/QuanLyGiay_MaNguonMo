@@ -3,8 +3,11 @@ package com.shoe.controller;
 import com.shoe.ObjectToJson.ConvertToJson;
 import com.shoe.dao.GioiTinhDAO;
 import com.shoe.dao.HangSanXuatDAO;
+import com.shoe.dao.LoaiGiayDAO;
 import com.shoe.dto.GioiTinhDTO;
+import com.shoe.dto.HangSanXuatDTO;
 import com.shoe.dto.HangSanXuatSelectDTO;
+import com.shoe.dto.LoaiGiayDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +38,18 @@ public class DataGiayController {
         List<HangSanXuatSelectDTO> list = hangSanXuatDAO.getAllList();
         ResponseEntity<String> res = new ResponseEntity<>(ConvertToJson.ToJson(list), HttpStatus.OK);
         return res;
+    }
+
+    @Autowired
+    private LoaiGiayDAO loaiGiayDAO;
+
+    @PostMapping("/get-loai-giay")
+    public  List<LoaiGiayDTO> getLoaGiay(){
+        return loaiGiayDAO.getList();
+    }
+
+    @PostMapping("/get-HSX")
+    public  List<HangSanXuatDTO> getHSX(){
+        return hangSanXuatDAO.getHangSanXuat();
     }
 }

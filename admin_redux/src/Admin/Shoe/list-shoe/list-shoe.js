@@ -6,22 +6,30 @@ import { Link } from "react-router-dom";
 import "../../Common/Loader/loader.css";
 import matchSorter from "match-sorter";
 import "react-table/react-table.css";
-import { Button, Table, Icon, Modal, Col, Row, Popconfirm, message, Tooltip } from "antd";
+import { Button, Table, Icon, Modal, Col, Row, Popconfirm, message, Tooltip, Select } from "antd";
 import Search from "antd/lib/input/Search";
 import UploadImg from "../upload-img/upload-img";
 import DetailShoe from "../detail-shoe/detail-shoe";
-
+const { Option, OptGroup } = Select;
 class ListShoe extends Component {
   state = {
     items: null,
     filter: null,
     modal: false,
     loadingTable: true,
-    shoe: null
+    shoe: null,
+    tenGiay: '',
+    gioiTinh: '',
+    loaiGiay: '',
+    nhaSanXuat: '',
+    listLoaiGiay: null,
+    listNhaSanXuat: null
   };
   async componentDidMount() {
     // lấy dữ liệu từ Server
     await this.loadDatatable();
+    await this.loadHSX();
+    await this.loadLoaiGiay();
   }
   loadDatatable() {
     fetch("/admin/api/shoe/list-shoe", {
@@ -31,7 +39,7 @@ class ListShoe extends Component {
       .then(res => res.json())
       .then(
         result => {
-
+          console.log(result)
           this.setState({
             items: result,
             filter: result,
@@ -43,21 +51,104 @@ class ListShoe extends Component {
         }
       );
   }
+  loadHSX() {
+    fetch("/admin/api/data/get-HSX", {
+      method: "POST",
+      body: JSON.stringify("")
+    })
+      .then(res => res.json())
+      .then(
+        result => {
+          console.log(result)
+          this.setState({
+            listNhaSanXuat: result
+          })
+        },
+        error => {
+          console.log("Lỗi get data giày: " + error);
+        }
+      );
+  }
+  loadLoaiGiay() {
+    fetch("/admin/api/data/get-loai-giay", {
+      method: "POST",
+      body: JSON.stringify("")
+    })
+      .then(res => res.json())
+      .then(
+        result => {
+          console.log(result)
+          this.setState({
+            listLoaiGiay: result
+          })
+        },
+        error => {
+          console.log("Lỗi get data giày: " + error);
+        }
+      );
+  }
   componentWillReceiveProps(myProps) { }
-
-  onSearchChange = e => {
-    const value = this.filter(e.target.value);
+  onGioiTinhChange = (value) => {
+    const gioiTinh = value;
+    this.filterWithConditions(this.state.tenGiay, gioiTinh, this.state.nhaSanXuat, this.state.loaiGiay)
     this.setState({
-      filter: value
+      gioiTinh: gioiTinh
     });
+  }
+  onHangSanXuatChange = (value) => {
+    const nhaSanXuat = value;
+    this.filterWithConditions(this.state.tenGiay, this.state.gioiTinh, nhaSanXuat, this.state.loaiGiay)
+    this.setState({
+      nhaSanXuat: nhaSanXuat
+    });
+  }
+  onSearchChange = e => {
+    const tenGiay = e.target.value;
+    this.setState({
+      tenGiay: tenGiay
+    });
+    this.filterWithConditions(tenGiay, this.state.gioiTinh, this.state.nhaSanXuat, this.state.loaiGiay)
   };
-
-  filter(value) {
-    return value
-      ? matchSorter(this.state.items, value, {
+  onLoaiGiayChange = (value) =>{
+    const loaiGiay = value;
+    this.filterWithConditions(this.state.tenGiay, this.state.gioiTinh, this.state.nhaSanXuat, loaiGiay)
+    this.setState({
+      loaiGiay: loaiGiay
+    });
+  }
+  // filter(value) {
+  //   return value
+  //     ? matchSorter(this.state.items, value, {
+  //       keys: ["maGiay", "tenGiay"]
+  //     })
+  //     : this.state.items;
+  // }
+  filterWithConditions(tenGiay, gioiTinh, nhaSanXuat, loaiGiay) { 
+    let listTemp = this.state.items;
+    if (tenGiay) {
+      listTemp = matchSorter(listTemp, tenGiay, {
         keys: ["maGiay", "tenGiay"]
       })
-      : this.state.items;
+    }
+    if (gioiTinh) {
+      listTemp = matchSorter(listTemp, gioiTinh, {
+        keys: ["tenGioiTinh"]
+      })
+    }
+    if (nhaSanXuat) {
+      listTemp = matchSorter(listTemp, nhaSanXuat, {
+        keys: ["tenHangSanXuat"]
+      })
+    }
+    if(loaiGiay){
+      listTemp = matchSorter(listTemp, loaiGiay, {
+        keys: ["tenLoaiGiay"]
+      })
+    }
+
+    this.setState({
+      filter: listTemp
+    })
   }
 
   deleteShoe(value) {
@@ -108,6 +199,20 @@ class ListShoe extends Component {
     this.props.history.push("/admin/danh-sach-giay/anh-giay");
   }
   render() {
+    if (this.state.listNhaSanXuat == null || this.state.listLoaiGiay == null) {
+      return <div className="loader" />;
+    }
+    let hangSanXuat = this.state.listNhaSanXuat.map(i => (
+      <Option value={i.tenHangSanXuat} key={i.idHangSanXuat}>
+        {i.tenHangSanXuat}
+      </Option>
+    ));
+
+    let loaiGiay = this.state.listLoaiGiay.map(i => (
+      <Option value={i.tenLoaiGiay} key={i.idLoaiGiay}>
+        {i.tenLoaiGiay}
+      </Option>
+    ));
     const columns = [
       {
         title: "Mã giày",
@@ -144,6 +249,7 @@ class ListShoe extends Component {
       {
         title: "Chức năng",
         dataIndex: "idGiay",
+        width: '20%',
         render: (text, record) => (
           <div>
             <Button onClick={() => this.onEdit(record)} placeholder="Sửa">
@@ -166,14 +272,56 @@ class ListShoe extends Component {
         )
       }
     ];
+
     return (
       <div>
-        <Row className="mt-1">
+        <Row className="mt-1" gutter={16}>
           <Col xs={6}>
             <Search
               placeholder="Tìm kiếm mã giày/tên giày"
               onChange={this.onSearchChange}
             />
+          </Col>
+          <Col xs={3}>
+            <Select
+              showSearch
+              allowClear={true}
+              placeholder="Chọn giới tính"
+              style={{ width: '100%' }}
+              onChange={this.onGioiTinhChange}
+            >
+              <Option value="Unisex">
+                Unisex
+              </Option>
+              <Option value="Nam">
+                Nam
+              </Option>
+              <Option value="Nữ">
+                Nữ
+              </Option>
+            </Select>
+          </Col>
+          <Col xs={4}>
+            <Select
+              showSearch
+              allowClear={true}
+              placeholder="Chọn hãng sản xuất"
+              style={{ width: '100%' }}
+              onChange={this.onHangSanXuatChange}
+            >
+              {hangSanXuat}
+            </Select>
+          </Col>
+          <Col xs={4}>
+            <Select
+              showSearch
+              allowClear={true}
+              placeholder="Chọn loại giày"
+              style={{ width: '100%' }}
+              onChange={this.onLoaiGiayChange}
+            >
+              {loaiGiay}
+            </Select>
           </Col>
           <Col>
             <Link to="/admin/danh-sach-giay/them-giay">
