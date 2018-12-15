@@ -3,7 +3,7 @@ package com.shoe.converter;
 import org.apache.commons.validator.GenericValidator;
 import org.modelmapper.ModelMapper;
 
-import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeDTO;
 import com.shoe.dto.GioiTinhDTO;
 import com.shoe.dto.LoaiGiayDTO;
 import com.shoe.entities.Giay;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ShoeConverter {
-    public void convertFormToDTO(GiayForm form, GiayDTO dto) {
+    public void convertFormToDTO(GiayForm form, ShoeDTO dto) {
         if (form == null || dto == null) {
             return;
         }
@@ -31,7 +31,7 @@ public class ShoeConverter {
         dto.setGiaBan(Integer.parseInt(form.getGiaBan()));
     }
 
-    public void convertDTOtoForm(GiayDTO dto, GiayForm form){
+    public void convertDTOtoForm(ShoeDTO dto, GiayForm form){
         form.setGhiChu(dto.getGhiChu());
         form.setId(dto.getIdGiay()+"");
         form.setMaGiay(dto.getMaGiay());
@@ -40,7 +40,7 @@ public class ShoeConverter {
         form.setId_loai_giay(dto.getLoaiGiay().getIdLoaiGiay()+"");
         form.setGiaBan(dto.getGiaBan()+"");
     }
-    public void convertDtoToEntity(GiayDTO dto, Giay entity) {
+    public void convertDtoToEntity(ShoeDTO dto, Giay entity) {
         if (dto == null || entity == null) {
             return;
         }
@@ -48,7 +48,7 @@ public class ShoeConverter {
         map.map(dto, entity);
     }
 
-    public void convertEntityToDto(Giay entity, GiayDTO dto) {
+    public void convertEntityToDto(Giay entity, ShoeDTO dto) {
         if (dto == null || entity == null) {
             return;
         }

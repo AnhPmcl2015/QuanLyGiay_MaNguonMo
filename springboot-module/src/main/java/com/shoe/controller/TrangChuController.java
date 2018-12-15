@@ -1,8 +1,8 @@
 package uit.controller;
 
 import com.shoe.converter.TenGiayConverter;
-import com.shoe.converter.TheAnhConverter.GiayConverter;
-import com.shoe.dto.TheAnhDto.GiayDto;
+import com.shoe.converter.GiayConverter;
+import com.shoe.dto.GiayDto;
 import com.shoe.dto.TenGiayDto;
 import com.shoe.jpa.JpaGiay;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,14 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.shoe.dto.DonHangDTO;
-import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeDTO;
 import com.shoe.entities.DonHang;
 import com.shoe.form.GiayForm;
 
 @Component
 public class DonHangConverter {
 	
-    public void convertFormToDTO(GiayForm form, GiayDTO dto){
+    public void convertFormToDTO(GiayForm form, ShoeDTO dto){
         
     }
     

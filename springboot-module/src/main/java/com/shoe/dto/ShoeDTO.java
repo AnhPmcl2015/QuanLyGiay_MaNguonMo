@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GiayDTO{
+public class ShoeDTO {
     private int idGiay;
 	private GioiTinhDTO gioiTinh;
 	private LoaiGiayDTO loaiGiay;

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ChiTietPhieuNhapDTO {
 	private int idChiTietPhieuNhap;
 	private PhieuNhap phieuNhap;
-	private GiayDTO giayDTO;
+	private ShoeDTO giayDTO;
 	private int soLuong;
 	private String giaVon;
 

@@ -1,7 +1,7 @@
 package com.shoe.converter;
 
 import com.shoe.dto.ChiTietGiayDTO;
-import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeDTO;
 import com.shoe.entities.ChiTietGiay;
 import com.shoe.form.ChiTietGiayForm;
 import org.apache.commons.validator.GenericValidator;
@@ -42,7 +42,7 @@ public class ChiTietGiayConverter {
             dto.setIdChiTietGiay(Integer.parseInt(form.getIdChiTietGiay()));
         }
         dto.setSoLuong(Integer.parseInt(form.getSoluong()));
-        GiayDTO giay = new GiayDTO();
+        ShoeDTO giay = new ShoeDTO();
         giay.setIdGiay(Integer.parseInt(form.getIdGiay()));
         dto.setGiay(giay);
     }

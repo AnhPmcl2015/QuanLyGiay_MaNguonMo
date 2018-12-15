@@ -19,7 +19,7 @@ import com.shoe.ObjectToJson.ConvertToJson;
 import com.shoe.converter.ShoeConverter;
 import com.shoe.dao.GiayDAO;
 import com.shoe.dao.LoaiGiayDAO;
-import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeDTO;
 import com.shoe.dto.GiayTableDTO;
 import com.shoe.form.GiayForm;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,7 +46,7 @@ public class GiayController {
         } else if (error.hasErrors()) {
             resp = new ResponseEntity<>("{\"status\":\"invalid\"}", HttpStatus.BAD_REQUEST);
         } else {
-            GiayDTO dto = new GiayDTO();
+            ShoeDTO dto = new ShoeDTO();
             converter.convertFormToDTO(model, dto);
             giayDAO.saveShoe(dto);
             resp = new ResponseEntity<>(ConvertToJson.ToJson(model), HttpStatus.OK);
@@ -65,7 +65,7 @@ public class GiayController {
                 || error.hasFieldErrors("id_loai_giay")) {
             resp = new ResponseEntity<>("{\"status\":\"invalid\"}", HttpStatus.BAD_REQUEST);
         } else {
-            GiayDTO dto = new GiayDTO();
+            ShoeDTO dto = new ShoeDTO();
             converter.convertFormToDTO(model, dto);
             giayDAO.saveShoe(dto);
             resp = new ResponseEntity<>(ConvertToJson.ToJson(model), HttpStatus.OK);
@@ -80,7 +80,7 @@ public class GiayController {
         if (id == null || "".equals(id.trim())) {
             resp = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            GiayDTO dto = giayDAO.getGiayById(Integer.parseInt(id));
+            ShoeDTO dto = giayDAO.getGiayById(Integer.parseInt(id));
             GiayForm form = new GiayForm();
             converter.convertDTOtoForm(dto, form);
             resp = new ResponseEntity<>(ConvertToJson.ToJson(form), HttpStatus.OK);
@@ -90,7 +90,7 @@ public class GiayController {
 
     @PostMapping("/list-shoe")
     public ResponseEntity<String> getListGiay() {
-        List<GiayDTO> list = giayDAO.getAllListNoneDel();
+        List<ShoeDTO> list = giayDAO.getAllListNoneDel();
         List<GiayTableDTO> giayTableDTOs = new ArrayList<>();
         list.forEach(i -> {
             GiayTableDTO dto = new GiayTableDTO();
@@ -109,7 +109,7 @@ public class GiayController {
     @PostMapping("/delete-giay")
     public ResponseEntity<String> deleteGiay(@RequestBody String id) {
         ResponseEntity<String> response = null;
-        GiayDTO dto = new GiayDTO();
+        ShoeDTO dto = new ShoeDTO();
         System.out.println(id);
         if (GenericValidator.isInt(id)) {
             dto.setIdGiay(Integer.parseInt(id));

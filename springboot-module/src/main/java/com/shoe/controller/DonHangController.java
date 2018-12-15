@@ -1,8 +1,8 @@
 package uit.controller;
 
-import com.shoe.converter.TheAnhConverter.GiayConverter;
+import com.shoe.converter.GiayConverter;
 import com.shoe.converter.ThongTinGiayConverter;
-import com.shoe.dto.TheAnhDto.GiayDto;
+import com.shoe.dto.GiayDto;
 import com.shoe.dto.ThongTinGiayDto;
 import com.shoe.entities.Giay;
 import com.shoe.jpa.JpaGiay;

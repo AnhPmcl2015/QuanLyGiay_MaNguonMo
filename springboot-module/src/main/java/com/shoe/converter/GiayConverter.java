@@ -1,7 +1,6 @@
-package com.shoe.converter.TheAnhConverter;
+package com.shoe.converter;
 
-import com.shoe.converter.BaseDtoConverter;
-import com.shoe.dto.TheAnhDto.GiayDto;
+import com.shoe.dto.GiayDto;
 import com.shoe.entities.Giay;
 import org.springframework.stereotype.Component;
 

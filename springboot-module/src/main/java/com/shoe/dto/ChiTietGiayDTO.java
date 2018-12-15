@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChiTietGiayDTO {
     private int idChiTietGiay;
-    private GiayDTO giay;
+    private ShoeDTO giay;
     private int size;
     private int soLuong;
 }

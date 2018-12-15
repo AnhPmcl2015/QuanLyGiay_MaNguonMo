@@ -12,7 +12,7 @@ import com.shoe.entities.Giay_;
 import com.shoe.form.GiayForm;
 import com.shoe.jpa.JpaGiay;
 import com.shoe.converter.ShoeConverter;
-import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeDTO;
 import com.shoe.entities.Giay;
 import org.apache.commons.validator.GenericValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +32,17 @@ public class GiayDAOImpl implements GiayDAO {
     private EntityManager em;
 
     @Override
-    public void saveShoe(GiayDTO giayDto) {
+    public void saveShoe(ShoeDTO giayDto) {
         Giay giay = new Giay();
         converter.convertDtoToEntity(giayDto, giay);
         giay.setXoaFlag(false);
         jpa.save(giay);
     }
 
-    public GiayDTO getGiayById(Integer id) {
+    public ShoeDTO getGiayById(Integer id) {
         Optional<Giay> giay = jpa.findById(id);
         if (giay.isPresent()) {
-            GiayDTO dto = new GiayDTO();
+            ShoeDTO dto = new ShoeDTO();
             converter.convertEntityToDto(giay.get(),dto);
             return dto;
         }
@@ -80,7 +80,7 @@ public class GiayDAOImpl implements GiayDAO {
 
 
     @Override
-    public List<GiayDTO> getAllListNoneDel() {
+    public List<ShoeDTO> getAllListNoneDel() {
 
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Giay> query = builder.createQuery(Giay.class);
@@ -89,9 +89,9 @@ public class GiayDAOImpl implements GiayDAO {
         query.select(from).where(builder.isFalse(from.get(Giay_.xoaFlag)));
         TypedQuery<Giay> typedQuery = em.createQuery(query);
         System.out.println(typedQuery.getResultList().size());
-        List<GiayDTO> list = new ArrayList<>();
+        List<ShoeDTO> list = new ArrayList<>();
         typedQuery.getResultList().forEach(i -> {
-            GiayDTO dto = new GiayDTO();
+            ShoeDTO dto = new ShoeDTO();
             converter.convertEntityToDto(i, dto);
             list.add(dto);
         });
@@ -99,7 +99,7 @@ public class GiayDAOImpl implements GiayDAO {
     }
 
     @Override
-    public boolean deleteShoe(GiayDTO giayDto) {
+    public boolean deleteShoe(ShoeDTO giayDto) {
         Optional<Giay> giay = jpa.findById(giayDto.getIdGiay());
         if (giay.isPresent()) {
             Giay entity = giay.get();

@@ -2,19 +2,19 @@ package com.shoe.dao;
 
 import java.util.List;
 
-import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeDTO;
 import com.shoe.dto.ShoeImage;
 import com.shoe.form.GiayForm;
 
 public interface GiayDAO {
 
-    public void saveShoe(GiayDTO giay);
+    public void saveShoe(ShoeDTO giay);
 
-    public List<GiayDTO> getAllListNoneDel();
+    public List<ShoeDTO> getAllListNoneDel();
 
-    public boolean deleteShoe(GiayDTO giay);
+    public boolean deleteShoe(ShoeDTO giay);
 
-    public GiayDTO getGiayById(Integer id);
+    public ShoeDTO getGiayById(Integer id);
 
     public boolean checkUniqueOnEdit(GiayForm giay);
 

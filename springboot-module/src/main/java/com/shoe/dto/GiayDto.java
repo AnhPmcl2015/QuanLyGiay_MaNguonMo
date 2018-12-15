@@ -1,4 +1,4 @@
-package com.shoe.dto.TheAnhDto;
+package com.shoe.dto;
 
 public class GiayDto {
 	private String idGiay;

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.shoe.dto.ChiTietDonHangDTO;
-import com.shoe.dto.GiayDTO;
+import com.shoe.dto.ShoeDTO;
 import com.shoe.entities.ChiTietDonHang;
 import com.shoe.form.GiayForm;
 
@@ -16,7 +16,7 @@ public class ChiTietDonHangConverter {
 	ChiTietGiayConverter chiTietGiayEco;
 	
 	
-    public void convertFormToDTO(GiayForm form, GiayDTO dto){
+    public void convertFormToDTO(GiayForm form, ShoeDTO dto){
         
     }
     
