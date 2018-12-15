@@ -1,37 +1,27 @@
 package com.shoe.controller;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.shoe.Bus.ImageBus;
 import com.shoe.dto.ShoeImage;
 import org.apache.commons.validator.GenericValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import com.shoe.ObjectToJson.ConvertToJson;
-import com.shoe.converter.GiayConverter;
+import com.shoe.converter.ShoeConverter;
 import com.shoe.dao.GiayDAO;
 import com.shoe.dao.LoaiGiayDAO;
 import com.shoe.dto.GiayDTO;
 import com.shoe.dto.GiayTableDTO;
 import com.shoe.form.GiayForm;
-import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -42,7 +32,7 @@ public class GiayController {
     GiayDAO giayDAO;
 
     @Autowired
-    private GiayConverter converter;
+    private ShoeConverter converter;
 
     @Autowired
     LoaiGiayDAO loaigiayDAO;
@@ -146,20 +136,20 @@ public class GiayController {
     @Autowired
     private ImageBus imgBus;
 
-    @PostMapping(value = "/upload-img", consumes = {"multipart/form-data"})
-    public ResponseEntity<String> uploadImg(@RequestParam("file") MultipartFile[] files,
-                                            @RequestParam("idGiay") String idGiay) throws IOException {
-        ResponseEntity<String> resp = null;
-
-        if (files.length <= 4) {
-            //imgBus.saveImage(files, idGiay);
-            resp = new ResponseEntity<>(ConvertToJson.ToJson(idGiay), HttpStatus.OK);
-        } else {
-            resp = new ResponseEntity<>(ConvertToJson.ToJson(idGiay), HttpStatus.BAD_REQUEST);
-        }
-
-        return resp;
-    }
+//    @PostMapping(value = "/upload-img", consumes = {"multipart/form-data"})
+//    public ResponseEntity<String> uploadImg(@RequestParam("file") MultipartFile[] files,
+//                                            @RequestParam("idGiay") String idGiay) throws IOException {
+//        ResponseEntity<String> resp = null;
+//
+//        if (files.length <= 4) {
+//            //imgBus.saveImage(files, idGiay);
+//            resp = new ResponseEntity<>(ConvertToJson.ToJson(idGiay), HttpStatus.OK);
+//        } else {
+//            resp = new ResponseEntity<>(ConvertToJson.ToJson(idGiay), HttpStatus.BAD_REQUEST);
+//        }
+//
+//        return resp;
+//    }
 
     @PostMapping(value = "/save-img")
     public ResponseEntity<String> saveImg(@RequestParam("file") String[] files,

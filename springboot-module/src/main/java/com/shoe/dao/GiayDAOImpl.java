@@ -5,14 +5,13 @@ import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 
 import com.shoe.dto.ShoeImage;
 import com.shoe.entities.Giay_;
 import com.shoe.form.GiayForm;
 import com.shoe.jpa.JpaGiay;
-import com.shoe.converter.GiayConverter;
+import com.shoe.converter.ShoeConverter;
 import com.shoe.dto.GiayDTO;
 import com.shoe.entities.Giay;
 import org.apache.commons.validator.GenericValidator;
@@ -24,7 +23,7 @@ import org.springframework.stereotype.Repository;
 public class GiayDAOImpl implements GiayDAO {
 
     @Autowired
-    private GiayConverter converter;
+    private ShoeConverter converter;
 
     @Autowired
     private JpaGiay jpa;

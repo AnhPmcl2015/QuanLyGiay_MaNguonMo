@@ -11,7 +11,7 @@ import com.shoe.form.GiayForm;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GiayConverter {
+public class ShoeConverter {
     public void convertFormToDTO(GiayForm form, GiayDTO dto) {
         if (form == null || dto == null) {
             return;
