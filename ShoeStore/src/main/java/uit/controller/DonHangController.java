@@ -24,7 +24,7 @@ import uit.repository.GiayRepository;
 import uit.repository.LoaiGiayRepository;
 
 @RestController()
-@RequestMapping("/chi-tiet-giay")
+@RequestMapping("/api/don-hang/")
 @CrossOrigin(origins = "http://localhost:3000")
 public class DonHangController {
 
