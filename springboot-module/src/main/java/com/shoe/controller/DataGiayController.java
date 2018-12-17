@@ -11,6 +11,7 @@ import com.shoe.dto.LoaiGiayDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class DataGiayController {
     GioiTinhDAO gioiTinhDAO;
 
     @PostMapping("/get-gender")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getGioiTinh(){
         List<GioiTinhDTO> list = gioiTinhDAO.getList();
         ResponseEntity<String> res = new ResponseEntity<>(ConvertToJson.ToJson(list), HttpStatus.OK);
@@ -34,6 +36,7 @@ public class DataGiayController {
     private HangSanXuatDAO hangSanXuatDAO;
 
     @PostMapping("/get-hang-san-xuat")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getHangSanXuat(){
         List<HangSanXuatSelectDTO> list = hangSanXuatDAO.getAllList();
         ResponseEntity<String> res = new ResponseEntity<>(ConvertToJson.ToJson(list), HttpStatus.OK);
@@ -44,11 +47,13 @@ public class DataGiayController {
     private LoaiGiayDAO loaiGiayDAO;
 
     @PostMapping("/get-loai-giay")
+    @PreAuthorize("hasRole('ADMIN')")
     public  List<LoaiGiayDTO> getLoaGiay(){
         return loaiGiayDAO.getList();
     }
 
     @PostMapping("/get-HSX")
+    @PreAuthorize("hasRole('ADMIN')")
     public  List<HangSanXuatDTO> getHSX(){
         return hangSanXuatDAO.getHangSanXuat();
     }

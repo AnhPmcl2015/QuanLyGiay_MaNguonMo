@@ -18,7 +18,6 @@ class UploadImg extends Component {
 
     }
     componentDidMount() {
-        // this.convertImage(this.state.pictures);
         console.log(this.state.pictures)
     }
     componentWillReceiveProps(myprops) {
@@ -152,12 +151,10 @@ class UploadImg extends Component {
                     {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()}>
                             <input {...getInputProps()} />
-
                             <div align="center">
                                 <p>Bỏ ảnh vào đây</p>
                                 <Button size="large">Chọn ảnh</Button>
                             </div>
-
                         </div>
                     )}
                 </Dropzone>

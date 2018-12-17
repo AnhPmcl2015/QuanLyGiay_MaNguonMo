@@ -1,11 +1,10 @@
 package com.shoe.form;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +15,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PhieuNhapForm {
 
-	@DateTimeFormat(pattern="yyyy-MM-dd")	
-	@NotNull 
-	private Date ngayNhap;
+	private String dateOfReciept;
 	
-	@Min(0)
-	private int idHangSanXuat;
+	@NotNull
+	private int brandId;
+	
+	@Min(1) 
+	private int amount;
+	
+	@NotEmpty
+	private List<ChiTietPhieuNhapForm> recieptDetails;
+	
 }

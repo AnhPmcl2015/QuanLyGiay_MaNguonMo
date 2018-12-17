@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChiTietPhieuNhapForm {
-	private int idChiTietGiay;
-	private int soLuong;
-	private String giaVon;
+	private int key;
+	private String shoeName;
+	private int amount;
+	private String price;
+	private int total;
 }

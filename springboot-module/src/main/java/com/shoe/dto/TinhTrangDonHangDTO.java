@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KhachHangDTO{
-	private int idKhachHang;
-	private String tenKhachHang;
-	private String diaChi;
-	private int soDienThoai;
+public class TinhTrangDonHangDTO {
+	private int idTinhTrang;
+	private String tenTinhTrang;
 }

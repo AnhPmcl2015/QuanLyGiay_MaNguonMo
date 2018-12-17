@@ -14,4 +14,5 @@ public class GiayTableDTO {
     private String tenGioiTinh;
     private String tenLoaiGiay;
     private String tenHangSanXuat;
+    private String giaban;
 }

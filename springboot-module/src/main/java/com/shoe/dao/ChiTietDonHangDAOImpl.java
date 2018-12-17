@@ -1,8 +1,10 @@
 package com.shoe.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -40,11 +42,11 @@ public class ChiTietDonHangDAOImpl implements ChiTietDonHangDAO {
 			donHang = donHangOptional.get();
 		else 
 			return null;
-		
-		List<ChiTietDonHang> listChiTietDonHang = new ArrayList<>();
+
+		Set<ChiTietDonHang> listChiTietDonHang = new HashSet<ChiTietDonHang>(0);
 		List<ChiTietDonHangDTO> listChiTietDonHangDTO = new ArrayList<>();
 		
-		// listChiTietDonHang = donHang.getChiTietDonHangs();
+		listChiTietDonHang = donHang.getChiTietDonHangs();
 		
 		listChiTietDonHang.forEach(ctdh ->{
         	ChiTietDonHangDTO chiTietDonHangDTO = new ChiTietDonHangDTO();

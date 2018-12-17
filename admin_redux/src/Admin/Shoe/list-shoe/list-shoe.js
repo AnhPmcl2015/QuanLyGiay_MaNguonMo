@@ -8,8 +8,9 @@ import matchSorter from "match-sorter";
 import "react-table/react-table.css";
 import { Button, Table, Icon, Modal, Col, Row, Popconfirm, message, Tooltip, Select } from "antd";
 import Search from "antd/lib/input/Search";
-import UploadImg from "../upload-img/upload-img";
 import DetailShoe from "../detail-shoe/detail-shoe";
+import { request } from '../../Common/APIUtils';
+import './list-shoe.css';
 const { Option, OptGroup } = Select;
 class ListShoe extends Component {
   state = {
@@ -32,11 +33,11 @@ class ListShoe extends Component {
     await this.loadLoaiGiay();
   }
   loadDatatable() {
-    fetch("/admin/api/shoe/list-shoe", {
+    request( {
+      url: "/admin/api/shoe/list-shoe",
       method: "POST",
       body: JSON.stringify("")
     })
-      .then(res => res.json())
       .then(
         result => {
           console.log(result)
@@ -52,11 +53,11 @@ class ListShoe extends Component {
       );
   }
   loadHSX() {
-    fetch("/admin/api/data/get-HSX", {
+    request({
+      url: "/admin/api/data/get-HSX",
       method: "POST",
       body: JSON.stringify("")
     })
-      .then(res => res.json())
       .then(
         result => {
           console.log(result)
@@ -70,11 +71,11 @@ class ListShoe extends Component {
       );
   }
   loadLoaiGiay() {
-    fetch("/admin/api/data/get-loai-giay", {
+    request({
+      url: "/admin/api/data/get-loai-giay", 
       method: "POST",
       body: JSON.stringify("")
     })
-      .then(res => res.json())
       .then(
         result => {
           console.log(result)
@@ -153,11 +154,11 @@ class ListShoe extends Component {
 
   deleteShoe(value) {
 
-    fetch("/admin/api/shoe/delete-giay", {
+    request({
+      url: "/admin/api/shoe/delete-giay", 
       method: "POST",
       body: JSON.stringify(value.idGiay)
     })
-      .then(res => res.json())
       .then(
         result => {
           if (result.status === "success") {
@@ -253,7 +254,7 @@ class ListShoe extends Component {
         render: (text, record) => (
           <div>
             <Button onClick={() => this.onEdit(record)} placeholder="Sửa">
-              <Icon type="edit" theme="filled" />
+              <Icon type="edit" theme="filled"/>
             </Button>
             <Popconfirm placement="topRight" title="Bạn có chắc muốn xóa không?" onConfirm={() => this.deleteShoe(record)} okText="Đồng ý" cancelText="Hủy">
               <Button className="ml-1" placeholder="Xóa">
@@ -272,7 +273,6 @@ class ListShoe extends Component {
         )
       }
     ];
-
     return (
       <div>
         <Row className="mt-1" gutter={16}>
@@ -326,7 +326,7 @@ class ListShoe extends Component {
           <Col>
             <Link to="/admin/danh-sach-giay/them-giay">
               <Button color="primary" className="float-right">
-                <Icon type="plus-square" />
+                <Icon type="plus-square" style={{ verticalAlign: 'middle' }}/>
               </Button>
             </Link>
           </Col>

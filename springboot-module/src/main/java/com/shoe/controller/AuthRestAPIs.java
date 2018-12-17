@@ -2,24 +2,20 @@ package com.shoe.controller;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.shoe.entities.Role;
 import com.shoe.entities.RoleName;
 import com.shoe.entities.User;
@@ -28,10 +24,7 @@ import com.shoe.form.SignUpForm;
 import com.shoe.jpa.RoleRepository;
 import com.shoe.jpa.UserRepository;
 import com.shoe.jwtauthentication.security.jwt.JwtProvider;
-import com.shoe.jwtauthentication.security.services.CurrentUser;
-import com.shoe.jwtauthentication.security.services.UserPrinciple;
 import com.shoe.payload.JwtResponse;
-import com.shoe.payload.UserSummary;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -64,7 +57,7 @@ public class AuthRestAPIs {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signupForm) {
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signupForm) {
 		if (userRepository.existsByUsername(signupForm.getUsername())) {
 			return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
 		}
@@ -103,14 +96,7 @@ public class AuthRestAPIs {
 		user.setRoles(roles);
 		userRepository.save(user);
 
-		return ResponseEntity.ok().body("User registered successfully!");
+		return ResponseEntity.ok(user);
 	}
 
-	@GetMapping("/user/me")
-	@PreAuthorize("hasRole('USER')")
-	public UserSummary getCurrentUser(@CurrentUser UserPrinciple currentUser) {
-		UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(),
-				currentUser.getRoles());
-		return userSummary;
-	}
 }

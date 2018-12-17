@@ -9,6 +9,7 @@ import org.apache.commons.validator.GenericValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class ChiTietGiayController {
     private ChiTietGiayConverter converter;
 
     @PostMapping("/get-chitietgiay-by-id")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getChiTietGiayById(@RequestBody String idChiTietGiay) {
         ResponseEntity<String> resp = null;
         if (GenericValidator.isInt(idChiTietGiay)) {
@@ -50,6 +52,7 @@ public class ChiTietGiayController {
     }
 
     @PostMapping(value = "/save-chitietgiay", consumes = "application/json")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> saveChiTietGiay(@Valid @RequestBody ChiTietGiayForm form, Errors error) {
         ResponseEntity<String> resp = null;
 
@@ -68,6 +71,7 @@ public class ChiTietGiayController {
     }
 
     @PostMapping(value = "/delete-chitietgiay", consumes = "application/json")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteChiTietGiay(@RequestBody String idChiTietGiay) {
         ResponseEntity<String> resp = null;
         System.out.println(idChiTietGiay);

@@ -80,6 +80,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.isAuthenticated)
     if (this.state.isLoading) {
       return <LoadingIndicator />
     }
@@ -93,19 +94,22 @@ class App extends Component {
         <Switch>
           <Route path="/login" render={(props) => this.state.isAuthenticated ?
             <BadRequest /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
-          <Route
+          <PrivateRoute
             path="/admin/danh-sach-giay/them-giay"
+            authenticated={this.state.isAuthenticated}
             component={CreateShoe}
           />
-          <Route
+          <PrivateRoute
             path="/admin/danh-sach-giay/sua-giay"
+            authenticated={this.state.isAuthenticated}
             component={EditShoe}
           />
-          <Route
+          <PrivateRoute
             path="/admin/danh-sach-giay/anh-giay"
+            authenticated={this.state.isAuthenticated}
             component={UploadImg}
           />
-          <Route path="/admin/danh-sach-giay" component={ListShoe} />
+          <PrivateRoute path="/admin/danh-sach-giay" component={ListShoe}  authenticated={this.state.isAuthenticated}/>
           <PrivateRoute path="/hoadon" component={Invoice} authenticated={this.state.isAuthenticated}></PrivateRoute>
           <PrivateRoute path="/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated}></PrivateRoute>
           <Route component={BadRequest} />

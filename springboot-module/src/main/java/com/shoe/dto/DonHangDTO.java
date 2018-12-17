@@ -17,8 +17,7 @@ public class DonHangDTO {
 	private Date ngayDat;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date ngayGiao;
-	private int idTinhTrang;
-	private String tongTien;
+	private int tongTien;
 	private KhachHangDTO khachHang;
-
+	private TinhTrangDonHangDTO tinhTrangDonHang;
 }

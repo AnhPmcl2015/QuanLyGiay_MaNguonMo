@@ -7,5 +7,5 @@ import com.shoe.entities.DonHang;
 public interface DonHangDAO {
 	public DonHangDTO getDonHangById(int id);
     public void add(DonHang donHang);
-    public void update(DonHang donHang);
+    public void updateStatus(int id, int stt);
 }

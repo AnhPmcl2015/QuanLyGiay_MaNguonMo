@@ -1,198 +1,318 @@
 import './GoodsReceipt.css';
 import React, { Component } from 'react';
-import {
-    Table, Input, Button, Popconfirm, Form,
-} from 'antd';
+import { Table, Popconfirm, Row, Col, DatePicker, Select, Card, notification, Button } from 'antd';
+import { EditableFormRow, EditableCell } from './EditableTableComp';
+import { getBrands, getShoes, save } from './GoodsReceiptAPI';
+import moment from 'moment';
 
-const FormItem = Form.Item;
-const EditableContext = React.createContext();
-
-const EditableRow = ({ form, index, ...props }) => (
-    <EditableContext.Provider value={form}>
-        <tr {...props} />
-    </EditableContext.Provider>
-);
-
-const EditableFormRow = Form.create()(EditableRow);
-
-class EditableCell extends React.Component {
-    state = {
-        editing: false,
-    }
-
-    componentDidMount() {
-        if (this.props.editable) {
-            document.addEventListener('click', this.handleClickOutside, true);
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.props.editable) {
-            document.removeEventListener('click', this.handleClickOutside, true);
-        }
-    }
-
-    toggleEdit = () => {
-        const editing = !this.state.editing;
-        this.setState({ editing }, () => {
-            if (editing) {
-                this.input.focus();
-            }
-        });
-    }
-
-    handleClickOutside = (e) => {
-        const { editing } = this.state;
-        if (editing && this.cell !== e.target && !this.cell.contains(e.target)) {
-            this.save();
-        }
-    }
-
-    save = () => {
-        const { record, handleSave } = this.props;
-        this.form.validateFields((error, values) => {
-            if (error) {
-                return;
-            }
-            this.toggleEdit();
-            handleSave({ ...record, ...values });
-        });
-    }
-
-    render() {
-        const { editing } = this.state;
-        const {
-            editable,
-            dataIndex,
-            title,
-            record,
-            index,
-            handleSave,
-            ...restProps
-        } = this.props;
-        return (
-            <td ref={node => (this.cell = node)} {...restProps}>
-                {editable ? (
-                    <EditableContext.Consumer>
-                        {(form) => {
-                            this.form = form;
-                            return (
-                                editing ? (
-                                    <FormItem style={{ margin: 0 }}>
-                                        {form.getFieldDecorator(dataIndex, {
-                                            rules: [{
-                                                required: true,
-                                                message: `${title} is required.`,
-                                            }],
-                                            initialValue: record[dataIndex],
-                                        })(
-                                            <Input
-                                                ref={node => (this.input = node)}
-                                                onPressEnter={this.save}
-                                            />
-                                        )}
-                                    </FormItem>
-                                ) : (
-                                        <div
-                                            className="editable-cell-value-wrap"
-                                            style={{ paddingRight: 24 }}
-                                            onClick={this.toggleEdit}
-                                        >
-                                            {restProps.children}
-                                        </div>
-                                    )
-                            );
-                        }}
-                    </EditableContext.Consumer>
-                ) : restProps.children}
-            </td>
-        );
-    }
-}
+const Option = Select.Option;
+notification.config({
+    placement: 'topRight',
+    duration: 3,
+});
 
 class GoodsReceipt extends Component {
-    constructor(props) {
-        super(props);
-        this.columns = [{
-            title: 'name',
-            dataIndex: 'name',
+    state = {
+        isLoading: false,
+        errors: [],
+        dataSourceTable: [],
+        dataSourceShoes: [],
+        listItemShoe: [],
+        brands: [],
+        dateOfReciept: null,
+        selectedBrand: 5,
+    };
+
+    columnsConfig = [
+        {
+            title: 'Mã giày',
+            dataIndex: 'shoeCode',
             width: '30%',
+        }, {
+            title: 'Tên giày',
+            dataIndex: 'shoeName',
+            width: '30%',
+        }, {
+            title: 'Số lượng',
+            dataIndex: 'amount',
             editable: true,
         }, {
-            title: 'age',
-            dataIndex: 'age',
+            title: 'Đơn giá',
+            dataIndex: 'price',
             editable: true,
         }, {
-            title: 'address',
-            dataIndex: 'address',
+            title: 'Thành tiền',
+            dataIndex: 'total',
         }, {
-            title: 'operation',
-            dataIndex: 'operation',
+            title: '',
+            dataIndex: '',
             render: (text, record) => (
-                this.state.dataSource.length >= 1
+                this.state.dataSourceTable.length >= 1
                     ? (
-                        <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-                            <a href="javascript:;">Delete</a>
+                        <Popconfirm title="Bạn có chắc muốn xoá?" onConfirm={() => this.handleDelete(record.key)}>
+                            <Button type="danger">Xoá</Button>
                         </Popconfirm>
                     ) : null
             ),
         }];
 
-        this.state = {
-            dataSource: [{
-                key: '0',
-                name: 'Edward King 0',
-                age: '32',
-                address: 'London, Park Lane no. 0',
-            }, {
-                key: '1',
-                name: 'Edward King 1',
-                age: '32',
-                address: 'London, Park Lane no. 1',
-            }],
-            count: 2,
-        };
-    }
-
     handleDelete = (key) => {
-        const dataSource = [...this.state.dataSource];
-        this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
+        const dataSourceTable = [...this.state.dataSourceTable];
+
+        const newErrors = this.state.errors
+        this.state.errors.forEach(function (error) {
+            if (key.toString() === error.key.toString()) {
+                const objError = {
+                    key: key,
+                    error: error
+                };
+                newErrors.splice(newErrors.indexOf(objError), 1);
+            }
+        });
+
+        this.setState({
+            dataSourceTable: dataSourceTable.filter(item => item.key !== key),
+            errors: newErrors
+        });
+        // this.setState({
+        //     dataSourceTable: newData,
+        //     errors: newErrors
+        // });
     }
 
-    handleAdd = () => {
-        const { count, dataSource } = this.state;
+    handleAdd = (value) => {
+        var shoe = this.state.dataSourceShoes.filter(function (shoe) {
+            return shoe.maGiay.toString() === value.toString();
+        });
+
+        var isExisted = false;
+        if (this.state.dataSourceTable !== null) {
+            this.state.dataSourceTable.forEach(function (row) {
+                if (row.shoeCode.toString() === value.toString()) {
+                    isExisted = true;
+                }
+            });
+        }
+
+        if (isExisted) {
+            notification.error({
+                message: 'Thông báo',
+                description: "Sản phầm này đã được thêm trước đó !",
+            });
+            return;
+        }
+
+        const { count, dataSourceTable } = this.state;
         const newData = {
-            key: count,
-            name: `Edward King ${count}`,
-            age: 32,
-            address: `London, Park Lane no. ${count}`,
+            key: shoe[0].idGiay,
+            shoeCode: value,
+            shoeName: shoe[0].tenGiay,
+            amount: 1,
+            price: shoe[0].giaBan,
+            total: shoe[0].giaBan
         };
+
         this.setState({
-            dataSource: [...dataSource, newData],
+            dataSourceTable: [...dataSourceTable, newData],
             count: count + 1,
         });
     }
 
     handleSave = (row) => {
-        const newData = [...this.state.dataSource];
+        const newData = [...this.state.dataSourceTable];
         const index = newData.findIndex(item => row.key === item.key);
         const item = newData[index];
         newData.splice(index, 1, {
             ...item,
             ...row,
         });
-        this.setState({ dataSource: newData });
+        this.setState({ dataSourceTable: newData });
+    }
+
+    handleChangeAmountOrPrice = (row, change) => {
+        const newData = [...this.state.dataSourceTable];
+        const index = newData.findIndex(item => row.key === item.key);
+        const item = newData[index];
+        const newTotal = parseInt(item.amount) * parseInt(item.price);
+        const rowWithNewTotal = {
+            key: item.key,
+            shoeCode: item.shoeCode,
+            shoeName: item.shoeName,
+            amount: item.amount,
+            price: item.price,
+            total: newTotal
+        };
+        newData.splice(index, 1, rowWithNewTotal);
+
+        const newErrors = this.state.errors
+        this.state.errors.forEach(function (error) {
+            if (row.key.toString() === error.key.toString()) {
+                const objError = {
+                    key: row.key,
+                    error: error
+                };
+                newErrors.splice(newErrors.indexOf(objError), 1);
+            }
+        });
+
+        this.setState({
+            dataSourceTable: newData,
+            errors: newErrors
+        });
+    }
+
+    handleErrorInput = (error, row) => {
+        const objError = {
+            key: row.key,
+            error: error
+        };
+        const newErrors = this.state.errors;
+
+        var existed = false;
+        this.state.errors.forEach(function (error) {
+            if (JSON.stringify(objError) === JSON.stringify(error)) {
+                existed = true;
+            }
+        });
+
+        if (!existed) {
+            newErrors.push(objError);
+            this.setState({
+                errors: newErrors
+            });
+        }
+    }
+
+    onChangeDate = (date, dateString) => {
+        if(dateString.trim() === '')
+            dateString = moment().format('DD-MM-YYYY');
+        this.setState({
+            dateOfReciept: dateString
+        });
+    }
+
+    handleBrandChange = (key, value) => {
+        this.setState({
+            selectedBrand: key
+        })
+    }
+
+    saveReceipt = () => {
+        if (this.state.errors.length === 0 && this.state.dataSourceTable.length !== 0) {
+            var initialValue = 0;
+            var sum = this.state.dataSourceTable.reduce(function (accumulator, currentValue) {
+                return accumulator + currentValue.amount;
+            }, initialValue)
+
+            const request = {
+                dateOfReciept: this.state.dateOfReciept,
+                brandId: this.state.selectedBrand,
+                amount: sum,
+                recieptDetails: this.state.dataSourceTable,
+            }
+            save(request)
+                .then(response => {
+                    notification.success({
+                        message: 'Thông báo',
+                        description: "Lưu phiếu nhập thành công",
+                    });
+                }).catch(error => {
+                    if (error.status === 401) {
+                        this.props.handleLogout('/login', 'error', 'You have been logged out. Please login');
+                    } else {
+                        notification.error({
+                            message: 'Thông báo',
+                            description: error.message || 'Sorry! Something went wrong. Please try again!'
+                        });
+                    }
+                });
+        } else {
+            console.log(this.state.errors);
+            notification.error({
+                message: 'Thông báo',
+                description: "Lưu thất bại, vui lòng kiểm tra dữ liệu",
+            });
+        }
+    }
+
+    loadBrand() {
+        this.setState({
+            isLoading: true
+        });
+        getBrands()
+            .then(response => {
+                console.log(JSON.stringify(response));
+                var respBrands = [];
+                response.forEach(function (brand) {
+                    respBrands.push(<Option key={brand.idHangSanXuat}>{brand.tenHangSanXuat}</Option>);
+                });
+
+                this.setState({
+                    brands: respBrands,
+                    isLoading: false,
+                });
+            }).catch(error => {
+                if (error.status === 404) {
+                    this.setState({
+                        notFound: true,
+                        isLoading: false
+                    });
+                } else {
+                    this.setState({
+                        serverError: true,
+                        isLoading: false
+                    });
+                }
+            });
+    }
+
+    loadShoes() {
+        this.setState({
+            isLoading: true
+        });
+        getShoes()
+            .then(response => {
+                console.log(response);
+                const items = []
+                response.forEach(function (shoe) {
+                    items.push(<Option key={shoe.maGiay}>{'#' + shoe.maGiay + ' | ' + shoe.tenGiay}</Option>);
+                });
+                this.setState({
+                    dataSourceShoes: response,
+                    listItemShoe: items,
+                    isLoading: false,
+                });
+            }).catch(error => {
+                if (error.status === 404) {
+                    this.setState({
+                        notFound: true,
+                        isLoading: false
+                    });
+                } else {
+                    this.setState({
+                        serverError: true,
+                        isLoading: false
+                    });
+                }
+            });
+    }
+
+    componentDidMount() {
+        this.loadBrand();
+        this.loadShoes();
+        this.setState({
+            dateOfReciept: moment().format("DD-MM-YYYY")
+        })
     }
 
     render() {
-        const { dataSource } = this.state;
         const components = {
             body: {
                 row: EditableFormRow,
                 cell: EditableCell,
             },
         };
-        const columns = this.columns.map((col) => {
+        const columns = this.columnsConfig.map((col) => {
             if (!col.editable) {
                 return col;
             }
@@ -204,21 +324,54 @@ class GoodsReceipt extends Component {
                     dataIndex: col.dataIndex,
                     title: col.title,
                     handleSave: this.handleSave,
+                    handleChangeAmountOrPrice: this.handleChangeAmountOrPrice,
+                    handleErrorInput: this.handleErrorInput
                 }),
             };
         });
+
         return (
-            <div>
-                <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
-                    Add a row
-        </Button>
-                <Table
-                    components={components}
-                    rowClassName={() => 'editable-row'}
-                    bordered
-                    dataSource={dataSource}
-                    columns={columns}
-                />
+            <div style={{ padding: '30px' }}>
+                <Card title="Thêm đơn nhập hàng" bordered={false}>
+                    <Row gutter={24}>
+                        <Col span={6}>
+                            <DatePicker defaultValue={moment()} format="DD-MM-YYYY" onChange={this.onChangeDate} placeholder="Ngày nhập hàng" style={{ width: '100%' }} />
+                        </Col>
+                        <Col span={6}>
+                            <Select defaultValue="Nike" style={{ width: '100%' }} onChange={this.handleBrandChange}>
+                                {this.state.brands}
+                            </Select>
+                        </Col>
+                        <Col span={12}>
+                            <Select
+                                showSearch
+                                notFoundContent="Không tìm thấy sản phẩm"
+                                style={{ width: '100%' }}
+                                placeholder="Nhập mã giày hoặc tên giày"
+                                optionFilterProp="children"
+                                value={"Nhập mã giày hoặc tên giày"}
+                                onChange={this.handleAdd}
+                                filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                            >
+                                {this.state.listItemShoe}
+                            </Select>
+                        </Col>
+                        <Col span={6}>
+
+                        </Col>
+                    </Row>
+                    <br />
+                    <Table
+                        components={components}
+                        rowClassName={() => 'editable-row'}
+                        bordered
+                        locale={{emptyText : "Chưa có dữ liệu"}}
+                        dataSource={this.state.dataSourceTable}
+                        columns={columns}
+                    />
+                    <br />
+                    <Button onClick={this.saveReceipt} style={{ float: 'right' }} type="primary">Lưu</Button>
+                </Card>
             </div>
         );
     }

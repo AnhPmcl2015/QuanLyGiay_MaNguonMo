@@ -74,7 +74,7 @@ id_khach_hang int not null auto_increment,
 ten_khach_hang char(100) not null,
 dia_chi text not null,
 so_dien_thoai int(10) not null,
-id_user int,
+user_id int,
 primary key(id_khach_hang)
 );
 
@@ -102,12 +102,17 @@ so_luong int not null,
 thanh_tien int(11) not null,
 primary key(id_chi_tiet_don_hang)
 );
+CREATE TABLE roles (
+  id bigint(20) PRIMARY KEY  NOT NULL AUTO_INCREMENT,
+  name varchar(60) NOT NULL UNIQUE KEY
+);
+
 create table user_roles(
 user_id int,
 role_id int
 );
 create table users(
-id_user int auto_increment primary key,
+user_id int auto_increment primary key,
 email varchar(45) unique,
 username varchar(45) unique,
 password varchar(256) not null
@@ -124,5 +129,8 @@ alter table don_hang add foreign key(id_khach_hang) references khach_hang(id_kha
 alter table chi_tiet_don_hang add foreign key(id_don_hang) references don_hang(id_don_hang);
 alter table chi_tiet_don_hang add foreign key(id_chi_tiet_giay) references chi_tiet_giay(id_chi_tiet_giay);
 alter table chi_tiet_giay add foreign key(id_giay) references giay(id_giay);
-alter table khach_hang add foreign key(id_user) references users(id_user);
+alter table khach_hang add foreign key(user_id) references users(user_id);
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_PM');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 commit;

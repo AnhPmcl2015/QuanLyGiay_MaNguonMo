@@ -12,6 +12,7 @@ import org.apache.commons.validator.GenericValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,7 @@ public class GiayController {
 
     // thêm, sửa giày
     @PostMapping(value = "/save", consumes = "application/json")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> saveGiay(@Valid @RequestBody GiayForm model, Errors error) {
         ResponseEntity<String> resp = null;
         if (error.hasFieldErrors("maGiay")) {
@@ -55,6 +57,7 @@ public class GiayController {
     }
 
     @PostMapping(value = "/edit", consumes = "application/json")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> editGiay(@Valid @RequestBody GiayForm model, Errors error) {
         ResponseEntity<String> resp = null;
         if (!giayDAO.checkUniqueOnEdit(model)) {
@@ -75,6 +78,7 @@ public class GiayController {
 
 
     @PostMapping(value = "/get-giay-by-id")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getGiayById(@RequestBody String id) {
         ResponseEntity<String> resp = null;
         if (id == null || "".equals(id.trim())) {
@@ -89,6 +93,7 @@ public class GiayController {
     }
 
     @PostMapping("/list-shoe")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getListGiay() {
         List<ShoeDTO> list = giayDAO.getAllListNoneDel();
         List<GiayTableDTO> giayTableDTOs = new ArrayList<>();

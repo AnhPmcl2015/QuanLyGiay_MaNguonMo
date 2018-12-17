@@ -31,7 +31,7 @@ import org.hibernate.annotations.NaturalId;
 public class User{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -61,12 +61,12 @@ public class User{
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {

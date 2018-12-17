@@ -4,7 +4,7 @@ import { request } from './../APIUtils';
 
 export function getCurrentUser() {
     return request({
-        url: API_BASE_URL + "/auth/user/me",
+        url: API_BASE_URL + "/user/me",
         method: 'GET'
     });
 }

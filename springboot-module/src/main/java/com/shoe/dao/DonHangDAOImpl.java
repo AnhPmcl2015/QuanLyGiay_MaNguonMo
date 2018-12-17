@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.shoe.converter.DonHangConverter;
 import com.shoe.dto.DonHangDTO;
 import com.shoe.entities.DonHang;
+import com.shoe.entities.TinhTrangDonHang;
 import com.shoe.jpa.JpaDonHang;
 
 @Repository
@@ -44,8 +45,14 @@ public class DonHangDAOImpl implements DonHangDAO {
 	}
 
 	@Override
-	public void update(DonHang donHang) {
-
+	public void updateStatus(int id, int stt) {
+		Optional<DonHang> donHangOptional = jpaDonHang.findById(id);
+		if (donHangOptional.isPresent()) {
+			TinhTrangDonHang tinhTrang = new TinhTrangDonHang();
+			tinhTrang.setIdTinhTrang(stt);
+			DonHang donhang= donHangOptional.get();
+			donhang.setTinhTrangDonHang(tinhTrang);
+		}
 	}
 
 }

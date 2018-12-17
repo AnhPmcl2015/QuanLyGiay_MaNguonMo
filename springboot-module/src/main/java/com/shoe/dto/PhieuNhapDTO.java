@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhieuNhapDTO{
-    private int idPhieuNhap;
+	private int idPhieuNhap;
     private Date ngayNhap;
     private int tongSoLuong;
-    private int idHangSanXuat;
+    private HangSanXuatDTO HangSanXuat;
 }
