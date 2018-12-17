@@ -1,18 +1,17 @@
 import {
     getGiayById
 } from '../types';
+import { request } from './../../Admin/Common/APIUtils';
 
 export const GetGiayById = idGiayData => dispatch => {
-    fetch("/admin/api/shoe/get-giay-by-id", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(idGiayData)
-        }).then(res => res.json())
+    request({
+        url: "/admin/api/shoe/get-giay-by-id",
+        method: "POST",
+        body: JSON.stringify(idGiayData)
+    })
         .then(
             result => {
-               
+
                 dispatch({
                     type: getGiayById.GET_GIAY_BY_ID,
                     payload: result
@@ -25,11 +24,11 @@ export const GetGiayById = idGiayData => dispatch => {
 };
 
 export const getImageByIdGiay = idGiay => dispatch => {
-    fetch("/admin/api/shoe/get-img-by-id", {
+    request({
+        url: "/admin/api/shoe/get-img-by-id",
         method: "POST",
         body: JSON.stringify(idGiay),
     })
-        .then(res => res.json())
         .then(
             result => {
                 dispatch({

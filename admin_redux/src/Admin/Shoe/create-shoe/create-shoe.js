@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./create-shoe.css";
 import CreateShoeForm from "./create-shoe.form";
+import { request } from '../../Common/APIUtils';
 const { Option, OptGroup } = Select;
 class CreateShoe extends Component {
   state = {
@@ -16,11 +17,11 @@ class CreateShoe extends Component {
     await this.loadCompany();
   }
   loadCompany() {
-    fetch("/admin/api/data/get-hang-san-xuat", {
+    request({
+      url: "/admin/api/data/get-hang-san-xuat", 
       method: "POST",
       body: JSON.stringify("")
     })
-      .then(res => res.json())
       .then(
         result => {
           const rel = result.map(i => {
@@ -43,11 +44,11 @@ class CreateShoe extends Component {
       );
   }
   loadGender() {
-    fetch("/admin/api/data/get-gender", {
+    request({
+      url: "/admin/api/data/get-gender", 
       method: "POST",
       body: JSON.stringify("")
     })
-      .then(res => res.json())
       .then(
         result => {
           const rel = result.map(i => {

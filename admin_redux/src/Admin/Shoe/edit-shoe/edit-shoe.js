@@ -9,6 +9,7 @@ import "../create-shoe/create-shoe.css";
 import { connect } from "react-redux";
 import { Select } from "antd";
 import EditShoeForm from "./edit-shoe.form";
+import { request } from '../../Common/APIUtils';
 const { Option, OptGroup } = Select;
 class EditShoe extends Component {
   state = {
@@ -28,11 +29,11 @@ class EditShoe extends Component {
     await this.loadCompany();
   }
   loadCompany() {
-    fetch("/admin/api/data/get-hang-san-xuat", {
+    request({
+      url: "/admin/api/data/get-hang-san-xuat", 
       method: "POST",
       body: JSON.stringify("")
     })
-      .then(res => res.json())
       .then(
         result => {
           const rel = result.map(i => {
@@ -55,11 +56,11 @@ class EditShoe extends Component {
       );
   }
   loadGender() {
-    fetch("/admin/api/data/get-gender", {
+    request({
+      url: "/admin/api/data/get-gender", 
       method: "POST",
       body: JSON.stringify("")
     })
-      .then(res => res.json())
       .then(
         result => {
           const rel = result.map(i => {

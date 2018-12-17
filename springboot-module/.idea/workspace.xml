@@ -2,63 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1414b5a-8180-4f0d-a34f-1105fc365f89" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/APIUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/APIUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/BadRequest/bad-request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/BadRequest/bad-request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Constant/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Constant/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Footer/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Footer/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Footer/footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Header/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Header/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Loader/loader.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Loader/loader.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/LoadingIndicator/LoadingIndicator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/LoadingIndicator/LoadingIndicator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Pagination/Pagination.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Pagination/Pagination.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Pagination/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/Pagination/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/UserAPI/UserAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Common/UserAPI/UserAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/GoodsReceipt/GoodsReceipt.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/GoodsReceipt/GoodsReceipt.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/GoodsReceipt/GoodsReceipt.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/GoodsReceipt/GoodsReceipt.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/GoodsReceipt/GoodsReceiptAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/GoodsReceipt/GoodsReceiptAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Invoice/Invoice.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Invoice/Invoice.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Invoice/Invoice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Invoice/Invoice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Invoice/InvoiceAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Invoice/InvoiceAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Login/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Login/Login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Login/LoginAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Login/LoginAPI.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/create-shoe/create-shoe.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/create-shoe/create-shoe.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/list-shoe/list-shoe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/list-shoe/list-shoe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/upload-img/upload-img.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/upload-img/upload-img.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admin_redux/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/829acc5a-34dc-4933-b445-62f96b763b39.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/829acc5a-34dc-4933-b445-62f96b763b39.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quanlybangiay.sql" beforeDir="false" afterPath="$PROJECT_DIR$/quanlybangiay.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/AuthRestAPIs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/AuthRestAPIs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/ChiTietGiayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/ChiTietGiayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/DataGiayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/DataGiayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangControllerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangControllerAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/GiayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/GiayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/PhieuNhapControllerAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/PhieuNhapControllerAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/converter/ChiTietDonHangConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/converter/ChiTietDonHangConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/converter/DonHangConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/converter/DonHangConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dao/ChiTietDonHangDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dao/ChiTietDonHangDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dao/ChiTietDonHangDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dao/ChiTietDonHangDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dao/DonHangDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dao/DonHangDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dao/DonHangDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dao/DonHangDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dao/PhieuNhapDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dao/PhieuNhapDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dao/PhieuNhapDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dao/PhieuNhapDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dto/ChiTietDonHangDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dto/ChiTietDonHangDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dto/ChiTietPhieuNhapDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dto/ChiTietPhieuNhapDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dto/DonHangDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dto/DonHangDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dto/GiayTableDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dto/GiayTableDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dto/KhachHangDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dto/KhachHangDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/dto/PhieuNhapDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/dto/PhieuNhapDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/form/ChiTietPhieuNhapForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/form/ChiTietPhieuNhapForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/form/DonHangForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/form/DonHangForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/form/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/form/LoginForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/form/PhieuNhapForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/form/PhieuNhapForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/form/SignUpForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/form/SignUpForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/jpa/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/jpa/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/services/UserPrinciple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/services/UserPrinciple.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -105,7 +50,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="532">
               <caret line="37" column="77" selection-start-line="37" selection-start-column="77" selection-end-line="37" selection-end-column="77" />
             </state>
           </provider>
@@ -114,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="54" column="66" lean-forward="true" selection-start-line="54" selection-start-column="66" selection-end-line="54" selection-end-column="66" />
+            <state relative-caret-position="79">
+              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
             </state>
           </provider>
         </entry>
@@ -267,7 +212,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -381,7 +326,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -457,12 +402,13 @@
       <workItem from="1545015347557" duration="978000" />
       <workItem from="1545026169866" duration="4412000" />
       <workItem from="1545032658135" duration="2279000" />
-      <workItem from="1545052614530" duration="1256000" />
+      <workItem from="1545052614530" duration="1949000" />
+      <workItem from="1545056293360" duration="956000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111107000" />
+    <option name="totallyTimeSpent" value="112756000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -475,9 +421,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22080536" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22416107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -507,7 +452,7 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.3295302" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.16442953" />
+      <window_info anchor="right" id="Database" order="6" weight="0.16442953" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Bean Validation" order="9" />
@@ -847,6 +792,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/user_roles">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="37" column="77" selection-start-line="37" selection-start-column="77" selection-end-line="37" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/PhieuNhapControllerAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -898,24 +857,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/user_roles">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="37" column="77" selection-start-line="37" selection-start-column="77" selection-end-line="37" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="54" column="66" lean-forward="true" selection-start-line="54" selection-start-column="66" selection-end-line="54" selection-end-column="66" />
+        <state relative-caret-position="79">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
     </entry>

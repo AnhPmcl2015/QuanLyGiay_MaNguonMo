@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Row, Col, Select, message } from "antd";
+import { request } from '../../Common/APIUtils';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 class EditShoeForm extends Component {
@@ -40,11 +41,9 @@ class EditShoeForm extends Component {
     callback();
   };
   save = form => {
-    fetch("/admin/api/shoe/edit", {
+    request({
+      url: "/admin/api/shoe/edit", 
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify(form)
     })
       .then(res => res.json())

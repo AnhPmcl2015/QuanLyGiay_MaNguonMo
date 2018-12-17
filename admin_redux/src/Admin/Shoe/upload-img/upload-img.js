@@ -3,6 +3,7 @@ import ImageUploader from 'react-images-upload';
 import { Button, Icon, Row, Col, message } from 'antd';
 import "./upload-img.css";
 import { connect } from "react-redux";
+import { request } from '../../Common/APIUtils';
 import "../../Common/Loader/loader.css";
 import Dropzone from 'react-dropzone';
 
@@ -80,11 +81,10 @@ class UploadImg extends Component {
                 data.append("file", null);
             }
             data.append("idGiay", this.state.oldImgs.id);
-            fetch("/admin/api/shoe/save-img", {
+            request("/admin/api/shoe/save-img", {
                 method: "POST",
                 body: data,
             })
-                .then(res => res.json())
                 .then(
                     result => {
                         if (result.status === 'success') {
