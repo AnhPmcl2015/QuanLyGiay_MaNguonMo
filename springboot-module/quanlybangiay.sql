@@ -117,6 +117,41 @@ email varchar(45) unique,
 username varchar(45) unique,
 password varchar(256) not null
 );
+select count(id_don_hang)
+from don_hang
+where DATE(ngay_giao)= DATE(NOW());
+
+select sum(tong_tien)
+from don_hang
+where WEEK(ngay_giao)= WEEK(NOW()) and id_tinh_trang =3;
+
+select sum(tong_tien),MONTH(ngay_giao) as thang
+from don_hang
+where YEAR(ngay_giao) = 2018
+group by MONTH(ngay_giao)
+order by thang;
+
+select distinct year(ngay_giao)
+from don_hang;
+
+select sum(ctdh.thanh_tien), hsx.ten_hang_san_xuat
+from don_hang dh, chi_tiet_don_hang ctdh, 
+chi_tiet_giay ctg, giay g,
+loai_giay lg, hang_san_xuat hsx
+where dh.id_don_hang = ctdh.id_don_hang 
+and ctg.id_chi_tiet_giay = ctdh.id_chi_tiet_giay
+and g.id_giay = ctg.id_giay
+and g.id_loai_giay = lg.id_loai_giay
+and hsx.id_hang_san_xuat = lg.id_hang_san_xuat
+and year(dh.ngay_giao) = 2018 and Month(dh.ngay_giao) = 12
+group by hsx.id_hang_san_xuat, hsx.ten_hang_san_xuat 
+order by hsx.ten_hang_san_xuat;
+
+select sum(so_luong)
+from don_hang dh, chi_tiet_don_hang ctdh
+where dh.id_don_hang = ctdh.id_don_hang
+and WEEK(ngay_giao)= WEEK(NOW()) and id_tinh_trang =3;
+
 -- Foreign key
 alter table giay add foreign key(id_gioi_tinh) references gioi_tinh(id_gioi_tinh);
 alter table giay add foreign key(id_loai_giay) references loai_giay(id_loai_giay);

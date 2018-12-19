@@ -42,11 +42,10 @@ class EditShoeForm extends Component {
   };
   save = form => {
     request({
-      url: "/admin/api/shoe/edit", 
+      url: "/admin/api/shoe/edit",
       method: "POST",
       body: JSON.stringify(form)
     })
-      .then(res => res.json())
       .then(
         result => {
 
@@ -160,7 +159,7 @@ class EditShoeForm extends Component {
                     showSearch
                     allowClear={true}
                     placeholder="Chọn giới tính"
-                    // onChange={this.handleChange.bind(this)}
+                  // onChange={this.handleChange.bind(this)}
                   >
                     {this.props.optionGender}
                   </Select>

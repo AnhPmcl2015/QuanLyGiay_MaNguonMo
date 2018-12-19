@@ -6,20 +6,20 @@ import {
 } from 'react-router-dom';
 
 import Header from "./Admin/Common/Header/header";
-import Footer from "./Admin/Common/Footer/footer";
 import CreateShoe from './Admin/Shoe/create-shoe/create-shoe';
 import EditShoe from './Admin/Shoe/edit-shoe/edit-shoe';
 import ListShoe from './Admin/Shoe/list-shoe/list-shoe';
 import BadRequest from './Admin/Common/BadRequest/bad-request';
 import { getCurrentUser } from './Admin/Common/UserAPI/UserAPI';
 import { ACCESS_TOKEN } from './Admin/Common/Constant/common';
-import { notification } from 'antd';
+import { notification, Col } from 'antd';
 import Login from './Admin/Login/Login';
 import Invoice from './Admin/Invoice/Invoice';
 import PrivateRoute from './PrivateRoute';
 import LoadingIndicator from './Admin/Common/LoadingIndicator/LoadingIndicator';
 import GoodsReceipt from './Admin/GoodsReceipt/GoodsReceipt';
 import UploadImg from "./Admin/Shoe/upload-img/upload-img";
+import StatisticsRevenue from "./Admin/Statistics/statistics-revenue";
 
 notification.config({
   placement: 'topRight',
@@ -87,34 +87,45 @@ class App extends Component {
 
     return (
       <div>
+
         <Header isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
           onLogout={this.handleLogout} />
+        <div className="m-2">
+          <Switch>
+            <Route path="/login" render={(props) => this.state.isAuthenticated ?
+              <BadRequest /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
+            <PrivateRoute
+              path="/admin/danh-sach-giay/them-giay"
+              authenticated={this.state.isAuthenticated}
+              component={CreateShoe}
+              handleLogout={this.handleLogout}
+            />
 
-        <Switch>
-          <Route path="/login" render={(props) => this.state.isAuthenticated ?
-            <BadRequest /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
-          <PrivateRoute
-            path="/admin/danh-sach-giay/them-giay"
-            authenticated={this.state.isAuthenticated}
-            component={CreateShoe}
-          />
-          <PrivateRoute
-            path="/admin/danh-sach-giay/sua-giay"
-            authenticated={this.state.isAuthenticated}
-            component={EditShoe}
-          />
-          <PrivateRoute
-            path="/admin/danh-sach-giay/anh-giay"
-            authenticated={this.state.isAuthenticated}
-            component={UploadImg}
-          />
-          <PrivateRoute path="/admin/danh-sach-giay" component={ListShoe}  authenticated={this.state.isAuthenticated}/>
-          <PrivateRoute path="/hoadon" component={Invoice} authenticated={this.state.isAuthenticated}></PrivateRoute>
-          <PrivateRoute path="/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated}></PrivateRoute>
-          <Route component={BadRequest} />
-        </Switch>
-        <Footer />
+            <PrivateRoute
+              path="/admin/danh-sach-giay/sua-giay"
+              authenticated={this.state.isAuthenticated}
+              component={EditShoe}
+              handleLogout={this.handleLogout}
+            />
+            <PrivateRoute
+              path="/admin/danh-sach-giay/anh-giay"
+              authenticated={this.state.isAuthenticated}
+              component={UploadImg}
+              handleLogout={this.handleLogout}
+            />
+            <PrivateRoute path="/admin/danh-sach-giay" component={ListShoe} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} />
+            <PrivateRoute path="/hoadon" component={Invoice} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} />
+            <PrivateRoute path="/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated}></PrivateRoute>
+            <PrivateRoute
+              path={["/admin/trang-chu", "/"]}
+              authenticated={this.state.isAuthenticated}
+              component={StatisticsRevenue}
+            />
+            <Route component={BadRequest} />
+          </Switch>
+        </div>
+
       </div>
     );
   }

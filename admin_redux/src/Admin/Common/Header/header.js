@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
+import { Icon } from 'antd';
 import {
   Collapse,
   Navbar,
@@ -31,35 +32,37 @@ class Header extends Component {
   render() {
     return (
       <div>
+
         <Navbar color="light" light expand="md">
-          <NavbarBrand>
-            <Link to="/about">About</Link>
-          </NavbarBrand>
-          <Button type="danger" onClick={() => this.props.onLogout()}>Dang xuat</Button>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
+            <NavbarBrand>
+              <div>
+                <Link to="/">Tổng quan</Link>
+              </div>
+            </NavbarBrand>
+            <NavbarBrand>
+              <Link to="/admin/danh-sach-giay">Danh sách giày</Link>
+            </NavbarBrand>
+            <NavbarBrand>
+              <Link to="/login">Danh sách đơn hàng</Link>
+            </NavbarBrand>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <Link to="/about">about</Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/login">login</Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/admin/danh-sach-giay">Danh sách giày</Link>
-              </NavItem>
+              {/* <NavItem>
+                <Link to="">Danh sách giày</Link>
+              </NavItem> */}
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
+                <DropdownToggle nav>
+                  <Button type="danger" className="rounded" onClick={() => this.props.onLogout()}>Đăng xuất</Button>
                 </DropdownToggle>
-                <DropdownMenu right>
+                {/* <DropdownMenu right>
                   <DropdownItem>
                     <Link to="/admin/danh-sach-giay/them-giay">thêm giày</Link>
                   </DropdownItem>
                   <DropdownItem>Option 2</DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>Reset</DropdownItem>
-                </DropdownMenu>
+                </DropdownMenu> */}
               </UncontrolledDropdown>
             </Nav>
           </Collapse>

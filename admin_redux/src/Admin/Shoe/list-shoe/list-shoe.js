@@ -33,7 +33,7 @@ class ListShoe extends Component {
     await this.loadLoaiGiay();
   }
   loadDatatable() {
-    request( {
+    request({
       url: "/admin/api/shoe/list-shoe",
       method: "POST",
       body: JSON.stringify("")
@@ -72,7 +72,7 @@ class ListShoe extends Component {
   }
   loadLoaiGiay() {
     request({
-      url: "/admin/api/data/get-loai-giay", 
+      url: "/admin/api/data/get-loai-giay",
       method: "POST",
       body: JSON.stringify("")
     })
@@ -110,7 +110,7 @@ class ListShoe extends Component {
     });
     this.filterWithConditions(tenGiay, this.state.gioiTinh, this.state.nhaSanXuat, this.state.loaiGiay)
   };
-  onLoaiGiayChange = (value) =>{
+  onLoaiGiayChange = (value) => {
     const loaiGiay = value;
     this.filterWithConditions(this.state.tenGiay, this.state.gioiTinh, this.state.nhaSanXuat, loaiGiay)
     this.setState({
@@ -124,7 +124,7 @@ class ListShoe extends Component {
   //     })
   //     : this.state.items;
   // }
-  filterWithConditions(tenGiay, gioiTinh, nhaSanXuat, loaiGiay) { 
+  filterWithConditions(tenGiay, gioiTinh, nhaSanXuat, loaiGiay) {
     let listTemp = this.state.items;
     if (tenGiay) {
       listTemp = matchSorter(listTemp, tenGiay, {
@@ -141,7 +141,7 @@ class ListShoe extends Component {
         keys: ["tenHangSanXuat"]
       })
     }
-    if(loaiGiay){
+    if (loaiGiay) {
       listTemp = matchSorter(listTemp, loaiGiay, {
         keys: ["tenLoaiGiay"]
       })
@@ -155,7 +155,7 @@ class ListShoe extends Component {
   deleteShoe(value) {
 
     request({
-      url: "/admin/api/shoe/delete-giay", 
+      url: "/admin/api/shoe/delete-giay",
       method: "POST",
       body: JSON.stringify(value.idGiay)
     })
@@ -248,13 +248,22 @@ class ListShoe extends Component {
         key: "tenHangSanXuat"
       },
       {
+        title: "Giá bán",
+        dataIndex: "giaban",
+        key: "giaban",
+        render: (text, recored) => {
+          const num = recored.giaban.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+          return <div>{num}</div>
+        }
+      },
+      {
         title: "Chức năng",
         dataIndex: "idGiay",
         width: '20%',
         render: (text, record) => (
           <div>
             <Button onClick={() => this.onEdit(record)} placeholder="Sửa">
-              <Icon type="edit" theme="filled"/>
+              <Icon type="edit" theme="filled" />
             </Button>
             <Popconfirm placement="topRight" title="Bạn có chắc muốn xóa không?" onConfirm={() => this.deleteShoe(record)} okText="Đồng ý" cancelText="Hủy">
               <Button className="ml-1" placeholder="Xóa">
@@ -326,7 +335,7 @@ class ListShoe extends Component {
           <Col>
             <Link to="/admin/danh-sach-giay/them-giay">
               <Button color="primary" className="float-right">
-                <Icon type="plus-square" style={{ verticalAlign: 'middle' }}/>
+                <Icon type="plus-square" style={{ verticalAlign: 'middle' }} />
               </Button>
             </Link>
           </Col>

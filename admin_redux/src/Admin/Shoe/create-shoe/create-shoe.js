@@ -83,12 +83,6 @@ class CreateShoe extends Component {
 
     return (
       <div>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Link to="/danh-sach-giay"> Danh sách giày </Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem active> Thêm giày </BreadcrumbItem>
-        </Breadcrumb>
         <CreateShoeForm optionGender={optionsGT} optionCompany={optionCom} />
       </div>
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Table, Icon, Radio, Col, Row, Popconfirm, message, Tooltip } from "antd";
 import EditableCell, { EditableFormRow, EditableContext } from './edit-table-cell';
 import './detail-shoe.css';
+import { request } from '../../Common/APIUtils';
 class DetailShoe extends Component {
 
     state = {
@@ -16,14 +17,11 @@ class DetailShoe extends Component {
         this.setState({
             idGiay: id
         })
-        fetch("/admin/api/detail-shoe/get-chitietgiay-by-id", {
+        request({
+            url: "/admin/api/detail-shoe/get-chitietgiay-by-id",
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
             body: JSON.stringify(id)
         })
-            .then(res => res.json())
             .then(
                 result => {
                     this.setState({
@@ -94,14 +92,11 @@ class DetailShoe extends Component {
                 value.size = row.size;
                 value.soluong = row.soluong;
                 console.log(value);
-                fetch("/admin/api/detail-shoe/save-chitietgiay", {
+                request({
+                    url: "/admin/api/detail-shoe/save-chitietgiay",
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
                     body: JSON.stringify(value)
                 })
-                    .then(res => res.json())
                     .then(
                         result => {
                             console.log(result)
@@ -121,14 +116,11 @@ class DetailShoe extends Component {
         });
     }
     handleDelete(key) {
-        fetch("/admin/api/detail-shoe/delete-chitietgiay", {
+        request({
+            url: "/admin/api/detail-shoe/delete-chitietgiay",
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
             body: JSON.stringify(parseInt(key.idChiTietGiay))
         })
-            .then(res => res.json())
             .then(
                 result => {
                     console.log(result)

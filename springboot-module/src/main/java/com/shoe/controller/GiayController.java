@@ -105,6 +105,7 @@ public class GiayController {
             dto.setTenGioiTinh(i.getGioiTinh().getTenGioiTinh());
             dto.setTenHangSanXuat(i.getLoaiGiay().getHangSanXuat().getTenHangSanXuat());
             dto.setTenLoaiGiay(i.getLoaiGiay().getTenLoaiGiay());
+            dto.setGiaban(i.getGiaBan()+"");
             giayTableDTOs.add(dto);
         });
         ResponseEntity<String> res = new ResponseEntity<>(ConvertToJson.ToJson(giayTableDTOs), HttpStatus.OK);

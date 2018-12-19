@@ -1,4 +1,14 @@
 package com.shoe.dto;
 
-public class DoanhThuDto {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DoanhThuDTO {
+
+    private String thang;
+    private Long doanhThu;
 }

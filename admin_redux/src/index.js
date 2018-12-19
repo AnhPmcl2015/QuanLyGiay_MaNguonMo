@@ -7,12 +7,18 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./store";
 import { Provider } from "react-redux";
 import "antd/dist/antd.css";
+import { LocaleProvider } from 'antd';
+import viVN from 'antd/lib/locale-provider/vi_VN';
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>,
+
+  <LocaleProvider locale={viVN}>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+   </LocaleProvider>
+  ,
   document.getElementById("root")
 );
 
