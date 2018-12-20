@@ -251,6 +251,9 @@ class ListShoe extends Component {
         title: "Giá bán",
         dataIndex: "giaban",
         key: "giaban",
+        sorter: (a, b) => {
+          return a.giaban.localeCompare(b.giaban);
+        },
         render: (text, recored) => {
           const num = recored.giaban.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
           return <div>{num}</div>

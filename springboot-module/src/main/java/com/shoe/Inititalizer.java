@@ -46,7 +46,7 @@ public class Inititalizer implements CommandLineRunner {
 			Workbook workBook = WorkbookFactory.create(new File(PATH));
 
 			Sheet sheet = workBook.getSheetAt(0);
-
+			System.out.println(sheet);
 			sheet.forEach(row -> {
 				List<String> arr = new ArrayList<>();
 
@@ -88,11 +88,11 @@ public class Inititalizer implements CommandLineRunner {
 					giay.setImg3(img3);
 					giay.setImg4(img4);
 					giay.setXoaFlag(false);
-
-					LoaiGiay loaiGiay = loaiGiayRepository.findById((int) Double.parseDouble(idLoaiGiay)).get();
+					System.out.println(idLoaiGiay);
+					LoaiGiay loaiGiay = loaiGiayRepository.findById((int)Double.parseDouble(idLoaiGiay)).get();
 					giay.setLoaiGiay(loaiGiay);
 
-					GioiTinh gioiTinh = gioiTinhRepository.findById((int) Double.parseDouble(idGioiTinh)).get();
+					GioiTinh gioiTinh = gioiTinhRepository.findById((int)Double.parseDouble(idGioiTinh)).get();
 					giay.setGioiTinh(gioiTinh);
 
 					giayRepository.save(giay);

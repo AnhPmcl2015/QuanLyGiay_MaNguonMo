@@ -1,4 +1,4 @@
-package uit.controller;
+package com.shoe.controller;
 
 import com.shoe.converter.TenGiayConverter;
 import com.shoe.converter.GiayConverter;
@@ -7,6 +7,7 @@ import com.shoe.dto.TenGiayDto;
 import com.shoe.jpa.JpaGiay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,6 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping
 public class TrangChuController {
 	@Autowired
 	private TenGiayConverter tenGiayConverter;
@@ -28,7 +28,6 @@ public class TrangChuController {
 	
 	@GetMapping("/api/ten-giay")
 	public Collection<TenGiayDto> getTenGiay() {
-
 		List<TenGiayDto> listTenGiays = new ArrayList<>();
 		giayRepository.findAll().forEach(giay->{
 			TenGiayDto tenGiayDto = new TenGiayDto();
@@ -41,9 +40,8 @@ public class TrangChuController {
 	
 	@GetMapping("/api/list-giay-noi-bac")
 	public Collection<GiayDto> getListGiayNoiBat() {
-		
+
 		List<GiayDto> listGiayNoiBac = new ArrayList<>();
-		
 		giayRepository.findTop8().forEach(giay->{
 			GiayDto giayDto = new GiayDto();
 			this.giayConverter.convertEntityToDto(giay, giayDto);
@@ -56,7 +54,6 @@ public class TrangChuController {
 	public Collection<GiayDto> getListGiayBanChay() {
 		
 		List<GiayDto> listGiayBanChay = new ArrayList<>();
-		
 		giayRepository.findTopSeller().forEach(giay->{
 			GiayDto giayDto = new GiayDto();
 			this.giayConverter.convertEntityToDto(giay, giayDto);

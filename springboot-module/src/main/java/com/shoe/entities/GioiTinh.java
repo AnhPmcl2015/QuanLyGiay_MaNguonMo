@@ -40,7 +40,6 @@ public class GioiTinh implements java.io.Serializable {
 	}
 
 	@Id
-
 	@Column(name = "id_gioi_tinh", unique = true, nullable = false)
 	public int getIdGioiTinh() {
 		return this.idGioiTinh;

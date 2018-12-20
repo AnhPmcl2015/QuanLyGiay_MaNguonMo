@@ -1,4 +1,4 @@
-package uit.controller;
+package com.shoe.controller;
 
 import com.shoe.converter.GiayConverter;
 import com.shoe.converter.ThongTinGiayConverter;
@@ -18,25 +18,25 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/admin/public/don-hang")
+@RequestMapping("/chi-tiet-giay")
 public class DonHangController {
 
 	@Autowired
 	private JpaGiay giayRepository;
-	
+
 	@Autowired
 	private JpaLoaiGiay loaiGiayRepository;
-	
+
 	@Autowired
 	private ThongTinGiayConverter thongTinGiayConverter;
 
 	@Autowired
 	private GiayConverter giayConverter;
 
-	@GetMapping("/chi-tiet-giay/thong-tin-giay/{id}")
+	@GetMapping("/thong-tin-giay/{id}")
 	public ResponseEntity<ThongTinGiayDto> getThongTinGiay(@PathVariable String id) {
 		Optional<Giay> optGiay = this.giayRepository.findById(Integer.parseInt(id));
-
+		System.out.println("running");
 		if (optGiay.isPresent()) {
 			Giay giay = optGiay.get();
 			giay.setChiTietGiays(giay.getChiTietGiays());
@@ -44,14 +44,14 @@ public class DonHangController {
 			this.thongTinGiayConverter.convertEntityToDto(giay, thongTinGiayDto);
 
 			if (thongTinGiayDto != null)
-				return new ResponseEntity<ThongTinGiayDto>(thongTinGiayDto, HttpStatus.OK);
+				return new ResponseEntity<>(thongTinGiayDto, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
-	@GetMapping("/chi-tiet-giay/thong-tin-giay/hang-san-xuat/{idHangGiay}")
+	@GetMapping("/thong-tin-giay/hang-san-xuat/{idHangGiay}")
 	public Collection<GiayDto> getListGiayNoiBat(@PathVariable String idHangGiay) {
-		
+
 		List<GiayDto> listGiayDto = new ArrayList<>();
 
 		for(Giay giay : giayRepository.findGiayBaseOnIdHangSanXuat(idHangGiay)) {
