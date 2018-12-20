@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/home")
+@RequestMapping
 public class TrangChuController {
 	@Autowired
 	private TenGiayConverter tenGiayConverter;
