@@ -17,8 +17,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+<<<<<<< HEAD:springboot-module/src/main/java/com/shoe/controller/DonHangController.java
 @RestController
 @RequestMapping("/admin/public/don-hang")
+=======
+@RestController()
+@RequestMapping("/chi-tiet-giay")
+@CrossOrigin(origins = "http://localhost:3000")
+>>>>>>> parent of c8518d3... update:ShoeStore/src/main/java/uit/controller/DonHangController.java
 public class DonHangController {
 
 	@Autowired
