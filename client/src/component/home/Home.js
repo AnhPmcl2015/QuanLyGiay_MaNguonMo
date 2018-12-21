@@ -42,6 +42,7 @@ class Home extends Component {
                 <h1 className="mt-5 mb-4 text-center">Bán chạy nhất</h1>
                 <hr/>
                 <CardShoe listGiay={this.props.giay.listGiayBanChay}/>
+                
             </React.Fragment>
         );
     }

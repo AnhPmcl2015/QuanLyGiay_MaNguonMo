@@ -21,8 +21,9 @@ class App extends Component {
                         <Route path='/chi-tiet-giay/:id' component={ShoeDetail}/>
                         <Route path='/thong-tin' component={Profile}/>
                     </Switch>
-                    <Footer/>
+                   
                 </div>
+                <Footer/>
             </React.Fragment>
         );
     }

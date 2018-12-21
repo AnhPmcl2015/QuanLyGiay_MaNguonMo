@@ -21,44 +21,44 @@ import java.util.Optional;
 @RequestMapping("/chi-tiet-giay")
 public class DonHangController {
 
-	@Autowired
-	private JpaGiay giayRepository;
+    @Autowired
+    private JpaGiay giayRepository;
 
-	@Autowired
-	private JpaLoaiGiay loaiGiayRepository;
+    @Autowired
+    private JpaLoaiGiay loaiGiayRepository;
 
-	@Autowired
-	private ThongTinGiayConverter thongTinGiayConverter;
+    @Autowired
+    private ThongTinGiayConverter thongTinGiayConverter;
 
-	@Autowired
-	private GiayConverter giayConverter;
+    @Autowired
+    private GiayConverter giayConverter;
 
-	@GetMapping("/thong-tin-giay/{id}")
-	public ResponseEntity<ThongTinGiayDto> getThongTinGiay(@PathVariable String id) {
-		Optional<Giay> optGiay = this.giayRepository.findById(Integer.parseInt(id));
-		System.out.println("running");
-		if (optGiay.isPresent()) {
-			Giay giay = optGiay.get();
-			giay.setChiTietGiays(giay.getChiTietGiays());
-			ThongTinGiayDto thongTinGiayDto = new ThongTinGiayDto();
-			this.thongTinGiayConverter.convertEntityToDto(giay, thongTinGiayDto);
+    @GetMapping("/thong-tin-giay/{id}")
+    public ResponseEntity<ThongTinGiayDto> getThongTinGiay(@PathVariable String id) {
+        Optional<Giay> optGiay = this.giayRepository.findById(Integer.parseInt(id));
+        System.out.println("running");
+        if (optGiay.isPresent()) {
+            Giay giay = optGiay.get();
+            giay.setChiTietGiays(giay.getChiTietGiays());
+            ThongTinGiayDto thongTinGiayDto = new ThongTinGiayDto();
+            this.thongTinGiayConverter.convertEntityToDto(giay, thongTinGiayDto);
 
-			if (thongTinGiayDto != null)
-				return new ResponseEntity<>(thongTinGiayDto, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}
+            if (thongTinGiayDto != null)
+                return new ResponseEntity<>(thongTinGiayDto, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 
-	@GetMapping("/thong-tin-giay/hang-san-xuat/{idHangGiay}")
-	public Collection<GiayDto> getListGiayNoiBat(@PathVariable String idHangGiay) {
+    @GetMapping("/thong-tin-giay/hang-san-xuat/{idHangGiay}")
+    public Collection<GiayDto> getListGiayNoiBat(@PathVariable String idHangGiay) {
 
-		List<GiayDto> listGiayDto = new ArrayList<>();
+        List<GiayDto> listGiayDto = new ArrayList<>();
 
-		for(Giay giay : giayRepository.findGiayBaseOnIdHangSanXuat(idHangGiay)) {
-			GiayDto giayDto = new GiayDto();
-			this.giayConverter.convertEntityToDto(giay, giayDto);
-			listGiayDto.add(giayDto);
-		}
-		return listGiayDto;
-	}
+        for (Giay giay : giayRepository.findGiayBaseOnIdHangSanXuat(idHangGiay)) {
+            GiayDto giayDto = new GiayDto();
+            this.giayConverter.convertEntityToDto(giay, giayDto);
+            listGiayDto.add(giayDto);
+        }
+        return listGiayDto;
+    }
 }
