@@ -20,6 +20,11 @@ class CardShoe extends Component {
     render() {
 
         var {listGiay} = this.props;
+
+        if(!listGiay || listGiay.length <= 0) {
+            return <div></div>;
+        }
+
         var eleListGiay = listGiay.map((giay, index) => {
             return (
                 <div className="col-md-6 col-lg-3 mt-2 " key={index}>
@@ -47,7 +52,7 @@ class CardShoe extends Component {
 
         return (
             <React.Fragment>
-                <div className="row">
+                <div className="row equal">
                     {eleListGiay}
                 </div>
 

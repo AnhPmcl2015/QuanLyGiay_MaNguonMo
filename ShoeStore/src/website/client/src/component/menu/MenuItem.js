@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class MenuItem extends Component {
 
@@ -21,6 +22,10 @@ class MenuItem extends Component {
             .then(data => this.setState({listLoaiGiay: data}));
     }
 
+    reload = () => {
+        window.location.reload();
+    }
+
     render() {
         var {hangSanXuat} = this.props;
 
@@ -28,8 +33,10 @@ class MenuItem extends Component {
             .state
             .listLoaiGiay
             .map((loaiGiay, index) => {
-                return <DropdownItem key={index}>
-                    <a href={loaiGiay.id}>{loaiGiay.tenLoaiGiay}</a>
+                return <DropdownItem key={index} onClick={this.reload}>
+                     <Link to={"/danh-sach/" + loaiGiay.id}>
+                         {loaiGiay.tenLoaiGiay}
+                     </Link>
                 </DropdownItem>
             })
 

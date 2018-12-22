@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import uit.entity.Giay;
+import uit.entity.GioiTinh;
+import uit.entity.LoaiGiay;
 
 @Repository
 public interface GiayRepository extends JpaRepository<Giay, Integer>{
@@ -23,4 +25,10 @@ public interface GiayRepository extends JpaRepository<Giay, Integer>{
 			"    where loaigiay.id_hang_san_xuat = :id_hang_san_xuat\r\n" + 
 			") order by giay.so_luong_ban desc limit 8;", nativeQuery=true)
 	List<Giay> findGiayBaseOnIdHangSanXuat(@Param("id_hang_san_xuat") String idHangSanXuat);
+	
+	List<Giay> findByLoaiGiay(LoaiGiay loaiGiay);
+	
+	List<Giay> findByGioiTinh(GioiTinh gioiTinh);
+	
+	List<Giay> findByGiaBanBetween(int min, int max);
 }

@@ -103,8 +103,6 @@ class ShoeDetail extends Component {
 
         return (
             <React.Fragment>
-                <Header/>
-                <Menu/>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
