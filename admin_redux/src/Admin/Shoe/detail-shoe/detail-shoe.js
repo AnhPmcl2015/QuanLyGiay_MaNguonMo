@@ -3,6 +3,7 @@ import { Button, Table, Icon, Radio, Col, Row, Popconfirm, message, Tooltip } fr
 import EditableCell, { EditableFormRow, EditableContext } from './edit-table-cell';
 import './detail-shoe.css';
 import { request } from '../../Common/APIUtils';
+import matchSorter  from 'match-sorter';
 class DetailShoe extends Component {
 
     state = {
@@ -91,7 +92,14 @@ class DetailShoe extends Component {
             } else {
                 value.size = row.size;
                 value.soluong = row.soluong;
-                console.log(value);
+                const listTemp = matchSorter(this.state.dataSource, value.size, {
+                    keys: ["size"]
+                })
+                if(listTemp.length > 1){
+                    message.warning('Đã tồn tại size này!');
+                    return;
+                }
+                
                 request({
                     url: "/admin/api/detail-shoe/save-chitietgiay",
                     method: "POST",
@@ -158,6 +166,7 @@ class DetailShoe extends Component {
         this.setState({ editingKey: selectedRow.idChiTietGiay });
     }
     render() {
+
         const cols = this.columns.map((col) => {
             if (!col.editable) {
                 return col;
