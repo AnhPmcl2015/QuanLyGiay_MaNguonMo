@@ -36,7 +36,6 @@ class Header extends Component {
         fetch("/api/ten-giay")
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 this.props.getListTenGiay(data)
             }).catch(e => {
                 console.log(e);
@@ -60,15 +59,14 @@ class Header extends Component {
                         <img id="logo" src="/images/logo.png" className="mr-3" alt="Không có hình ảnh" />
                         <SelectGiay listTenGiay={giay.listTenGiay} />
                     </div>
-
                     <div className="col-2 text-right">
                         <ul className="list-inline">
                             <li className="list-inline-item">
-                                <Badge count={5} className="float-right  mr-4">
+                                <Badge count={5} className="mr-4">
                                     <a className="icon-size"><Icon type="shopping-cart" /></a>
                                 </Badge>
                             </li>
-                            <li className="list-inline-item"> <Badge className="float-right" dot>
+                            <li className="list-inline-item"> <Badge dot>
                                 <a className="icon-size" key="yun" onClick={this.openLogin}> <Icon type="login" /></a>
                             </Badge></li>
                         </ul>

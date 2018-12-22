@@ -28,11 +28,11 @@ class Menu extends Component {
     }
 
     // lấy danh sách Loại giày
-     getListLoaiGiay() {
+     getListLoaiGiay = () => {
          fetch('/api/ten-giay')
             .then(response => response.json())
             .then(data =>{
-                console.log(data)
+                
                 this.props.getListLoaiGiay(data)
             });
     }
@@ -42,6 +42,7 @@ class Menu extends Component {
             .state
             .loaiGiay
             .map((giay, index) => {
+                console.log(giay)
                 return <MenuItem key={index} loaiGiay={giay}/>
             });
         return (

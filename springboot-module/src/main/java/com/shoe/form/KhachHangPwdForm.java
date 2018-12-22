@@ -9,13 +9,11 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class KhachHangInfoForm {
+public class KhachHangPwdForm {
 
     private String id;
     @NotEmpty
-    private String tenKhachHang;
+    private String oldPwd;
     @NotEmpty
-    private String soDienThoai;
-    @NotEmpty
-    private String diaChi;
+    private String newPwd;
 }

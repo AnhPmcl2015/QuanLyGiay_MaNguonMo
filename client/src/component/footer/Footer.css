@@ -26,4 +26,10 @@ hr {
   .link-footer:active {
     color: white;
   }
+.page-footer{
 
+
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

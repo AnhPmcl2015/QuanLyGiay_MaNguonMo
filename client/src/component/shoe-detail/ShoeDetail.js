@@ -56,7 +56,6 @@ class ShoeDetail extends Component {
             fetch(`/chi-tiet-giay/thong-tin-giay/${this.props.match.params.id}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     this.setState({ thongTinGiay: data, preIdGiay: data.idGiay })
                 });
         }
@@ -102,8 +101,6 @@ class ShoeDetail extends Component {
             }
             count = false;
         }
-
-
         return (
             <React.Fragment>
                 <nav aria-label="breadcrumb">

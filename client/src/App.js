@@ -80,18 +80,14 @@ class App extends Component {
         }
         return (
             <React.Fragment>
-                <Header />
-                <Affix offsetTop={0}>
-                    <Menu />
-                </Affix>
                 <BackTop />
-                <Header />
-                <Affix offsetTop={0}>
-                    <Menu />
-                </Affix>
                 <div className="container-fluid">
+                    <Header />
+                    <Affix offsetTop={0}>
+                        <Menu />
+                    </Affix>
                     <Switch>
-                        <Route path='/' exact={true} component={Home} />
+                        <Route path='/' exact component={Home} />
                         <Route path='/chi-tiet-giay/:id' component={ShoeDetail} />
                         <PrivateRoute path='/thong-tin' isAuthenticated={this.state.isAuthenticated}
                             currentUser={this.state.currentUser}
@@ -102,7 +98,6 @@ class App extends Component {
                         <Route path="/gio-hang" component={Cart} />
                         <Route path="/thanh-toan" component={Checkout} />
                     </Switch>
-
                 </div>
                 <Footer />
             </React.Fragment>

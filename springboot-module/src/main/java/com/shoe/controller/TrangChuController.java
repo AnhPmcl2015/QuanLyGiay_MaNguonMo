@@ -39,7 +39,6 @@ public class TrangChuController {
 		return listTenGiays;
 	}
 	
-	
 	@GetMapping("/api/list-giay-noi-bac")
 	public Collection<GiayDto> getListGiayNoiBat() {
 

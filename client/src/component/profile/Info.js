@@ -1,4 +1,4 @@
-import { Form, Input, Tooltip, Icon, Select, Button, Row, Col } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button, Row, Col, message } from 'antd';
 import React, { Component } from 'react';
 
 class Info extends Component {
@@ -8,10 +8,10 @@ class Info extends Component {
         return (
             <Row>
                 <Col lg={12}>
-                    <Form1 />
+                    <Form1 loggedUser={this.props.loggedUser} />
                 </Col>
                 <Col lg={12}>
-                    <Form2 />
+                    <Form2 loggedUser={this.props.loggedUser} />
                 </Col>
             </Row >
         );
@@ -27,39 +27,41 @@ class InfoForm extends Component {
         confirmDirty: false,
         autoCompleteResult: [],
     };
+    handleSaveInfo(form) {
 
+        const frm = {
+            diaChi: form.diaChi,
+            soDienThoai: form.soDienThoai,
+            tenKhachHang: form.tenKhachHang,
+            id: this.props.loggedUser.user.userId
+        }
+        fetch("/api/khach-hang/update-info", {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(frm)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    message.success('Cập nhật thông tin thành công')
+                } else {
+                    message.error('Cập nhật thông tin thất bại')
+                }
+            }).catch(e => {
+                console.log(e);
+            });
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.handleSaveInfo(values)
             } else {
-                console.log('ccc1111 ', values);
+               
             }
         });
-    }
-
-
-    handleConfirmBlur = (e) => {
-        const value = e.target.value;
-        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    }
-
-    compareToFirstPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && value !== form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
-        } else {
-            callback();
-        }
-    }
-
-    validateToNextPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
-        }
-        callback();
     }
 
     render() {
@@ -103,6 +105,7 @@ class InfoForm extends Component {
                     label="Họ tên"
                 >
                     {getFieldDecorator('tenKhachHang', {
+                        initialValue: this.props.loggedUser.tenKhachHang,
                         rules: [
                             { required: true, message: 'Họ và tên không được trống' },
                             { max: 100, message: "Số kí tự tối đa là 100!" }
@@ -116,6 +119,7 @@ class InfoForm extends Component {
                     label="Số điện thoại"
                 >
                     {getFieldDecorator('soDienThoai', {
+                        initialValue: this.props.loggedUser.soDienThoai + '',
                         rules: [
                             { required: true, message: 'Số điện thoại không được trống' },
                             { max: 10, message: "Số kí tự tối đa là 10!" }
@@ -129,12 +133,11 @@ class InfoForm extends Component {
                     label="Địa chỉ"
                 >
                     {getFieldDecorator('diaChi', {
+                        initialValue: this.props.loggedUser.diaChi,
                         rules: [{ required: true, message: 'Địa chỉ không được trống' },
                         { max: 500, message: "Số kí tự tối đa là 500!" }],
                     })(
-                        <div>
-                            <TextArea placeholder="" autosize={{ minRows: 2, maxRows: 6 }} />
-                        </div>
+                        <TextArea placeholder="" autosize={{ minRows: 2, maxRows: 6 }} />
                     )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
@@ -148,13 +151,42 @@ class InfoForm extends Component {
 
 class PasswordForm extends Component {
 
+
+    handleSavePwd(form) {
+
+        const frm = {
+            oldPwd: form.oldPwd,
+            newPwd: form.newPwd,
+            id: this.props.loggedUser.user.userId
+        }
+        fetch("/api/khach-hang/update-password", {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(frm)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    message.success('Thay đổi mật khẩu thành công!')
+                } else if (data.status === 'wrong') {
+                    message.error('Mật khẩu cũ không chính xác')
+                } else {
+
+                }
+            }).catch(e => {
+                console.log(e);
+            });
+    }
+
     handlePassword = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.handleSavePwd(values);
             } else {
-                console.log('ccc ', values);
+
             }
         });
     }
@@ -190,11 +222,11 @@ class PasswordForm extends Component {
                     {...formItemLayout}
                     label="Mật khẩu cũ"
                 >
-                    {getFieldDecorator('password', {
+                    {getFieldDecorator('oldPwd', {
                         rules: [{
-                            required: true, message: 'Please input your password!',
+                            required: true, message: 'Mật khẩu cũ không được rỗng',
                         }, {
-                            validator: this.validateToNextPassword,
+                            max: 45, message: 'Số kí tự tối đa là 45!'
                         }],
                     })(
                         <Input type="password" />
@@ -204,11 +236,12 @@ class PasswordForm extends Component {
                     {...formItemLayout}
                     label="Mật khẩu mới"
                 >
-                    {getFieldDecorator('confirm', {
+                    {getFieldDecorator('newPwd', {
                         rules: [{
-                            required: true, message: 'Please confirm your password!',
+                            required: true, message: 'Mật khẩu mới không được rỗng',
+
                         }, {
-                            validator: this.compareToFirstPassword,
+                            max: 45, message: 'Số kí tự tối đa là 45!'
                         }],
                     })(
                         <Input type="password" onBlur={this.handleConfirmBlur} />

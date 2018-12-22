@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/index';
-import Header from '../header/Header';
-import Menu from '../menu/Menu';
 import CarouselCustom from '../carousel/Carousel';
 import CardShoe from '../card-shoe/CardShoe';
+import './Home.css';
 
 class Home extends Component {
     constructor(props) {
@@ -30,24 +29,25 @@ class Home extends Component {
     }
 
     render() {
+
         return (
             <React.Fragment>
-                <CarouselCustom/>
+                <CarouselCustom />
                 <h1 className="mt-5 mb-4 text-center">Danh sách nổi bậc</h1>
-                <hr/>
-                <CardShoe listGiay={this.props.giay.listGiayNoiBac}/>
+                <hr />
+                <CardShoe listGiay={this.props.giay.listGiayNoiBac} />
 
                 <h1 className="mt-5 mb-4 text-center">Bán chạy nhất</h1>
-                <hr/>
-                <CardShoe listGiay={this.props.giay.listGiayBanChay}/>
-                
+                <hr />
+                <CardShoe listGiay={this.props.giay.listGiayBanChay} />
+
             </React.Fragment>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return {giay: state.giay}
+    return { giay: state.giay }
 };
 
 const mapDispatchToProps = (dispatch, props) => {

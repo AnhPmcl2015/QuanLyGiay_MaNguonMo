@@ -37,7 +37,6 @@ public class UserController {
 	}
 
 	@GetMapping("/me")
-	@PreAuthorize("hasRole('ADMIN')")
 	public KhachHangDTO getCurrentUser(@CurrentUser UserPrinciple currentUser) {
 		KhachHangDTO khachHang = new KhachHangDTO();
 		khachHang = khachHangDAO.getKhachHangByUser(currentUser.getId());
