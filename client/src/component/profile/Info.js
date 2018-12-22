@@ -129,7 +129,8 @@ class InfoForm extends Component {
                     label="Địa chỉ"
                 >
                     {getFieldDecorator('diaChi', {
-                        rules: [{ required: true, message: 'Địa chỉ không được trống' }],
+                        rules: [{ required: true, message: 'Địa chỉ không được trống' },
+                        { max: 500, message: "Số kí tự tối đa là 500!" }],
                     })(
                         <div>
                             <TextArea placeholder="" autosize={{ minRows: 2, maxRows: 6 }} />
