@@ -1,0 +1,13 @@
+com\shoe\entities\Giay_.class
+com\shoe\entities\DonHang_.class
+com\shoe\entities\HangSanXuat_.class
+com\shoe\entities\TinhTrangDonHang_.class
+com\shoe\entities\ChiTietDonHang_.class
+com\shoe\entities\ChiTietGiay_.class
+com\shoe\entities\KhachHang_.class
+com\shoe\entities\User_.class
+com\shoe\entities\LoaiGiay_.class
+com\shoe\entities\GioiTinh_.class
+com\shoe\entities\PhieuNhap_.class
+com\shoe\entities\ChiTietPhieuNhap_.class
+com\shoe\entities\Role_.class
