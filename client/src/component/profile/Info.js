@@ -1,11 +1,19 @@
-import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button, Row, Col } from 'antd';
 import React, { Component } from 'react';
 
 class Info extends Component {
     render() {
-        const AntWrappedLoginForm = Form.create()(InfoForm)
+        const Form1 = Form.create()(InfoForm);
+        const Form2 = Form.create()(PasswordForm);
         return (
-            <AntWrappedLoginForm />
+            <Row>
+                <Col lg={12}>
+                    <Form1 />
+                </Col>
+                <Col lg={12}>
+                    <Form2 />
+                </Col>
+            </Row >
         );
     }
 }
@@ -25,9 +33,12 @@ class InfoForm extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+            } else {
+                console.log('ccc1111 ', values);
             }
         });
     }
+
 
     handleConfirmBlur = (e) => {
         const value = e.target.value;
@@ -53,7 +64,7 @@ class InfoForm extends Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        
+
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -67,12 +78,12 @@ class InfoForm extends Component {
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
-                    span: 24,
+                    span: 18,
                     offset: 0,
                 },
                 sm: {
-                    span: 24,
-                    offset: 16,
+                    span: 9,
+                    offset: 15,
                 },
             },
         };
@@ -85,48 +96,98 @@ class InfoForm extends Component {
         );
 
         return (
+
             <Form onSubmit={this.handleSubmit}>
                 <FormItem
                     {...formItemLayout}
-                    label={(
-                        <span>
-                            Tên tài khoản&nbsp;
-                            <Tooltip title="Tài khoản dùng đê đăng nhập">
-                                <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
-                    )}
+                    label="Họ tên"
                 >
-                    {getFieldDecorator('nickname', {
-                        rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+                    {getFieldDecorator('tenKhachHang', {
+                        rules: [
+                            { required: true, message: 'Họ và tên không được trống' },
+                            { max: 100, message: "Số kí tự tối đa là 100!" }
+                        ],
                     })(
-                        <Input />
+                        <Input style={{ width: '100%' }} />
                     )}
                 </FormItem>
                 <FormItem
                     {...formItemLayout}
-                    label={(
-                        <span>
-                            E-mail&nbsp;
-                            <Tooltip title="Email nhận thông tin promotion hoặc thông tin đơn hàng">
-                                <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
-                    )}
+                    label="Số điện thoại"
                 >
-                    {getFieldDecorator('email', {
-                        rules: [{
-                            type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
+                    {getFieldDecorator('soDienThoai', {
+                        rules: [
+                            { required: true, message: 'Số điện thoại không được trống' },
+                            { max: 10, message: "Số kí tự tối đa là 10!" }
+                        ],
                     })(
-                        <Input />
+                        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     )}
                 </FormItem>
                 <FormItem
                     {...formItemLayout}
-                    label="Mật khẩu"
+                    label="Địa chỉ"
+                >
+                    {getFieldDecorator('diaChi', {
+                        rules: [{ required: true, message: 'Địa chỉ không được trống' }],
+                    })(
+                        <div>
+                            <TextArea placeholder="" autosize={{ minRows: 2, maxRows: 6 }} />
+                        </div>
+                    )}
+                </FormItem>
+                <FormItem {...tailFormItemLayout}>
+
+                    <Button type="primary" htmlType="submit">Lưu</Button>
+                </FormItem>
+            </Form>
+        );
+    }
+}
+
+class PasswordForm extends Component {
+
+    handlePassword = (e) => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            } else {
+                console.log('ccc ', values);
+            }
+        });
+    }
+
+    render() {
+        const { getFieldDecorator } = this.props.form;
+
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 7 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 10 },
+            },
+        };
+        const tailFormItemLayout = {
+            wrapperCol: {
+                xs: {
+                    span: 18,
+                    offset: 0,
+                },
+                sm: {
+                    span: 9,
+                    offset: 15,
+                },
+            },
+        };
+        return (
+            <Form onSubmit={this.handlePassword}>
+                <FormItem
+                    {...formItemLayout}
+                    label="Mật khẩu cũ"
                 >
                     {getFieldDecorator('password', {
                         rules: [{
@@ -140,7 +201,7 @@ class InfoForm extends Component {
                 </FormItem>
                 <FormItem
                     {...formItemLayout}
-                    label="Xác nhận mật khẩu"
+                    label="Mật khẩu mới"
                 >
                     {getFieldDecorator('confirm', {
                         rules: [{
@@ -152,35 +213,13 @@ class InfoForm extends Component {
                         <Input type="password" onBlur={this.handleConfirmBlur} />
                     )}
                 </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="Số điện thoại"
-                >
-                    {getFieldDecorator('phone', {
-                        rules: [{ required: true, message: 'Please input your phone number!' }],
-                    })(
-                        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-                    )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="Địa chỉ"
-                >
-                    {getFieldDecorator('website', {
-                        rules: [{ required: true, message: 'Please input website!' }],
-                    })(
-                        <div>
-                            <TextArea placeholder="" autosize={{ minRows: 2, maxRows: 6 }} />
-                        </div>
-                    )}
-                </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                    
                     <Button type="primary" htmlType="submit">Lưu</Button>
                 </FormItem>
             </Form>
         );
     }
-}
+
+};
 
 export default Info;

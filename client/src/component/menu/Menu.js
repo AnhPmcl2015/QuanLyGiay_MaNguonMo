@@ -20,19 +20,21 @@ class Menu extends Component {
         });
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
         if (this.props.giay.listLoaiGiay.length === 0) {
-
-            this.getListLoaiGiay();
+            await this.getListLoaiGiay();
         }
     }
 
     // lấy danh sách Loại giày
-    async getListLoaiGiay() {
-        await fetch('/api/ten-giay')
+     getListLoaiGiay() {
+         fetch('/api/ten-giay')
             .then(response => response.json())
-            .then(data => this.props.getListLoaiGiay(data));
+            .then(data =>{
+                console.log(data)
+                this.props.getListLoaiGiay(data)
+            });
     }
 
     render() {

@@ -24,7 +24,7 @@ class UploadImg extends Component {
     componentWillReceiveProps(myprops) {
         const imgs = myprops.ImageShoe.giayInfo;
         const pictures = this.state.pictures;
-        if (imgs.img1 !== null && imgs.img1  !== "") {
+        if (imgs.img1 !== null && imgs.img1 !== "") {
             this.setState({
                 pictures: [imgs.img1, imgs.img2, imgs.img3, imgs.img4, ...pictures]
             })
@@ -51,13 +51,13 @@ class UploadImg extends Component {
 
     }
 
-     onUpload = ()  => {
+    onUpload = () => {
 
         if (this.state.pictures.length == 0) {
             message.warning('Hình ảnh không được rỗng!')
             return;
         }
-        if(this.state.pictures.length < 4){
+        if (this.state.pictures.length < 4) {
             message.warning('Phải tải lên đúng 4 tấm ảnh!')
             return;
         }
@@ -68,16 +68,16 @@ class UploadImg extends Component {
             let data = new FormData();
             let count = 0;
             this.state.pictures.forEach(i => {
-                
+
                 if (typeof i == "object") {
-                    data.append("filepart",i)
+                    data.append("filepart", i)
                     count++;
                 } else {
                     data.append("file", i);
                 }
             })
 
-            if(count === 4){
+            if (count === 4) {
                 data.append("file", null);
             }
             data.append("idGiay", this.state.oldImgs.id);
@@ -99,7 +99,11 @@ class UploadImg extends Component {
                     error => {
                         console.log("Lỗi upload ảnh " + error);
                     }
-                );
+                ).catch(error => {
+                    if (error.status === 401) {
+                        this.props.handleLogout('/login', 'error', 'Hết phiên đăng nhập');
+                    }
+                });
         } else {
             message.warning('Chỉ tải lên tối đa 4 tấm ảnh')
         }

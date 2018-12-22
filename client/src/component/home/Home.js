@@ -32,8 +32,6 @@ class Home extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header/>
-                <Menu/>
                 <CarouselCustom/>
                 <h1 className="mt-5 mb-4 text-center">Danh sách nổi bậc</h1>
                 <hr/>

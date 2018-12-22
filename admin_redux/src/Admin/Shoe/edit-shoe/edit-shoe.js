@@ -101,12 +101,6 @@ class EditShoe extends Component {
     ));
     return (
       <div>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <Link to="/danh-sach-giay"> Danh sách giày </Link>
-          </BreadcrumbItem>
-          <BreadcrumbItem active> Thêm giày </BreadcrumbItem>
-        </Breadcrumb>
         <EditShoeForm optionGender={optionsGT} optionCompany={optionCom} editForm={this.state.form}/>    
       </div>
     );

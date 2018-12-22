@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1414b5a-8180-4f0d-a34f-1105fc365f89" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/KhachHangController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shoe/form/KhachHangInfoForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/edit-shoe/edit-shoe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/edit-shoe/edit-shoe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/list-shoe/list-shoe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/list-shoe/list-shoe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/upload-img/upload-img.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Shoe/upload-img/upload-img.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin_redux/src/Admin/Statistics/statistics-revenue.js" beforeDir="false" afterPath="$PROJECT_DIR$/../admin_redux/src/Admin/Statistics/statistics-revenue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/footer/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/footer/footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/header/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/header/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/menu/Menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/profile/Info.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/profile/Info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/profile/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/component/shoe-detail/ShoeDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/component/shoe-detail/ShoeDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/TrangChuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/TrangChuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,32 +67,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/Inititalizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+            <state relative-caret-position="36">
+              <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/ThongKeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/PhieuNhapControllerAPI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -82,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+            <state relative-caret-position="190">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,20 +88,53 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/KhachHangController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="55" column="62" lean-forward="true" selection-start-line="55" selection-start-column="62" selection-end-line="55" selection-end-column="62" />
+            <state relative-caret-position="266">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/TrangChuController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/form/KhachHangInfoForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+            <state relative-caret-position="245">
+              <caret line="14" column="31" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/form/GiayForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/khach_hang">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/users">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -125,8 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/shoe/dao/GiayDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shoe/dao/ChiTietGiayDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/dao/ChiTietDonHangDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/form/ChiTietGiayForm.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/converter/ChiTietGiayConverter.java" />
@@ -155,7 +183,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/jpa/UserRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/converter/ChiTietDonHangConverter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/converter/DonHangConverter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/dto/DoanhThuDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/controller/GiayController.java" />
@@ -173,9 +200,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/entities/ChiTietDonHang.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/Inititalizer.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shoe/controller/TrangChuController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shoe/controller/TrangChuController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shoe/controller/KhachHangController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shoe/form/KhachHangInfoForm.java" />
       </list>
     </option>
   </component>
@@ -257,16 +287,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="shoe" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="web-app-module" type="b2602c69:ProjectViewProjectNode" />
-              <item name="springboot-module" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="shoe" type="462c0819:PsiDirectoryNode" />
-              <item name="security" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="web-app-module" type="b2602c69:ProjectViewProjectNode" />
@@ -274,12 +295,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="web-app-module" type="b2602c69:ProjectViewProjectNode" />
-              <item name="springboot-module" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -296,7 +311,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545307964028" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545452050033" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/QuanLyGiay_MaNguonMo-TheAnh/QuanLyGiay_MaNguonMo-TheAnh/ShoeStore" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -372,12 +387,13 @@
       <workItem from="1545227199503" duration="9884000" />
       <workItem from="1545305027828" duration="3167000" />
       <workItem from="1545315412740" duration="5698000" />
-      <workItem from="1545395234350" duration="1260000" />
+      <workItem from="1545395234350" duration="3179000" />
+      <workItem from="1545442277994" duration="7132000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161463000" />
+    <option name="totallyTimeSpent" value="170514000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -392,7 +408,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21610738" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21879195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -422,7 +438,7 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.18724832" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.16442953" />
+      <window_info active="true" anchor="right" id="Database" order="6" visible="true" weight="0.16442953" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Bean Validation" order="9" />
@@ -437,13 +453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/khach_hang">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -483,13 +492,6 @@
       </provider>
     </entry>
     <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/hang_san_xuat">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/loai_giay">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -559,13 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/roles">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -577,13 +572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangControllerAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
@@ -601,19 +589,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/Inititalizer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/dto/GiayDto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="188">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="53" column="13" lean-forward="true" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/loai_giay">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/TrangChuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="52" column="5" lean-forward="true" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/dto/DoanhThuDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/shoe/entities/KhachHang.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/PhieuNhapControllerAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/ThongKeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
+        <state relative-caret-position="378">
           <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -621,34 +648,92 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/PhieuNhapControllerAPI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/Inititalizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/TrangChuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+        <state relative-caret-position="36">
+          <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/WebSecurityConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/jwtauthentication/security/services/CurrentUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="55" column="62" lean-forward="true" selection-start-line="55" selection-start-column="62" selection-end-line="55" selection-end-column="62" />
+        <state relative-caret-position="152">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/payload/UserSummary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="37" column="15" lean-forward="true" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangControllerAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-665">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/DonHangController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/controller/KhachHangController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/form/GiayForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/users">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shoe/form/KhachHangInfoForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://829acc5a-34dc-4933-b445-62f96b763b39/schema/quanlygiay/table/khach_hang">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>

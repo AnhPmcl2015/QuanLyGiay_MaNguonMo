@@ -76,7 +76,11 @@ class StatisticsRevenue extends Component {
                 error => {
                     console.log("Lỗi get doanh thu " + error);
                 }
-            );
+            ).catch(error => {
+                if (error.status === 401) {
+                    this.props.handleLogout('/login', 'error', 'Hết phiên đăng nhập');
+                }
+            });;
     }
     getTongDoanhThu = (year) => {
         request({
@@ -94,7 +98,11 @@ class StatisticsRevenue extends Component {
                 error => {
                     console.log("Lỗi get tong doanh thu " + error);
                 }
-            );
+            ).catch(error => {
+                if (error.status === 401) {
+                    this.props.handleLogout('/login', 'error', 'Hết phiên đăng nhập');
+                }
+            });;
     }
     getThangTrongDonHang = () => {
         request({
@@ -111,7 +119,11 @@ class StatisticsRevenue extends Component {
                 error => {
                     console.log("Lỗi get thang trong don hang " + error);
                 }
-            );
+            ).catch(error => {
+                if (error.status === 401) {
+                    this.props.handleLogout('/login', 'error', 'Hết phiên đăng nhập');
+                }
+            });;
     }
     getDoanhThuHSX = (date) => {
         request({
@@ -129,7 +141,11 @@ class StatisticsRevenue extends Component {
                 error => {
                     console.log("Lỗi get thang trong don hang " + error);
                 }
-            );
+            ).catch(error => {
+                if (error.status === 401) {
+                    this.props.handleLogout('/login', 'error', 'Hết phiên đăng nhập');
+                }
+            });;
     }
     getSoLuongGiayBan = () => {
         request({
@@ -139,7 +155,7 @@ class StatisticsRevenue extends Component {
         })
             .then(
                 result => {
-                    
+
                     this.setState({
                         soLuongGiayBan: result
                     })
@@ -147,7 +163,11 @@ class StatisticsRevenue extends Component {
                 error => {
                     console.log("Lỗi get so luong giay ban trong tuan: " + error);
                 }
-            );
+            ).catch(error => {
+                if (error.status === 401) {
+                    this.props.handleLogout('/login', 'error', 'Hết phiên đăng nhập');
+                }
+            });;
     }
     render() {
         const divStyle = {

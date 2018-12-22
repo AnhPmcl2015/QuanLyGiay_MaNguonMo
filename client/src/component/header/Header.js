@@ -5,9 +5,24 @@ import SelectGiay from './SelectGiay';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/index';
 import { list_giay_ban_chay } from './../../redux/actions/index';
+import { Icon, Badge, Modal, Col, Row, Button, Input } from 'antd';
 
 class Header extends Component {
 
+    state = {
+        count: 0,
+        isOpenModal: false,
+    }
+    openLogin = () => {
+        this.setState({
+            isOpenModal: true
+        })
+    }
+    handleCancel = () => {
+        this.setState({
+            isOpenModal: false
+        })
+    }
     async componentDidMount() {
 
         if (this.props.giay.listTenGiay.length === 0) {
@@ -25,8 +40,7 @@ class Header extends Component {
                 this.props.getListTenGiay(data)
             }).catch(e => {
                 console.log(e);
-            })
-
+            });
     }
 
     handleChange = (value) => {
@@ -39,28 +53,60 @@ class Header extends Component {
     render() {
 
         var { giay } = this.props;
-        // console.log(giay)
-        if (giay.listGiayBanChay.length === 0) {
-            return <div>Loading...</div>
-        }
         return (
-
             <React.Fragment>
                 <header className="row align-items-center">
                     <div className="col-10">
                         <img id="logo" src="/images/logo.png" className="mr-3" alt="Không có hình ảnh" />
-                        <SelectGiay listTenGiay={giay.listTenGiay}/>
+                        <SelectGiay listTenGiay={giay.listTenGiay} />
                     </div>
 
                     <div className="col-2 text-right">
                         <ul className="list-inline">
-                            <li className="list-inline-item">Đăng nhập |</li>
-                            <li className="list-inline-item">$0
-                                <i className="fa fa-arrow-down"></i>
+                            <li className="list-inline-item">
+                                <Badge count={5} className="float-right  mr-4">
+                                    <a className="icon-size"><Icon type="shopping-cart" /></a>
+                                </Badge>
                             </li>
+                            <li className="list-inline-item"> <Badge className="float-right" dot>
+                                <a className="icon-size" key="yun" onClick={this.openLogin}> <Icon type="login" /></a>
+                            </Badge></li>
                         </ul>
                     </div>
                 </header>
+                <Modal
+                    visible={this.state.isOpenModal}
+                    title="Đăng nhập"
+                    //  onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    footer={[
+                        <div></div>
+                    ]}
+                >
+                    <Row>
+                        <Col>
+                            <label>Tài khoản</label>
+                            <Input placeholder="" />
+                        </Col>
+                        <Col>
+                            <label className="mt-2">Mật khẩu</label>
+                            <Input placeholder="" type="password" />
+                        </Col>
+                        <Col>
+                            <Button className="mt-2">Đăng nhập</Button>
+                        </Col>
+                        {/* <Col>
+                            <div align="center" className="mt-2">
+                                <a href="#">Quên mật khẩu</a>
+                            </div>
+                        </Col> */}
+                        <Col>
+                            <div align="center" className="mt-2">
+                                <a href="#">Chưa có tài khoản/đăng ký</a>
+                            </div>
+                        </Col>
+                    </Row>
+                </Modal>
             </React.Fragment>
         );
     }

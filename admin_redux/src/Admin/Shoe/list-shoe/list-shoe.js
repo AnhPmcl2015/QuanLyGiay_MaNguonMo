@@ -117,13 +117,7 @@ class ListShoe extends Component {
       loaiGiay: loaiGiay
     });
   }
-  // filter(value) {
-  //   return value
-  //     ? matchSorter(this.state.items, value, {
-  //       keys: ["maGiay", "tenGiay"]
-  //     })
-  //     : this.state.items;
-  // }
+
   filterWithConditions(tenGiay, gioiTinh, nhaSanXuat, loaiGiay) {
     let listTemp = this.state.items;
     if (tenGiay) {
@@ -176,7 +170,11 @@ class ListShoe extends Component {
         error => {
           console.log("Lỗi đăng nhập " + error);
         }
-      );
+      ).catch(error =>{
+        if(error.status === 401){
+          this.props.handleLogout('/login', 'error','Hết phiên đăng nhập');
+        }
+      });
   }
   onEdit = value => {
     this.props.GetGiayById(value.idGiay);

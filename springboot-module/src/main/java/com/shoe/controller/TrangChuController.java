@@ -30,9 +30,11 @@ public class TrangChuController {
 	public Collection<TenGiayDto> getTenGiay() {
 		List<TenGiayDto> listTenGiays = new ArrayList<>();
 		giayRepository.findAll().forEach(giay->{
-			TenGiayDto tenGiayDto = new TenGiayDto();
-			this.tenGiayConverter.convertEntityToDto(giay, tenGiayDto);
-			listTenGiays.add(tenGiayDto);
+			if(!giay.getXoaFlag()){
+				TenGiayDto tenGiayDto = new TenGiayDto();
+				this.tenGiayConverter.convertEntityToDto(giay, tenGiayDto);
+				listTenGiays.add(tenGiayDto);
+			}
 		});
 		return listTenGiays;
 	}

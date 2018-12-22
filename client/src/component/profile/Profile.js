@@ -18,8 +18,6 @@ class Profile extends Component {
         return (
 
             <div>
-                <Header/>
-                <Menu/>
                 <Tabs
                     defaultActiveKey="1"
                     tabPosition="left"
@@ -29,9 +27,9 @@ class Profile extends Component {
                     <TabPane tab="Thông tin" key="1">
                         <Info/>
                     </TabPane>
-                    <TabPane tab="Quản lý địa chỉ" key="2">
+                    {/* <TabPane tab="Quản lý địa chỉ" key="2">
                         <Address/>
-                    </TabPane>
+                    </TabPane> */}
                     <TabPane tab="Đơn hàng" key="3">
                         <Order/>
                     </TabPane>

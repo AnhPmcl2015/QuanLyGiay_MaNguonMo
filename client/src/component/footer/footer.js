@@ -18,7 +18,6 @@ class Footer extends Component {
                             <hr className="clearfix w-100 d-md-none pb-3" />
                             <div className="col-md-3 mb-md-0 mb-3">
 
-
                                 <h5 className="text-uppercase text-color">FAQ</h5>
 
                                 <ul className="list-unstyled">
@@ -50,12 +49,8 @@ class Footer extends Component {
                                         <p>Gặp vấn đề về chất lượng sản phẩm hoặc vận chuyển vui lòng liên hệ (028) 7307 1441</p>
                                     </li>
                                 </ul>
-
                             </div>
-
-
                         </div>
-
                     </div>
                     <hr />
                     <div className="container-fluid text-left">

@@ -36,7 +36,6 @@ public class DonHangController {
     @GetMapping("/thong-tin-giay/{id}")
     public ResponseEntity<ThongTinGiayDto> getThongTinGiay(@PathVariable String id) {
         Optional<Giay> optGiay = this.giayRepository.findById(Integer.parseInt(id));
-        System.out.println("running");
         if (optGiay.isPresent()) {
             Giay giay = optGiay.get();
             giay.setChiTietGiays(giay.getChiTietGiays());
