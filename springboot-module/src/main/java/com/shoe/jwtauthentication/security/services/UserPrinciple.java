@@ -46,7 +46,7 @@ public class UserPrinciple implements UserDetails {
         ).collect(Collectors.toList());
 
         return new UserPrinciple(
-                user.getUser_id(),
+                user.getUserId(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getRoles(),

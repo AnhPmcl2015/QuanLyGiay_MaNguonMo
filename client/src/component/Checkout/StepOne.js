@@ -1,42 +1,60 @@
 import './Checkout.css';
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button, Radio } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
 
-class RegistrationForm extends Component {
+class AddressForm extends Component {
     state = {
         customer: {
-            email: 'dieu556@gmail.com',
-            name: 'Nguyễn Tấn Diệu',
-            phone: '0822970000',
-            address: 'Gò Vấp, HCM',
+            email: '',
+            name: '',
+            phone: '',
+            address: '',
         },
+        shipMethod: 'normal',
         isValid: false
     };
 
-    onChange = (e) => {
+    onChangeShipMethod = (e) => {
+        this.setState({
+            shipMethod: e.target.value,
+        });
+    }
+
+    next = (e) => {
         e.preventDefault();
+        const shipMethod = this.state.shipMethod;
         this.props.form.validateFields((err, values) => {
             if (err) {
-                this.setState({ isValid: false })
+                this.setState({ customer: values, isValid: false })
+                this.props.handlerNext(values, false, shipMethod);
             } else {
                 this.setState({ customer: values, isValid: true })
+                this.props.handlerNext(values, true, shipMethod);
             }
         });
     }
 
+    componentWillMount() { }
+
     componentDidMount() {
-        const { customer } = this.state;
-        this.props.form.setFieldsValue({ 'email': customer.email });
-        this.props.form.setFieldsValue({ 'name': customer.name })
-        this.props.form.setFieldsValue({ 'phone': customer.phone })
-        this.props.form.setFieldsValue({ 'address': customer.address })
+        const { customer } = this.props;
+        if (customer !== null) {
+            this.props.form.setFieldsValue({
+                'email': customer.email,
+                'name': customer.name,
+                'phone': customer.phone,
+                'address': customer.address
+            });
+        }
     }
 
     render() {
+        const { shipMethod } = this.state;
+        const { selectedShipMethod } = this.props;
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
             labelCol: {
@@ -56,7 +74,6 @@ class RegistrationForm extends Component {
                 <Option value="84">+84</Option>
             </Select>
         );
-
         return (
             <Form onSubmit={this.handleSubmit}>
                 <FormItem
@@ -77,7 +94,7 @@ class RegistrationForm extends Component {
                             required: true, message: 'Email không được trống!',
                         }],
                     })(
-                        <Input onChange={this.onChange} />
+                        <Input />
                     )}
                 </FormItem>
 
@@ -88,7 +105,7 @@ class RegistrationForm extends Component {
                     {getFieldDecorator('name', {
                         rules: [{ required: true, message: 'Tên không được trống!', whitespace: true }],
                     })(
-                        <Input onChange={this.onChange} />
+                        <Input />
                     )}
                 </FormItem>
 
@@ -100,7 +117,7 @@ class RegistrationForm extends Component {
                             required: true, message: 'Số điện thoại không được trống!',
                         }],
                     })(
-                        <Input addonBefore={prefixSelector} style={{ width: '100%' }} onChange={this.onChange} />
+                        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     )}
                 </FormItem>
                 <FormItem
@@ -109,39 +126,34 @@ class RegistrationForm extends Component {
                     {getFieldDecorator('address', {
                         rules: [{ required: true, message: 'Địa chỉ không được trống!', whitespace: true }],
                     })(
-                        <TextArea placeholder="Địa chỉ nhận hàng" autosize={{ minRows: 2, maxRows: 6 }} onChange={this.onChange} />
+                        <TextArea placeholder="Địa chỉ nhận hàng" autosize={{ minRows: 2, maxRows: 6 }} />
                     )}
                 </FormItem>
+
+                <div style={{ textAlign: 'center' }}>
+                    <h5>Chọn hình thức giao hàng</h5>
+                    <Radio.Group onChange={this.onChangeShipMethod} defaultValue={selectedShipMethod} buttonStyle="solid">
+                        <Radio.Button value="default">Mặc định</Radio.Button>
+                        <Radio.Button value="normal">Tiêu chuẩn</Radio.Button>
+                        <Radio.Button value="fast">Nhanh</Radio.Button>
+                    </Radio.Group>
+                    <br />
+                    {shipMethod === 'default' &&
+                        <p>Hình thức giao hàng mặc định ..... </p>
+                    }
+                    {shipMethod === 'normal' &&
+                        <p>Hình thức giao hàng tiêu chuẩn ..... </p>
+                    }
+                    {shipMethod === 'fast' &&
+                        <p>Hình thức giao hàng nhanh ..... </p>
+                    }
+                </div>
+                <Button type="primary" onClick={this.next} className="float-right">Bước tiếp</Button>
             </Form>
         );
     }
 }
 
-class StepOne extends Component {
-    state = {
-        isValid: false,
-        test: 'child content'
-    }
-
-    onChange = (e) => {
-        console.log('change');
-    }
-
-    handler = () => {
-        console.log('click child');
-        this.props.handler();
-        console.log(this.props.test);
-    }
-
-    render() {
-        const WrappedRegistrationForm = Form.create()(RegistrationForm);
-        return (
-            <div>
-                <Button onClick={this.handler}>abc</Button>
-                <WrappedRegistrationForm onChange={this.onChange}/>
-            </div>
-        );
-    }
-}
-
+const StepOne = Form.create()(AddressForm);
 export default StepOne;
+

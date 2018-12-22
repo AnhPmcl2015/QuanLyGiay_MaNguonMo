@@ -12,7 +12,7 @@ import ListShoe from './Admin/Shoe/list-shoe/list-shoe';
 import BadRequest from './Admin/Common/BadRequest/bad-request';
 import { getCurrentUser } from './Admin/Common/UserAPI/UserAPI';
 import { ACCESS_TOKEN } from './Admin/Common/Constant/common';
-import { notification, Col } from 'antd';
+import { notification } from 'antd';
 import Login from './Admin/Login/Login';
 import Invoice from './Admin/Invoice/Invoice';
 import PrivateRoute from './PrivateRoute';
@@ -20,6 +20,8 @@ import LoadingIndicator from './Admin/Common/LoadingIndicator/LoadingIndicator';
 import GoodsReceipt from './Admin/GoodsReceipt/GoodsReceipt';
 import UploadImg from "./Admin/Shoe/upload-img/upload-img";
 import StatisticsRevenue from "./Admin/Statistics/statistics-revenue";
+import Signup from './Admin/Signup/Signup';
+import NotFound from './Admin/Common/NotFound/NotFound';
 
 notification.config({
   placement: 'topRight',
@@ -115,14 +117,15 @@ class App extends Component {
               handleLogout={this.handleLogout}
             />
             <PrivateRoute path="/admin/danh-sach-giay" component={ListShoe} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} />
-            <PrivateRoute path="/hoadon" component={Invoice} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} />
-            <PrivateRoute path="/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated}></PrivateRoute>
+            <Route path="/dang-ky" component={Signup} />
+            <PrivateRoute path="/don-hang" component={Invoice} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
+            <PrivateRoute path="/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
             <PrivateRoute
               path={["/admin/trang-chu", "/"]}
               authenticated={this.state.isAuthenticated}
               component={StatisticsRevenue}
             />
-            <Route component={BadRequest} />
+            <Route component={NotFound} />
           </Switch>
         </div>
 

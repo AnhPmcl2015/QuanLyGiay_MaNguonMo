@@ -1,6 +1,6 @@
 import './Checkout.css';
 import React, { Component } from 'react';
-import { Collapse, Badge, Icon, Button } from 'antd';
+import { Collapse, Icon, Button, message } from 'antd';
 
 const Panel = Collapse.Panel;
 class StepTwo extends Component {
@@ -12,6 +12,15 @@ class StepTwo extends Component {
         this.setState({
             paymentMethod: key,
         });
+        console.log(key);
+    }
+
+    next = (e) => {
+        const {paymentMethod} = this.state;
+        if (paymentMethod != null)
+            this.props.handlerNext(null, null, null, paymentMethod);
+        else 
+            message.error('Vui lòng chọn hình thức thanh toán');
     }
 
     render() {
@@ -36,8 +45,8 @@ class StepTwo extends Component {
                         Bạn có thể kiểm tra và thanh toán khi nhận hàng.
                     </Panel>
                 </Collapse>
-
                 <br />
+                <Button type="primary" onClick={this.next} className="float-right">Bước tiếp</Button>
             </div >
         );
     }

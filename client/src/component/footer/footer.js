@@ -55,7 +55,7 @@ class Footer extends Component {
                     <hr />
                     <div className="container-fluid text-left">
                         <div className="row">
-                            <div class="col-md-8">
+                            <div className="col-md-8">
                                 <span>Địa chỉ đăng ký kinh doanh: 10 Nguyễn Văn Cừ, P.1, Q.1, TpHCM - Điện thoại: 028 3868 4857</span>
                                 <br />
                                 <span>Giấy CNĐKDN: 0310874914 – Ngày cấp: 25/11/2011 - Cơ quan cấp: Phòng Đăng Ký Kinh Doanh – Sở Kế Hoạch và Đầu Tư TP.HCM</span>
