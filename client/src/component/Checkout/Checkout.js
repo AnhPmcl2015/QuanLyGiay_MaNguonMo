@@ -1,6 +1,6 @@
 import './Checkout.css';
 import React, { Component } from 'react';
-import { Steps, Button, message, Card, Col, Row, Alert, List, Avatar, Modal } from 'antd';
+import { Steps, Button, message, Card, Col, Row, Alert, List, Avatar, Modal, notification } from 'antd';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
@@ -8,8 +8,8 @@ import { database } from '../../firebase';
 import moment from 'moment';
 import moneyUtil from '../../common/Utils/ParseMoney';
 import { getShoe } from '../Cart/CartAPI';
-import { getCurrentUser } from '../../common/UserAPI/UserAPI';
 import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
+import { pay } from './CheckoutAPI';
 const Step = Steps.Step;
 
 class Checkout extends Component {
@@ -54,19 +54,6 @@ class Checkout extends Component {
     pay = (e) => {
         e.preventDefault();
         const { customer, shipMethod, paymentMethod, total, discount, summary } = this.state;
-        this.addNewOrder(customer, shipMethod, paymentMethod, total, discount, summary).then(function () {
-            // success
-            localStorage.removeItem('items');
-        }).catch(function (error) {
-            message.error('Thanh toán thất bại! ' + error)
-        });
-
-        this.setState({
-            paid: true,
-        });
-    }
-
-    addNewOrder(customer, shipMethod, paymentMethod, total, discount, summary) {
         var products = [];
         this.state.items.forEach(item => {
             const product = {
@@ -79,12 +66,64 @@ class Checkout extends Component {
             products.push(product);
         });
 
+        var idCustomer;
+        const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+        if (loggedUser !== null) {
+            idCustomer = loggedUser.idKhachHang;
+        } else {
+            idCustomer = 0;
+        }
+
+        this.addNewOrder(idCustomer, customer, products, shipMethod, paymentMethod, total, discount, summary);
+
+        this.setState({
+            paid: true,
+        });
+    }
+
+    addNewOrder(idCustomer, customer, products, shipMethod, paymentMethod, total, discount, summary) {
+        var arrayProduct = [];
+        products.forEach(product => {
+            const _product = {
+                idChiTietGiay: product.shoeId,
+                soLuong: product.amount,
+                thanhTien: product.sum
+            }
+            arrayProduct.push(_product);
+        });
+        const order = {
+            idTinhTrang: 1,
+            idKhachHang: idCustomer,
+            tongTien: summary,
+            listChiTietDonHang: arrayProduct,
+        }
+        pay(order)
+            .then(response => {
+                console.log('Lưu đơn hàng xuống db thành công');
+                this.addNewOrderToFirebase(response, idCustomer, customer, products, shipMethod, paymentMethod, total, discount, summary).then(function () {
+                    // success
+                    localStorage.removeItem('items');
+                }).catch(function (error) {
+                    notification.error({
+                        message: 'Thông báo',
+                        description: 'Thanh toán thất bại, vui lòng thanh toán lại !'
+                    });
+                });
+            }).catch(error => {
+                notification.error({
+                    message: 'Thông báo',
+                    description: 'Thanh toán thất bại, vui lòng thanh toán lại !'
+                });
+            });
+    }
+
+    addNewOrderToFirebase(idDonHang, idCustomer, customer, products, shipMethod, paymentMethod, total, discount, summary) {
         // Get a key for a new order.
         var key = database.ref().child('orders').push().key;
 
         // A order entry.
         var order = {
-            orderId: key,
+            orderId: idDonHang,
             orderDate: moment().format("DD-MM-YYYY"),
             customerEmail: customer.email,
             customerName: customer.name,
@@ -114,6 +153,7 @@ class Checkout extends Component {
         const current = this.state.current + 1;
         this.setState({ current, summary });
     }
+
     prev() {
         const current = this.state.current - 1;
         this.setState({ current });
@@ -166,30 +206,25 @@ class Checkout extends Component {
     }
 
     componentDidMount() {
-        getCurrentUser()
-            .then(response => {
-                const customer = {
-                    email: response.user.email,
-                    name: response.tenKhachHang,
-                    phone: response.soDienThoai,
-                    address: response.diaChi,
-                };
-                this.setState({
-                    customer
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            });
+
     }
 
     render() {
-        const { current, isLoading, shipMethod, customer, total, discount, summary, paymentMethod, paid, items } = this.state;
+        const { current, isLoading, customer, shipMethod, total, discount, summary, paymentMethod, paid, items } = this.state;
         const cart = JSON.parse(localStorage.getItem('items'));
+        var isEmptyCart = true;
+        if (cart !== null) {
+            if (cart.length !== 0)
+                isEmptyCart = false;
+        } else {
+            isEmptyCart = true;
+        }
+
         const layout = {
             paymentZone: { xs: 24, sm: 16, md: 16, lg: 16 },
             cartZone: { xs: 24, sm: 8, md: 8, lg: 8 },
         }
+
         const steps = [{
             title: 'Địa chỉ',
             content: <StepOne customer={customer} selectedShipMethod={shipMethod} handlerNext={this.handlerNext} />,
@@ -211,7 +246,7 @@ class Checkout extends Component {
         return (
             <div style={{ padding: '50px' }}>
                 <br />
-                {cart !== null ?
+                {!isEmptyCart ?
                     <Row gutter={32}>
                         <Col {...layout.paymentZone}>
                             {

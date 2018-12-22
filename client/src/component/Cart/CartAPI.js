@@ -7,11 +7,3 @@ export function getShoe(id) {
         method: 'GET'
     });
 }
-
-export function save(reciept) {
-    return request({
-        url: API_BASE_URL  + "/luu",
-        method: 'POST',
-        body: JSON.stringify(reciept)
-    });
-}

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/index';
 import { list_giay_ban_chay } from './../../redux/actions/index';
 import { Icon, Badge, Modal, Col, Row, Button, Input } from 'antd';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -49,9 +50,13 @@ class Header extends Component {
             .push('/chi-tiet-giay/' + value);
     }
 
+    handleUpdateCart(amount) {
+        this.setState({ count: amount });
+    }
+
     render() {
 
-        var { giay } = this.props;
+        var { giay, count } = this.props;
         return (
             <React.Fragment>
                 <header className="row align-items-center">
@@ -62,8 +67,9 @@ class Header extends Component {
                     <div className="col-2 text-right">
                         <ul className="list-inline">
                             <li className="list-inline-item">
-                                <Badge count={5} className="mr-4">
-                                    <a className="icon-size"><Icon type="shopping-cart" /></a>
+                                <Badge count={count} className="mr-4">
+                                    <a className="icon-size">
+                                        <Link to="/gio-hang"><Icon type="shopping-cart" /></Link></a>
                                 </Badge>
                             </li>
                             <li className="list-inline-item"> <Badge dot>

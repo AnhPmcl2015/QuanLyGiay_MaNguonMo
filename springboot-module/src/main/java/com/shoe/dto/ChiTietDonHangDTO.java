@@ -12,6 +12,6 @@ public class ChiTietDonHangDTO {
 	private ChiTietGiayDTO chiTietGiay;
 	private DonHangDTO donHang;
 	private int soLuong;
-	private String thanhTien;
+	private int thanhTien;
 
 }

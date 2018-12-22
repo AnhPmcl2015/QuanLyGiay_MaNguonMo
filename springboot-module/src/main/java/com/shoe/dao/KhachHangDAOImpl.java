@@ -1,11 +1,9 @@
 package com.shoe.dao;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
-import com.shoe.dto.UserDTO;
-import com.shoe.entities.User;
-import com.shoe.form.KhachHangPwdForm;
-import com.shoe.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -13,9 +11,10 @@ import org.springframework.stereotype.Repository;
 import com.shoe.converter.KhachHangConverter;
 import com.shoe.dto.KhachHangDTO;
 import com.shoe.entities.KhachHang;
+import com.shoe.entities.User;
+import com.shoe.form.KhachHangPwdForm;
 import com.shoe.jpa.JpaKhachHang;
-
-import java.util.Optional;
+import com.shoe.jpa.UserRepository;
 
 @Repository
 @Transactional

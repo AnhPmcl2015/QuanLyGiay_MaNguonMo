@@ -14,6 +14,7 @@ class AddressForm extends Component {
             phone: '',
             address: '',
         },
+        loggedCustomer: null,
         shipMethod: 'normal',
         isValid: false
     };
@@ -38,22 +39,35 @@ class AddressForm extends Component {
         });
     }
 
-    componentWillMount() { }
+    setFormAddress(customer) {
+        this.props.form.setFieldsValue({
+            'email': customer.email,
+            'name': customer.name,
+            'phone': customer.phone,
+            'address': customer.address
+        });
+    }
 
-    componentDidMount() {
+    componentWillMount() {
         const { customer } = this.props;
         if (customer !== null) {
-            this.props.form.setFieldsValue({
-                'email': customer.email,
-                'name': customer.name,
-                'phone': customer.phone,
-                'address': customer.address
-            });
+            this.setFormAddress(customer);
+        }
+
+        const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+        if (loggedUser !== null) {
+            const customer = {
+                email: loggedUser.user.email,
+                name: loggedUser.tenKhachHang,
+                phone: loggedUser.soDienThoai,
+                address: loggedUser.diaChi,
+            };
+            this.setState({ loggedCustomer: customer });
         }
     }
 
     render() {
-        const { shipMethod } = this.state;
+        const { shipMethod, loggedCustomer } = this.state;
         const { selectedShipMethod } = this.props;
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
@@ -76,6 +90,14 @@ class AddressForm extends Component {
         );
         return (
             <Form onSubmit={this.handleSubmit}>
+                <FormItem
+                    {...formItemLayout}
+                    label="Sử dụng địa chỉ đã lưu"
+                >
+                    <Button block onClick={() => this.setFormAddress(loggedCustomer)}>
+                    {loggedCustomer.name}, &nbsp; {loggedCustomer.email}, &nbsp;{loggedCustomer.address}, &nbsp;{loggedCustomer.phone}
+                    </Button>
+                </FormItem>
                 <FormItem
                     {...formItemLayout}
                     label={(

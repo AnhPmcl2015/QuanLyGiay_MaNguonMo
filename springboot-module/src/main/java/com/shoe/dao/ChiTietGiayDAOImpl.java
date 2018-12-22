@@ -80,4 +80,16 @@ public class ChiTietGiayDAOImpl implements ChiTietGiayDAO {
             jpa.save(ctgiay);
         }
     }
+
+	@Override
+	public ChiTietGiayDTO getGiayByIdChiTietGiay(int idChiTietGiay) {
+		Optional<ChiTietGiay> optionalChiTietGiay;
+		optionalChiTietGiay = jpa.findById(idChiTietGiay);
+		ChiTietGiayDTO ctgDTO = new ChiTietGiayDTO();
+		if (optionalChiTietGiay.isPresent()) {
+			converter.convertEntityToDto(optionalChiTietGiay.get(), ctgDTO);
+		}
+
+		return ctgDTO;
+	}
 }

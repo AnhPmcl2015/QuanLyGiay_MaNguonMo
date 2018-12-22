@@ -43,7 +43,7 @@ public class ChiTietDonHangDAOImpl implements ChiTietDonHangDAO {
 		else 
 			return null;
 
-		Set<ChiTietDonHang> listChiTietDonHang = new HashSet<ChiTietDonHang>(0);
+		List<ChiTietDonHang> listChiTietDonHang = new ArrayList<ChiTietDonHang>;
 		List<ChiTietDonHangDTO> listChiTietDonHangDTO = new ArrayList<>();
 		
 		listChiTietDonHang = donHang.getChiTietDonHangs();

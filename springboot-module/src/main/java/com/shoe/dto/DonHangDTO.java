@@ -1,6 +1,8 @@
 package com.shoe.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,4 +22,5 @@ public class DonHangDTO {
 	private int tongTien;
 	private KhachHangDTO khachHang;
 	private TinhTrangDonHangDTO tinhTrangDonHang;
+	private List<ChiTietDonHangDTO> listChiTietDonHangDTO = new ArrayList<ChiTietDonHangDTO>();
 }

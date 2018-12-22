@@ -1,9 +1,9 @@
 package com.shoe.entities;
 // Generated Nov 27, 2018 12:36:27 AM by Hibernate Tools 5.1.10.Final
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,7 +34,7 @@ public class DonHang implements java.io.Serializable {
 	private Date ngayDat;
 	private Date ngayGiao;
 	private int tongTien;
-	private Set<ChiTietDonHang> chiTietDonHangs = new HashSet<ChiTietDonHang>(0);
+	private List<ChiTietDonHang> chiTietDonHangs = new ArrayList<ChiTietDonHang>();
 
 	public DonHang() {
 	}
@@ -48,7 +48,7 @@ public class DonHang implements java.io.Serializable {
 	}
 
 	public DonHang(KhachHang khachHang, TinhTrangDonHang tinhTrangDonHang, Date ngayDat, Date ngayGiao, int tongTien,
-			Set<ChiTietDonHang> chiTietDonHangs) {
+			List<ChiTietDonHang> chiTietDonHangs) {
 		this.khachHang = khachHang;
 		this.tinhTrangDonHang = tinhTrangDonHang;
 		this.ngayDat = ngayDat;
@@ -90,7 +90,7 @@ public class DonHang implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngay_dat", nullable = false, length = 19)
+	@Column(name = "ngay_dat", insertable = false, updatable =false, length = 19, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getNgayDat() {
 		return this.ngayDat;
 	}
@@ -100,7 +100,7 @@ public class DonHang implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ngay_giao", nullable = false, length = 19)
+	@Column(name = "ngay_giao", nullable = true, length = 19)
 	public Date getNgayGiao() {
 		return this.ngayGiao;
 	}
@@ -119,11 +119,11 @@ public class DonHang implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "donHang")
-	public Set<ChiTietDonHang> getChiTietDonHangs() {
+	public List<ChiTietDonHang> getChiTietDonHangs() {
 		return this.chiTietDonHangs;
 	}
 
-	public void setChiTietDonHangs(Set<ChiTietDonHang> chiTietDonHangs) {
+	public void setChiTietDonHangs(List<ChiTietDonHang> chiTietDonHangs) {
 		this.chiTietDonHangs = chiTietDonHangs;
 	}
 

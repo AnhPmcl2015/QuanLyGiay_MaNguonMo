@@ -70,6 +70,10 @@ class App extends Component {
         this.props.history.push("/");
     }
 
+    handleUpdateCart = () => {
+        console.log('concac');
+    }
+
     componentWillMount() {
         this.loadCurrentUser();
     }
@@ -82,7 +86,7 @@ class App extends Component {
             <React.Fragment>
                 <BackTop />
                 <div className="container-fluid">
-                    <Header />
+                    <Header handleUpdateCart={this.handleUpdateCart} />
                     <Affix offsetTop={0}>
                         <Menu />
                     </Affix>

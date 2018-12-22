@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './ShoeDetail.css';
 import CardShoe from '../card-shoe/CardShoe';
-import { Button, Spin } from 'antd';
+import { Button, Spin, notification, message } from 'antd';
 import { Radio } from 'antd';
-import Header from '../header/Header';
-import Menu from '../menu/Menu';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
@@ -67,7 +65,47 @@ class ShoeDetail extends Component {
     }
     // bỏ vào local Storage
     clickDatHang = () => {
+        const id = this.state.idChiTietGiay;
+        if (id === null) {
+            notification.error({
+                message: 'Thông báo',
+                description: 'Bạn chưa chọn size giày, vui lòng chọn size giày !'
+            });
+            return;
+        }
 
+        const item = {
+            id: id,
+            amount: 1
+        }
+
+        var cart = JSON.parse(localStorage.getItem('items'));
+        if (cart === null) {
+            var items = [];
+            items.push(item);
+            localStorage.setItem('items', JSON.stringify(items));
+            console.log(JSON.parse(localStorage.getItem('items')));
+            message.success('Đã thêm sản phầm vào giỏ hàng', 4);
+            this.props.handleUpdateCart();
+            return;
+        } else {
+            this.props.handleUpdateCart();
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i].id === id) {
+                    var temp = cart;
+                    temp[i].amount += 1;
+                    localStorage.setItem('items', JSON.stringify(temp));
+                    console.log(JSON.parse(localStorage.getItem('items')));
+                    message.success('Đã thêm sản phầm vào giỏ hàng', 4);
+                    return;
+                }
+            }
+
+            cart.push(item);
+            localStorage.setItem('items', JSON.stringify(cart));
+            console.log(JSON.parse(localStorage.getItem('items')));
+            message.success('Đã thêm sản phầm vào giỏ hàng', 4);
+        }
     }
 
     render() {
@@ -101,6 +139,7 @@ class ShoeDetail extends Component {
                 return <RadioButton value={ctg.idChiTietGiay} className="m-1" key={idx} disabled>{ctg.size}</RadioButton>
             }
         });
+        
         return (
             <React.Fragment>
                 <nav aria-label="breadcrumb">

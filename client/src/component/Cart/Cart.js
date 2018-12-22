@@ -30,45 +30,16 @@ class Cart extends Component {
         const newItems = items.filter(function (item) {
             return item.id.toString() !== id.toString();
         });
+        console.log(newItems, id);
         const _newItems = this.state.items.filter(function (item) {
-            return item.shoe.giay.idGiay.toString() !== id.toString();
+            return item.shoe.idChiTietGiay.toString() !== id.toString();
         });
         this.setState({ items: _newItems });
         localStorage.setItem('items', JSON.stringify(newItems));
     }
 
     addToCart(id, amount) {
-        //localStorage.clear();
-        const item = {
-            id: id,
-            amount: amount
-        }
-
-        var cart = JSON.parse(localStorage.getItem('items'));
-        var items = [];
-        if (cart === null) {
-            items.push(item);
-            localStorage.setItem('items', JSON.stringify(items));
-            console.log('Thêm sp đầu tiên với mã #' + item.id);
-            console.log(JSON.parse(localStorage.getItem('items')));
-            return;
-        } else {
-            for (var i = 0; i < cart.length; i++) {
-                if (cart[i].id === id) {
-                    var temp = cart;
-                    temp[i].amount += amount;
-                    localStorage.setItem('items', JSON.stringify(temp));
-                    console.log('Cộng dồn số lượng sp #' + item.id);
-                    console.log(JSON.parse(localStorage.getItem('items')));
-                    return;
-                }
-            }
-
-            cart.push(item);
-            localStorage.setItem('items', JSON.stringify(cart));
-            console.log('Thêm sản phẩm mới với mã #' + item.id);
-            console.log(JSON.parse(localStorage.getItem('items')));
-        }
+        
     }
 
     userCheckout = () => {
@@ -76,7 +47,7 @@ class Cart extends Component {
         if (isLogged)
             this.props.history.push("/thanh-toan");
         else
-            this.props.history.push("/login");
+            this.props.history.push("/dang-nhap");
     }
 
     guestCheckout = () => {
@@ -85,6 +56,7 @@ class Cart extends Component {
 
     componentWillMount() {
         const items = JSON.parse(localStorage.getItem('items'));
+        console.log(items);
         if (items !== null) {
             this.setState({ isLoading: true });
             var temp = this.state.items;

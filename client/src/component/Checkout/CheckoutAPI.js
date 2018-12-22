@@ -1,10 +1,11 @@
-import { API_BASE_URL } from '../Common/Constant/common';
-import { request } from '../Common/APIUtils';
 
-export function login(loginRequest) {
+import { API_BASE_URL } from '../../common/Constant/common';
+import { request } from '../../common/APIUtils';
+
+export function pay(payment) {
     return request({
-        url: API_BASE_URL + "/auth/signin",
+        url: API_BASE_URL + "/client/public/payment/pay",
         method: 'POST',
-        body: JSON.stringify(loginRequest)
+        body: JSON.stringify(payment)
     });
 }
