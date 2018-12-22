@@ -14,9 +14,14 @@ class Profile extends Component {
         this.state = {};
     }
 
+    componentDidMount (){
+        const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+        if (loggedUser !== null)
+            console.log(loggedUser);
+    }
+
     render() {
         return (
-
             <div>
                 <Tabs
                     defaultActiveKey="1"
