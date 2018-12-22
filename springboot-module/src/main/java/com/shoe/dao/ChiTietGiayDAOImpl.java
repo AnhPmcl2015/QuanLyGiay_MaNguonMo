@@ -64,6 +64,7 @@ public class ChiTietGiayDAOImpl implements ChiTietGiayDAO {
 
     @Override
     public void updateDetailShoe(ChiTietGiayDTO giayDTO) {
+
         ChiTietGiay chiTietGiay = new ChiTietGiay();
         converter.convertDtoToEntity(giayDTO, chiTietGiay);
         jpa.save(chiTietGiay);

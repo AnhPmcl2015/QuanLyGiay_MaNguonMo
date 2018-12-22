@@ -52,7 +52,7 @@ class ShoeDetail extends Component {
 
     }
 
-    onChangeRadioCTG = (e) =>{
+    onChangeRadioCTG = (e) => {
         console.log(e.target.value);
         const value = e.target.value;
         this.setState({
@@ -60,8 +60,13 @@ class ShoeDetail extends Component {
         })
     }
 
+    setImg = (img) => {
+        this.setState({
+            img
+        })
+    }
     // bỏ vào local Storage
-    clickDatHang = () =>{
+    clickDatHang = () => {
 
     }
 
@@ -69,7 +74,7 @@ class ShoeDetail extends Component {
 
         var { thongTinGiay, danhSachNoiBat } = this.state;
         if (thongTinGiay == null) {
-            return  <Spin size="large" />;
+            return <div align="center"><Spin size="large" /></div>;
         }
         var count = true;
         this.getListDanhSachNoiBac(this.state.thongTinGiay.idHangSanXuat);
@@ -88,7 +93,7 @@ class ShoeDetail extends Component {
 
             if (ctg.soLuong > 0) {
                 if (idx % 4 === 0 && idx > 0) {
-                    return <span><br/><RadioButton value={ctg.idChiTietGiay} className="m-1" key={idx}>{ctg.size}</RadioButton> </span>
+                    return <span><br /><RadioButton value={ctg.idChiTietGiay} className="m-1" key={idx}>{ctg.size}</RadioButton> </span>
                 }
                 return <RadioButton value={ctg.idChiTietGiay} className="m-1" key={idx}>{ctg.size}</RadioButton>
             }
