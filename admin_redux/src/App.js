@@ -121,6 +121,7 @@ class App extends Component {
             <PrivateRoute path="/don-hang" component={Invoice} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
             <PrivateRoute path="/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
             <PrivateRoute
+              exact
               path={["/admin/trang-chu", "/"]}
               authenticated={this.state.isAuthenticated}
               component={StatisticsRevenue}

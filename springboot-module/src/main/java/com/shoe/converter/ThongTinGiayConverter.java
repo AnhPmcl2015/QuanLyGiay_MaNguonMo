@@ -1,10 +1,14 @@
 package com.shoe.converter;
 
+import com.shoe.dto.ChiTietGiayDTO;
 import com.shoe.dto.ThongTinGiayDto;
 import com.shoe.entities.ChiTietGiay;
 import com.shoe.entities.Giay;
 import com.shoe.entities.LoaiGiay;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ThongTinGiayConverter extends BaseDtoConverter<Giay, ThongTinGiayDto> {
@@ -34,31 +38,15 @@ public class ThongTinGiayConverter extends BaseDtoConverter<Giay, ThongTinGiayDt
 
 		dto.setGiaBan(entity.getGiaBan() + "");
 
+		List<ChiTietGiayDTO> listCTG = new ArrayList<>();
 		for (ChiTietGiay ct : entity.getChiTietGiays()) {
-			switch (ct.getSize()) {
-			case 38:
-				dto.setSize38(ct.getSoLuong() + "");
-				break;
-			case 39:
-				dto.setSize39(ct.getSoLuong() + "");
-				break;
-			case 40:
-				dto.setSize40(ct.getSoLuong() + "");
-				break;
-			case 41:
-				dto.setSize41(ct.getSoLuong() + "");
-				break;
-			case 42:
-				dto.setSize42(ct.getSoLuong() + "");
-				break;
-			case 43:
-				dto.setSize43(ct.getSoLuong() + "");
-				break;
-				
-			default:
-				break;
-			}
+			ChiTietGiayDTO ctg = new ChiTietGiayDTO();
+			ctg.setIdChiTietGiay(ct.getIdChiTietGiay());
+			ctg.setSoLuong(ct.getSoLuong());
+			ctg.setSize(ct.getSize());
+			listCTG.add(ctg);
 		}
+		dto.setListCTG(listCTG);
 	}
 
 }

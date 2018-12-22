@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HangSanXuatDTO {
-    private int idHangSanXuat;
-    private String tenHangSanXuat;
+	private int idHangSanXuat;
+	private String tenHangSanXuat;
 }

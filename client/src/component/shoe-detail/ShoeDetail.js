@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './ShoeDetail.css';
 import CardShoe from '../card-shoe/CardShoe';
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import { Radio } from 'antd';
 import Header from '../header/Header';
 import Menu from '../menu/Menu';
@@ -13,29 +13,12 @@ class ShoeDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            thongTinGiay: {
-                idHangSanXuat: '',
-                tenHangSanXuat: '',
-                idLoaiGiay: '',
-                tenLoaiGiay: '',
-                img1: '',
-                img2: '',
-                img3: '',
-                img4: '',
-                img: '',
-                idGiay: '',
-                tenGiay: '',
-                size38: '',
-                size39: '',
-                size40: '',
-                size41: '',
-                size42: '',
-                size43: '',
-                giaBan: ''
-            },
+            thongTinGiay: null,
             danhSachNoiBat: [],
             preIdHangSanXuat: '',
-            preIdGiay: ''
+            preIdGiay: '',
+            img: null,
+            idChiTietGiay: null
         };
 
     }
@@ -45,10 +28,9 @@ class ShoeDetail extends Component {
 
     }
 
-    async componentWillReceiveProps() {
-        await this.setShoeDetail();
-    }
-
+    // async componentWillReceiveProps() {
+    //     await this.setShoeDetail();
+    // }
 
     setShoeDetail() {
 
@@ -56,17 +38,9 @@ class ShoeDetail extends Component {
             fetch(`/chi-tiet-giay/thong-tin-giay/${this.props.match.params.id}`)
                 .then(response => response.json())
                 .then(data => {
-                    this.setState({ thongTinGiay: data, preIdGiay: data.idGiay })
+                    this.setState({ thongTinGiay: data, preIdGiay: data.idGiay, img: data.img1 })
                 });
         }
-
-        this.setState({
-            thongTinGiay: {
-                ...this.state.thongTinGiay,
-                img: this.state.thongTinGiay.img1
-            }
-        });
-
     }
 
     getListDanhSachNoiBac(idHangSanXuat) {
@@ -78,17 +52,25 @@ class ShoeDetail extends Component {
 
     }
 
-    setImg = (img) => {
+    onChangeRadioCTG = (e) =>{
+        console.log(e.target.value);
+        const value = e.target.value;
         this.setState({
-            thongTinGiay: {
-                ...this.state.thongTinGiay,
-                img: img
-            }
+            idChiTietGiay: value
         })
     }
 
+    // bỏ vào local Storage
+    clickDatHang = () =>{
+
+    }
+
     render() {
+
         var { thongTinGiay, danhSachNoiBat } = this.state;
+        if (thongTinGiay == null) {
+            return  <Spin size="large" />;
+        }
         var count = true;
         this.getListDanhSachNoiBac(this.state.thongTinGiay.idHangSanXuat);
 
@@ -101,6 +83,19 @@ class ShoeDetail extends Component {
             }
             count = false;
         }
+
+        const radioBtn = thongTinGiay.listCTG.map((ctg, idx) => {
+
+            if (ctg.soLuong > 0) {
+                if (idx % 4 === 0 && idx > 0) {
+                    return <span><br/><RadioButton value={ctg.idChiTietGiay} className="m-1" key={idx}>{ctg.size}</RadioButton> </span>
+                }
+                return <RadioButton value={ctg.idChiTietGiay} className="m-1" key={idx}>{ctg.size}</RadioButton>
+            }
+            if (ctg.soLuong == 0) {
+                return <RadioButton value={ctg.idChiTietGiay} className="m-1" key={idx} disabled>{ctg.size}</RadioButton>
+            }
+        });
         return (
             <React.Fragment>
                 <nav aria-label="breadcrumb">
@@ -115,7 +110,7 @@ class ShoeDetail extends Component {
                 <div className="row">
                     <div className="col-md-12 col-lg-8">
                         <img
-                            src={thongTinGiay.img}
+                            src={this.state.img}
                             style={{
                                 width: '100%'
                             }}
@@ -183,18 +178,15 @@ class ShoeDetail extends Component {
                         </div>
 
                         <div className="mx-auto mt-3">
-                            <RadioGroup>
-                                <RadioButton value="38">38</RadioButton>
-                                <RadioButton value="39">39</RadioButton>
-                                <RadioButton value="40">40</RadioButton>
-                                <RadioButton value="41">41</RadioButton><br />
-                                <RadioButton value="42" className="mt-1">42</RadioButton>
-                                <RadioButton value="43" className="mt-1">43</RadioButton>
+                            <RadioGroup onChange={this.onChangeRadioCTG}>
+
+                                {radioBtn}
+
                             </RadioGroup>
                         </div>
 
                         <div className="mx-auto mt-3">
-                            <Button className="button">Đặt hàng</Button>
+                            <Button className="button" onClick={this.clickDatHang}>Đặt hàng</Button>
                         </div>
                     </div>
                 </div>

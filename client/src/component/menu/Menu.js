@@ -29,7 +29,7 @@ class Menu extends Component {
 
     // lấy danh sách Loại giày
      getListLoaiGiay = () => {
-         fetch('/api/ten-giay')
+         fetch('/api/hang-san-xuat')
             .then(response => response.json())
             .then(data =>{
                 
