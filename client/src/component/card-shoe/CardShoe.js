@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card} from 'antd';
+import { Card, Spin } from 'antd';
 import { withRouter } from 'react-router-dom';
 
 import './CardShoe.css';
@@ -20,6 +20,10 @@ class CardShoe extends Component {
     render() {
 
         var {listGiay} = this.props;
+        if(!listGiay || listGiay.length <= 0) {
+            return <div align="center"><Spin size="large"/></div>;
+        }
+        
         var eleListGiay = listGiay.map((giay, index) => {
             return (
                 <div className="col-md-6 col-lg-3 mt-2 " key={index}>
@@ -37,7 +41,8 @@ class CardShoe extends Component {
                             <p>{giay.loaiGiay}</p>
                             <p>{giay.gioiTinh}</p>
                             <hr/>
-                            <h6>{giay.tenGiay}</h6>
+                            <h6>{giay.tenHangSanXuat}</h6>
+                            <h6> {giay.tenGiay}</h6>
                             <p>{giay.giaBan}$</p>
                         </div>
                     </Card>
@@ -45,7 +50,7 @@ class CardShoe extends Component {
 
             );
         });
-
+        
         return (
             <React.Fragment>
                 <div className="row">

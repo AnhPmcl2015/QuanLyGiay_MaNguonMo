@@ -19,6 +19,7 @@ public class GiayConverter extends BaseDtoConverter<Giay, GiayDto> {
 		dto.setImg(entity.getImg1());
 		dto.setLoaiGiay(entity.getLoaiGiay().getTenLoaiGiay());
 		dto.setGioiTinh(entity.getGioiTinh().getTenGioiTinh());
+		dto.setTenHangSanXuat(entity.getLoaiGiay().getHangSanXuat().getTenHangSanXuat());
 	}
 
 }

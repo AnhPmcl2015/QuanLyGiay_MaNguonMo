@@ -74,6 +74,7 @@ class SideNav extends Component {
     };
 
     thayDoiHangSanXuat = async event => {
+        console.log(event.target.value)
         await fetch("/danh-sach/hang-san-xuat/" + event.target.value)
             .then(response => response.json())
             .then(data => this.props.onSearch(data));
@@ -92,14 +93,13 @@ class SideNav extends Component {
             .map((hangSanXuat, index) => {
                 return (
                     <div>
-                        <Radio value={hangSanXuat.id} key={index}>
+                        <Radio value={hangSanXuat.idHangSanXuat} key={index}>
                             {hangSanXuat.tenHangSanXuat}
                         </Radio>
                         <br/>
                     </div>
                 );
             });
-
         var elmLoaiGiay = this
             .state
             .loaiGiay

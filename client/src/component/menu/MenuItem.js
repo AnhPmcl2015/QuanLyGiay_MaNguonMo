@@ -33,7 +33,7 @@ class MenuItem extends Component {
             .state
             .listLoaiGiay
             .map((loaiGiay, index) => {
-                return <DropdownItem key={index} onClick={this.reload}>
+                return <DropdownItem key={index} >
                     <Link to={"/danh-sach/" + loaiGiay.id}>
                         {loaiGiay.tenLoaiGiay}
                     </Link>

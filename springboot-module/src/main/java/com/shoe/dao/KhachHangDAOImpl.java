@@ -47,13 +47,19 @@ public class KhachHangDAOImpl implements KhachHangDAO {
 	@Override
 	public void saveKhachHang(KhachHangDTO dto) {
 		Optional<KhachHang> kh = jpaKhachHang.findById(dto.getIdKhachHang());
-		if(kh.isPresent()){
+		if(kh.isPresent()) {
 			KhachHang khachHang = kh.get();
 			khachHang.setDiaChi(dto.getDiaChi());
 			khachHang.setIdKhachHang(dto.getIdKhachHang());
 			khachHang.setSoDienThoai(dto.getSoDienThoai());
 			khachHang.setTenKhachHang(dto.getTenKhachHang());
 			jpaKhachHang.save(khachHang);
+		} else {
+			KhachHang khachHang = new KhachHang();
+			khachHang.setDiaChi(dto.getDiaChi());
+			khachHang.setIdKhachHang(dto.getIdKhachHang());
+			khachHang.setSoDienThoai(dto.getSoDienThoai());
+			khachHang.setTenKhachHang(dto.getTenKhachHang());
 		}
 	}
 

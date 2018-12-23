@@ -14,4 +14,5 @@ public class GiayDto {
 	private String img;
 	private String loaiGiay;
 	private String gioiTinh;
+	private String tenHangSanXuat;
 }

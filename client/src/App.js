@@ -29,19 +29,18 @@ class App extends Component {
     }
 
     loadCurrentUser = () => {
-        console.log('kkaaaaaaaaallk')
+     
         this.setState({
             isLoading: true
         });
         getCurrentUser()
             .then(response => {
+                localStorage.setItem('loggedUser', JSON.stringify(response));
                 this.setState({
                     currentUser: response,
                     isAuthenticated: true,
                     isLoading: false
                 });
-                localStorage.setItem('loggedUser', JSON.stringify(response));
-                console.log('kkllk')
             }).catch(error => {
                 console.log(error);
                 this.setState({

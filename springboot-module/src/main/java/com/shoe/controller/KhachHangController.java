@@ -3,6 +3,7 @@ package com.shoe.controller;
 import com.shoe.ObjectToJson.ConvertToJson;
 import com.shoe.dao.KhachHangDAO;
 import com.shoe.dto.KhachHangDTO;
+import com.shoe.dto.UserDTO;
 import com.shoe.form.KhachHangInfoForm;
 import com.shoe.form.KhachHangPwdForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class KhachHangController {
         } else {
 
             KhachHangDTO dto = new KhachHangDTO();
+//            UserDTO u = new UserDTO();
+//            u.setUserId(Long.parseLong(form.getId()));
+//            dto.setUser(u);
             dto.setDiaChi(form.getDiaChi());
             dto.setSoDienThoai(Integer.parseInt(form.getSoDienThoai()));
             dto.setIdKhachHang(Integer.parseInt(form.getId()));

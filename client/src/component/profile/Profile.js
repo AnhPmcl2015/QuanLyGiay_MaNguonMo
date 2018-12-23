@@ -14,20 +14,19 @@ class Profile extends Component {
         loggedUser: null
     }
 
-    componentWillReceiveProps() {
+    componentWillMount() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
         if (loggedUser !== null) {
             this.setState({
                 loggedUser: loggedUser
             })
-            console.log(loggedUser)
         }
     }
 
     render() {
         const user = this.state.loggedUser;
+        console.log(user)
         return (
-           
             <div>
                 <Tabs
                     defaultActiveKey="1"

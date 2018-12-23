@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './ListShoe.css';
-import {Menu, Dropdown, Button, Icon, message} from 'antd';
+import { Menu, Dropdown, Button, Icon, message } from 'antd';
 
 import SideNav from '../side-nav/SideNav';
 import CardShoe from '../card-shoe/CardShoe';
@@ -15,14 +15,21 @@ class ListShoe extends Component {
         };
     }
 
-    componentDidMount() {
-        this.getGiays(this.props.match.params.id);
-    }
+    async componentDidMount() {
 
-    async getGiays(id) {
-        await fetch('/danh-sach/loai-giay/' + id)
+        await this.getGiays(this.props.match.params.id);
+    }
+    async componentWillReceiveProps(myProps){
+
+        await this.getGiays(myProps.match.params.id);
+    }
+    getGiays(id) {
+        fetch('/danh-sach/loai-giay/' + id)
             .then(response => response.json())
-            .then(data => this.setState({listGiay: data, tempList: data}));
+            .then(data => {
+                console.log(data)
+                this.setState({ listGiay: data, tempList: data })
+            });
     }
 
     sortGiay = (e) => {
@@ -32,16 +39,15 @@ class ListShoe extends Component {
                 .state
                 .tempList
                 .sort((giay1, giay2) => {
-                    if(giay1.tenGiay > giay2.tenGiay){
+                    if (giay1.tenGiay > giay2.tenGiay) {
                         return 1;
-                    }else if(giay1.tenGiay < giay2.tenGiay){
+                    } else if (giay1.tenGiay < giay2.tenGiay) {
                         return -1;
-                    }else{
+                    } else {
                         return 0;
                     }
                 });
-            console.log(list);
-            this.setState({tempList: list})
+            this.setState({ tempList: list })
 
             // Z - A
         } else if (e.key == 2) {
@@ -49,16 +55,15 @@ class ListShoe extends Component {
                 .state
                 .tempList
                 .sort((giay1, giay2) => {
-                    if(giay1.tenGiay > giay2.tenGiay){
+                    if (giay1.tenGiay > giay2.tenGiay) {
                         return -1;
-                    }else if(giay1.tenGiay < giay2.tenGiay){
+                    } else if (giay1.tenGiay < giay2.tenGiay) {
                         return 1;
-                    }else{
+                    } else {
                         return 0;
                     }
                 });
-            console.log(list);
-            this.setState({tempList: list})
+            this.setState({ tempList: list })
         }
 
     }
@@ -72,19 +77,18 @@ class ListShoe extends Component {
 
     render() {
 
-        var {listGiay, tempList} = this.state;
-        console.log(tempList)
+        var { listGiay, tempList } = this.state;
         var menu = (
             <Menu onClick={this.sortGiay}>
-                <Menu.Item key="1"><Icon type="caret-down"/>A - Z</Menu.Item>
-                <Menu.Item key="2"><Icon type="caret-up"/>Z - A</Menu.Item>
+                <Menu.Item key="1"><Icon type="caret-down" />A - Z</Menu.Item>
+                <Menu.Item key="2"><Icon type="caret-up" />Z - A</Menu.Item>
             </Menu>
         );
-
+            console.log(tempList)
         return (
             <React.Fragment>
                 <div className="row">
-                    <SideNav onSearch={this.onSearch}/>
+                    <SideNav onSearch={this.onSearch} />
 
                     <div className="col-9 mt-3">
                         <div className="row">
@@ -96,16 +100,16 @@ class ListShoe extends Component {
                                 <Dropdown overlay={menu}>
                                     <Button
                                         style={{
-                                        marginLeft: 8
-                                    }}>
+                                            marginLeft: 8
+                                        }}>
                                         Sắp xếp
-                                        <Icon type="down"/>
+                                        <Icon type="down" />
                                     </Button>
                                 </Dropdown>
                             </div>
                         </div>
 
-                        <CardShoe listGiay={tempList}/>
+                        <CardShoe listGiay={tempList} />
                     </div>
                 </div>
 
