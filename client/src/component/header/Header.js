@@ -7,23 +7,15 @@ import * as actions from '../../redux/actions/index';
 import { list_giay_ban_chay } from './../../redux/actions/index';
 import { Icon, Badge, Modal, Col, Row, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
+import { ACCESS_TOKEN } from '../../common/Constant/common';
 
 class Header extends Component {
 
     state = {
         count: 0,
-        isOpenModal: false,
+        isLogged: false,
     }
-    openLogin = () => {
-        this.setState({
-            isOpenModal: true
-        })
-    }
-    handleCancel = () => {
-        this.setState({
-            isOpenModal: false
-        })
-    }
+
     async componentDidMount() {
 
         if (this.props.giay.listTenGiay.length === 0) {
@@ -32,6 +24,20 @@ class Header extends Component {
         }
     }
 
+    componentWillMount() {
+        var isLogged = false;
+        if (localStorage.getItem(ACCESS_TOKEN)) {
+            isLogged = true;
+        } else
+            isLogged = false;
+        this.setState({isLogged});
+    }
+
+    clickLogout = () => {
+        this.props.onLogout();
+        this.setState({isLogged: false});
+    }
+    
     // lấy danh sách tên giày
     getListTenGiay() {
         fetch("/api/ten-giay")
@@ -50,13 +56,23 @@ class Header extends Component {
             .push('/chi-tiet-giay/' + value);
     }
 
-    handleUpdateCart(amount) {
-        this.setState({ count: amount });
+    componentWillReceiveProps(props) {
+        this.setState({ count: props.count });
     }
 
-    render() {
+    // componentWillMount() {
+    //     const cart = JSON.parse(localStorage.getItem('items'));
+    //     if (cart !== null) {
+    //         this.setState({
+    //             count: cart.length,
+    //         })
+    //     }
+    // }
 
-        var { giay, count } = this.props;
+    render() {
+        var { count, isLogged } = this.state;
+        var { giay } = this.props;
+
         return (
             <React.Fragment>
                 <header className="row align-items-center">
@@ -67,50 +83,33 @@ class Header extends Component {
                     <div className="col-2 text-right">
                         <ul className="list-inline">
                             <li className="list-inline-item">
+                                <a className="icon-size mr-4">
+                                    <Link to="/thong-tin"><Icon type="user" /></Link></a>
+                            </li>
+                            <li className="list-inline-item">
                                 <Badge count={count} className="mr-4">
                                     <a className="icon-size">
                                         <Link to="/gio-hang"><Icon type="shopping-cart" /></Link></a>
                                 </Badge>
                             </li>
-                            <li className="list-inline-item"> <Badge dot>
-                                <a className="icon-size" key="yun" onClick={this.openLogin}> <Icon type="login" /></a>
-                            </Badge></li>
+                            <li className="list-inline-item">
+                                <Badge dot>
+                                    <a className="icon-size" >
+                                        {
+                                            !isLogged &&
+                                            <Link to='/dang-nhap' ><Icon type="login" /></Link>
+                                        }
+
+                                        {
+                                            isLogged &&
+                                            <Icon type="logout" onClick={this.clickLogout} />
+                                        }
+                                    </a>
+                                </Badge>
+                            </li>
                         </ul>
                     </div>
                 </header>
-                <Modal
-                    visible={this.state.isOpenModal}
-                    title="Đăng nhập"
-                    //  onOk={this.handleOk}
-                    onCancel={this.handleCancel}
-                    footer={[
-                        <div></div>
-                    ]}
-                >
-                    <Row>
-                        <Col>
-                            <label>Tài khoản</label>
-                            <Input placeholder="" />
-                        </Col>
-                        <Col>
-                            <label className="mt-2">Mật khẩu</label>
-                            <Input placeholder="" type="password" />
-                        </Col>
-                        <Col>
-                            <Button className="mt-2">Đăng nhập</Button>
-                        </Col>
-                        {/* <Col>
-                            <div align="center" className="mt-2">
-                                <a href="#">Quên mật khẩu</a>
-                            </div>
-                        </Col> */}
-                        <Col>
-                            <div align="center" className="mt-2">
-                                <a href="#">Chưa có tài khoản/đăng ký</a>
-                            </div>
-                        </Col>
-                    </Row>
-                </Modal>
             </React.Fragment>
         );
     }

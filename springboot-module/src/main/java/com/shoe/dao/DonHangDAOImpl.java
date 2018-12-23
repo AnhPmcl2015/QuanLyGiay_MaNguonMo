@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import com.shoe.converter.DonHangConverter;
 import com.shoe.dto.DonHangDTO;
+import com.shoe.entities.ChiTietGiay;
 import com.shoe.entities.DonHang;
 import com.shoe.entities.TinhTrangDonHang;
 import com.shoe.jpa.JpaChiTietDonHang;
+import com.shoe.jpa.JpaChiTietGiay;
 import com.shoe.jpa.JpaDonHang;
 
 @Repository
@@ -23,6 +25,9 @@ public class DonHangDAOImpl implements DonHangDAO {
 
 	@Autowired
 	private JpaChiTietDonHang jpaChiTietDonHang;
+
+	@Autowired
+	private JpaChiTietGiay jpaChiTietGiay;
 
 	@Autowired
 	DonHangConverter donHangConverter;
@@ -60,6 +65,17 @@ public class DonHangDAOImpl implements DonHangDAO {
 		donHang.getChiTietDonHangs().forEach(ctdh -> {
 			ctdh.setDonHang(donHang);
 			jpaChiTietDonHang.save(ctdh);
+
+			Optional<ChiTietGiay> optionalCTG;
+			optionalCTG = jpaChiTietGiay.findById(ctdh.getChiTietGiay().getIdChiTietGiay());
+			if (optionalCTG.isPresent()) {
+				ChiTietGiay ctg = new ChiTietGiay();
+				ctg = optionalCTG.get();
+				int newAmount = ctg.getSoLuong() - ctdh.getSoLuong();
+				ctg.setSoLuong(newAmount);
+				jpaChiTietGiay.save(ctg);
+			}
+
 		});
 		return donHang.getIdDonHang();
 	}

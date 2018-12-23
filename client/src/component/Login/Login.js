@@ -81,7 +81,7 @@ class LoginForm extends Component {
                 </FormItem>
                 <FormItem>
                     <Button type="primary" htmlType="submit" size="large" className="login-form-button">Đăng nhập</Button>
-                    Chưa có tài khoản ? <Link to="/signup">Đăng kí ngay</Link>
+                    Chưa có tài khoản ? <Link to="/dang-ky">Đăng kí ngay</Link>
                 </FormItem>
             </Form>
         );

@@ -90,7 +90,6 @@ class ShoeDetail extends Component {
             this.props.handleUpdateCart();
             return;
         } else {
-            this.props.handleUpdateCart();
             for (var i = 0; i < cart.length; i++) {
                 if (cart[i].id === id) {
                     var temp = cart;
@@ -98,6 +97,7 @@ class ShoeDetail extends Component {
                     localStorage.setItem('items', JSON.stringify(temp));
                     console.log(JSON.parse(localStorage.getItem('items')));
                     message.success('Đã thêm sản phầm vào giỏ hàng', 4);
+                    this.props.handleUpdateCart();
                     return;
                 }
             }
@@ -106,6 +106,7 @@ class ShoeDetail extends Component {
             localStorage.setItem('items', JSON.stringify(cart));
             console.log(JSON.parse(localStorage.getItem('items')));
             message.success('Đã thêm sản phầm vào giỏ hàng', 4);
+            this.props.handleUpdateCart();
         }
     }
 

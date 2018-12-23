@@ -14,7 +14,7 @@ class Profile extends Component {
         loggedUser: null
     }
 
-    componentWillMount() {
+    componentWillReceiveProps() {
         const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
         if (loggedUser !== null) {
             this.setState({
@@ -22,7 +22,6 @@ class Profile extends Component {
             })
             console.log(loggedUser)
         }
-
     }
 
     render() {

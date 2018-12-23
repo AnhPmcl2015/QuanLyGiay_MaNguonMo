@@ -40,6 +40,7 @@ public class UserController {
 
 	@GetMapping("/me")
 	public KhachHangDTO getCurrentUser(@CurrentUser UserPrinciple currentUser) {
+		System.out.println(currentUser.getId());
 		KhachHangDTO khachHang = new KhachHangDTO();
 		khachHang = khachHangDAO.getKhachHangByUser(currentUser.getId());
 //		UserSummary userSummary = new UserSummary(currentUser.getId(), currentUser.getUsername(),

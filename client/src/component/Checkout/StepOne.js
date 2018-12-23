@@ -90,14 +90,17 @@ class AddressForm extends Component {
         );
         return (
             <Form onSubmit={this.handleSubmit}>
-                <FormItem
-                    {...formItemLayout}
-                    label="Sử dụng địa chỉ đã lưu"
-                >
-                    <Button block onClick={() => this.setFormAddress(loggedCustomer)}>
-                    {loggedCustomer.name}, &nbsp; {loggedCustomer.email}, &nbsp;{loggedCustomer.address}, &nbsp;{loggedCustomer.phone}
-                    </Button>
-                </FormItem>
+                {
+                    loggedCustomer !== null &&
+                    <FormItem
+                        {...formItemLayout}
+                        label="Sử dụng địa chỉ đã lưu"
+                    >
+                        <Button block onClick={() => this.setFormAddress(loggedCustomer)}>
+                            {loggedCustomer.name}, &nbsp; {loggedCustomer.email}, &nbsp;{loggedCustomer.address}, &nbsp;{loggedCustomer.phone}
+                        </Button>
+                    </FormItem>
+                }
                 <FormItem
                     {...formItemLayout}
                     label={(

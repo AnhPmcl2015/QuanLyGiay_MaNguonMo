@@ -37,11 +37,7 @@ class Cart extends Component {
         this.setState({ items: _newItems });
         localStorage.setItem('items', JSON.stringify(newItems));
     }
-
-    addToCart(id, amount) {
-        
-    }
-
+    
     userCheckout = () => {
         const isLogged = this.state.isLogged;
         if (isLogged)
@@ -51,7 +47,7 @@ class Cart extends Component {
     }
 
     guestCheckout = () => {
-
+        this.props.history.push("/thanh-toan");
     }
 
     componentWillMount() {
@@ -99,16 +95,16 @@ class Cart extends Component {
                 xs: 24,
                 sm: {
                     span: 12,
-                    offset: 3
+                    offset: 2
                 }, md: {
                     span: 12,
-                    offset: 3
+                    offset: 2
                 }, lg: {
                     span: 12,
-                    offset: 3
+                    offset: 2
                 }
             },
-            summaryZone: { xs: 24, sm: 4, md: 4, lg: 6 },
+            summaryZone: { xs: 24, sm: 8, md: 8, lg: 8 },
         }
         const { visiblePromotion, isLoading, isLogged, items } = this.state;
         const sum = items.reduce(function (accumulator, currentValue) {
@@ -116,8 +112,6 @@ class Cart extends Component {
         }, 0)
         return (
             <div>
-                <Button onClick={() => this.addToCart(1, 1)}>add to cart sp1</Button>
-                <Button onClick={() => this.addToCart(2, 1)}>add to cart sp2</Button>
                 <Button onClick={() => localStorage.clear()}>clear cart</Button>
                 <Row gutter={50}>
                     <Col {...layout.cartZone}>
@@ -181,6 +175,7 @@ class Cart extends Component {
                                             </div>}
                                                 description={<div>
                                                     {item.shoe.giay.loaiGiay.tenLoaiGiay} <br />
+                                                    <b>Size: {item.shoe.size}</b><br />
                                                     <b>Đơn giá: {moneyUtil.format(item.shoe.giay.giaBan)}</b><br />
                                                     <b>Số lượng: {item.amount}</b></div>}
                                             />

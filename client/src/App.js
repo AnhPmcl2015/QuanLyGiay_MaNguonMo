@@ -24,10 +24,12 @@ class App extends Component {
     state = {
         currentUser: null,
         isAuthenticated: false,
-        isLoading: false
+        isLoading: false,
+        count: 0,
     }
 
     loadCurrentUser = () => {
+        console.log('kkaaaaaaaaallk')
         this.setState({
             isLoading: true
         });
@@ -39,7 +41,9 @@ class App extends Component {
                     isLoading: false
                 });
                 localStorage.setItem('loggedUser', JSON.stringify(response));
+                console.log('kkllk')
             }).catch(error => {
+                console.log(error);
                 this.setState({
                     isLoading: false
                 });
@@ -48,13 +52,13 @@ class App extends Component {
 
     handleLogout = (redirectTo = "/", notificationType = "success", description = "Đăng xuất thành công") => {
         localStorage.removeItem(ACCESS_TOKEN);
-
+        localStorage.removeItem('loggedUser');
         this.setState({
             currentUser: null,
             isAuthenticated: false
         });
 
-        this.props.history.push(redirectTo);
+        // this.props.history.push(redirectTo);
 
         notification[notificationType]({
             message: 'Thông báo',
@@ -68,15 +72,20 @@ class App extends Component {
             description: "Đăng nhập thành công.",
         });
         this.loadCurrentUser();
-        this.props.history.push("/");
     }
 
     handleUpdateCart = () => {
-        console.log('concac');
+        const cart = JSON.parse(localStorage.getItem('items'));
+        if (cart !== null) {
+            this.setState({
+                count: cart.length,
+            })
+        }
     }
 
     componentWillMount() {
         this.loadCurrentUser();
+        this.handleUpdateCart();
     }
 
     render() {
@@ -88,20 +97,19 @@ class App extends Component {
             <React.Fragment>
                 <BackTop />
                 <div className="container-fluid">
-                    <Header handleUpdateCart={this.handleUpdateCart} />
+                    <Header handleUpdateCart={this.handleUpdateCart} onLogout={this.handleLogout} count={this.state.count} />
                     <Affix offsetTop={0}>
                         <Menu />
                     </Affix>
                     <Switch>
                         <Route path='/' exact component={Home} />
-                        <Route path='/chi-tiet-giay/:id'  component={ShoeDetail} />
+                        <Route path="/chi-tiet-giay/:id" render={(props) => <ShoeDetail handleUpdateCart={this.handleUpdateCart} {...props} />}></Route>
                         <PrivateRoute path='/thong-tin' isAuthenticated={this.state.isAuthenticated}
-                            // currentUser={this.state.currentUser}
                             onLogout={this.handleLogout} component={Profile} />
                         <Route path="/dang-nhap" render={(props) => this.state.isAuthenticated ?
-                            <Profile /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
+                            <Profile/> : <Login onLogin={this.handleLogin} {...props} />}></Route>
                         <Route path="/dang-ky" component={Signup} />
-                        <Route path="/gio-hang" component={Cart} />
+                        <Route path="/gio-hang" render={(props) => <Cart handleUpdateCart={this.handleUpdateCart} {...props} />}></Route>
                         <Route path="/thanh-toan" component={Checkout} />
                         <Route path='/danh-sach/:id' component={ListShoe}/>
                     </Switch>
