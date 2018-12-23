@@ -68,7 +68,7 @@ class StatisticsRevenue extends Component {
             .then(
                 result => {
                     console.log(result)
-                    const num = result.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + " VND";
+                    const num = result.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + " USD";
                     this.setState({
                         doanhThu: num
                     })

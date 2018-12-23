@@ -109,7 +109,7 @@ class App extends Component {
                             <Profile/> : <Login onLogin={this.handleLogin} {...props} />}></Route>
                         <Route path="/dang-ky" component={Signup} />
                         <Route path="/gio-hang" render={(props) => <Cart handleUpdateCart={this.handleUpdateCart} {...props} />}></Route>
-                        <Route path="/thanh-toan" component={Checkout} />
+                        <Route path="/thanh-toan" render={(props) => <Checkout handleUpdateCart={this.handleUpdateCart} {...props} />} />
                         <Route path='/danh-sach/:id' component={ListShoe}/>
                     </Switch>
                 </div>

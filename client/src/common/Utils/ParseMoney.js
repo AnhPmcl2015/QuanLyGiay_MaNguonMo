@@ -1,6 +1,6 @@
-const moneyUtil = new Intl.NumberFormat('vi-VN', {
+const moneyUtil = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'vnd',
+    currency: 'usd',
     minimumFractionDigits: 0
 })
 
