@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import MenuItem from './MenuItem';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/index';
 
-import {Collapse, Navbar, NavbarToggler, Nav} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav } from 'reactstrap';
 class Menu extends Component {
 
     constructor(props) {
@@ -11,7 +11,7 @@ class Menu extends Component {
 
         this.state = {
             isOpen: false,
-            loaiGiay: [],
+            hangSanXuat: []
         };
     }
     toggle = () => {
@@ -21,34 +21,30 @@ class Menu extends Component {
     }
 
     async componentDidMount() {
-
-        if (this.props.giay.listLoaiGiay.length === 0) {
-            await this.getListLoaiGiay();
-        }
+        await this.getListHanSanXuat();
     }
 
-    // lấy danh sách Loại giày
-     getListLoaiGiay = () => {
-         fetch('/api/hang-san-xuat')
+    // lấy danh sách hãng sản xuất
+    getListHanSanXuat() {
+        fetch('/api/hang-san-xuat')
             .then(response => response.json())
-            .then(data =>{
-                
-                this.props.getListLoaiGiay(data)
-            });
+            .then(data => this.setState({
+                hangSanXuat: data
+            }));
     }
 
     render() {
         var menuItem = this
             .state
-            .loaiGiay
-            .map((giay, index) => {
-                console.log(giay)
-                return <MenuItem key={index} loaiGiay={giay}/>
+            .hangSanXuat
+            .map((hangSanXuat, index) => {
+                return <MenuItem key={index} hangSanXuat={hangSanXuat} />
             });
+
         return (
             <React.Fragment>
                 <Navbar color="dark" dark expand="md">
-                    <NavbarToggler onClick={this.toggle}/>
+                    <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mx-auto" navbar>
                             {menuItem}
@@ -61,16 +57,4 @@ class Menu extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {giay: state.giay}
-};
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        getListLoaiGiay: (listLoaiGiay) => {
-            dispatch(actions.list_loai_giay(listLoaiGiay));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default (Menu);

@@ -111,4 +111,16 @@ public class TrangChuController {
 		});
 		return listGiayBanChay;
 	}
+	@GetMapping("/api/loai-giay")
+	public Collection<TenLoaiGiayDto> getListLoaiGiay() {
+
+		List<TenLoaiGiayDto> listTenLoaiGiay = new ArrayList<>();
+
+		this.loaiGiayRepository.findAll().forEach(loaiGiay -> {
+			TenLoaiGiayDto dto = new TenLoaiGiayDto();
+			this.tenLoaiGiayConverter.convertEntityToDto(loaiGiay, dto);
+			listTenLoaiGiay.add(dto);
+		});
+		return listTenLoaiGiay;
+	}
 }

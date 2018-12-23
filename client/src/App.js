@@ -18,6 +18,7 @@ import { ACCESS_TOKEN } from './common/Constant/common';
 import LoadingIndicator from './component/LoadingIndicator/LoadingIndicator';
 import Login from './component/Login/Login';
 import PrivateRoute from './PrivateRoute';
+import ListShoe from './component/list-shoe/ListShoe';
 
 class App extends Component {
     state = {
@@ -82,6 +83,7 @@ class App extends Component {
         if (this.state.isLoading) {
             return <LoadingIndicator />
         }
+        console.log(this.state.isAuthenticated)
         return (
             <React.Fragment>
                 <BackTop />
@@ -92,15 +94,16 @@ class App extends Component {
                     </Affix>
                     <Switch>
                         <Route path='/' exact component={Home} />
-                        <Route path='/chi-tiet-giay/:id' component={ShoeDetail} />
+                        <Route path='/chi-tiet-giay/:id'  component={ShoeDetail} />
                         <PrivateRoute path='/thong-tin' isAuthenticated={this.state.isAuthenticated}
-                            currentUser={this.state.currentUser}
+                            // currentUser={this.state.currentUser}
                             onLogout={this.handleLogout} component={Profile} />
                         <Route path="/dang-nhap" render={(props) => this.state.isAuthenticated ?
                             <Profile /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
                         <Route path="/dang-ky" component={Signup} />
                         <Route path="/gio-hang" component={Cart} />
                         <Route path="/thanh-toan" component={Checkout} />
+                        <Route path='/danh-sach/:id' component={ListShoe}/>
                     </Switch>
                 </div>
                 <Footer />

@@ -105,7 +105,7 @@ class InfoForm extends Component {
                     label="Họ tên"
                 >
                     {getFieldDecorator('tenKhachHang', {
-                        initialValue: this.props.loggedUser.tenKhachHang,
+                        initialValue: this.props.loggedUser.tenKhachHang !== null ? this.props.loggedUser.tenKhachHang+'' : '' ,
                         rules: [
                             { required: true, message: 'Họ và tên không được trống' },
                             { max: 100, message: "Số kí tự tối đa là 100!" }
@@ -119,7 +119,7 @@ class InfoForm extends Component {
                     label="Số điện thoại"
                 >
                     {getFieldDecorator('soDienThoai', {
-                        initialValue: this.props.loggedUser.soDienThoai + '',
+                        initialValue: this.props.loggedUser.soDienThoai !== null ? this.props.loggedUser.soDienThoai+'' : '',
                         rules: [
                             { required: true, message: 'Số điện thoại không được trống' },
                             { max: 10, message: "Số kí tự tối đa là 10!" }
@@ -133,7 +133,7 @@ class InfoForm extends Component {
                     label="Địa chỉ"
                 >
                     {getFieldDecorator('diaChi', {
-                        initialValue: this.props.loggedUser.diaChi,
+                        initialValue: this.props.loggedUser.diaChi !== null ? this.props.loggedUser.diaChi+'' : '',
                         rules: [{ required: true, message: 'Địa chỉ không được trống' },
                         { max: 500, message: "Số kí tự tối đa là 500!" }],
                     })(

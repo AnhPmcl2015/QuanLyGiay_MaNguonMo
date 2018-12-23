@@ -61,7 +61,7 @@ class Header extends Component {
             <React.Fragment>
                 <header className="row align-items-center">
                     <div className="col-10">
-                        <img id="logo" src="/images/logo.png" className="mr-3" alt="Không có hình ảnh" />
+                        <img id="logo" src="/images/logo_retina.png" className="mr-3" alt="Không có hình ảnh" />
                         <SelectGiay listTenGiay={giay.listTenGiay} />
                     </div>
                     <div className="col-2 text-right">

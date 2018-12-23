@@ -35,6 +35,7 @@ class CardShoe extends Component {
                         </div>
                         <div className="mt-4">
                             <p>{giay.loaiGiay}</p>
+                            <p>{giay.gioiTinh}</p>
                             <hr/>
                             <h6>{giay.tenGiay}</h6>
                             <p>{giay.giaBan}$</p>
