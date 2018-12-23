@@ -3,6 +3,7 @@ import './ShoeDetail.css';
 import CardShoe from '../card-shoe/CardShoe';
 import { Button, Spin, notification, message } from 'antd';
 import { Radio } from 'antd';
+import { Link } from 'react-router-dom';
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 
@@ -31,7 +32,7 @@ class ShoeDetail extends Component {
     // }
 
     setShoeDetail() {
-
+     
         if (this.props.match.params.id !== '0' && this.state.preIdGiay !== this.props.match.params.id) {
             fetch(`/chi-tiet-giay/thong-tin-giay/${this.props.match.params.id}`)
                 .then(response => response.json())
@@ -128,7 +129,9 @@ class ShoeDetail extends Component {
             }
             count = false;
         }
+        //danh-sach/2/loai-giay-Traning
 
+        const link ='/danh-sach/'+thongTinGiay.idHangSanXuat+'/loai-giay-'+thongTinGiay.tenLoaiGiay;
         const radioBtn = thongTinGiay.listCTG.map((ctg, idx) => {
 
             if (ctg.soLuong > 0) {
@@ -147,9 +150,12 @@ class ShoeDetail extends Component {
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
-                            <a href="javascript:void(0)">{thongTinGiay.tenHangSanXuat}</a>
+                            <a>{thongTinGiay.tenHangSanXuat}</a>
                         </li>
-                        <li className="breadcrumb-item active" aria-current="page">{thongTinGiay.tenLoaiGiay}</li>
+                        <li className="breadcrumb-item " aria-current="page"> <a><Link to={link}>{thongTinGiay.tenLoaiGiay}</Link></a></li>
+                        <li className="breadcrumb-item active">
+                            <a>{thongTinGiay.tenGiay}</a>
+                        </li>
                     </ol>
                 </nav>
 

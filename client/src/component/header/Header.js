@@ -59,7 +59,7 @@ class Header extends Component {
         this.setState({ count: props.count });
     }
 
-    // componentWillMount() {
+    // componentWillMount() {   
     //     const cart = JSON.parse(localStorage.getItem('items'));
     //     if (cart !== null) {
     //         this.setState({
