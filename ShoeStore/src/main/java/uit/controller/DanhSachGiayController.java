@@ -44,17 +44,26 @@ public class DanhSachGiayController {
 	public Collection<GiayDto> getTenGiayDuaVaoLoaiGiay(@PathVariable("id") String idLoaiGiay) {
 		List<GiayDto> listGiay = new ArrayList<>();
 
-		Optional<LoaiGiay> optLoaiGiay = this.loaiGiayRepository.findById(Integer.parseInt(idLoaiGiay));
-
-		if (optLoaiGiay.isPresent()) {
-			LoaiGiay loaiGiay = optLoaiGiay.get();
-
-			List<Giay> giays = this.giayRepository.findByLoaiGiay(loaiGiay);
-
+		if (Integer.parseInt(idLoaiGiay) == -1) {
+			List<Giay> giays = this.giayRepository.findAll();
 			for (Giay giay : giays) {
 				GiayDto dto = new GiayDto();
 				this.giayConverter.convertEntityToDto(giay, dto);
 				listGiay.add(dto);
+			}
+		} else {
+			Optional<LoaiGiay> optLoaiGiay = this.loaiGiayRepository.findById(Integer.parseInt(idLoaiGiay));
+
+			if (optLoaiGiay.isPresent()) {
+				LoaiGiay loaiGiay = optLoaiGiay.get();
+
+				List<Giay> giays = this.giayRepository.findByLoaiGiay(loaiGiay);
+
+				for (Giay giay : giays) {
+					GiayDto dto = new GiayDto();
+					this.giayConverter.convertEntityToDto(giay, dto);
+					listGiay.add(dto);
+				}
 			}
 		}
 
@@ -65,20 +74,29 @@ public class DanhSachGiayController {
 	public Collection<GiayDto> getTenGiayDuaVaoHangSanXuat(@PathVariable("id") String idHangSanXuat) {
 		List<GiayDto> listGiay = new ArrayList<>();
 
-		Optional<HangSanXuat> optHangSanXuat = this.hangSanXuatRepository.findById(Integer.parseInt(idHangSanXuat));
+		if (Integer.parseInt(idHangSanXuat) == -1) {
+			List<Giay> giays = this.giayRepository.findAll();
+			for (Giay giay : giays) {
+				GiayDto dto = new GiayDto();
+				this.giayConverter.convertEntityToDto(giay, dto);
+				listGiay.add(dto);
+			}
+		} else {
+			Optional<HangSanXuat> optHangSanXuat = this.hangSanXuatRepository.findById(Integer.parseInt(idHangSanXuat));
 
-		if (optHangSanXuat.isPresent()) {
-			HangSanXuat hangSanXuat = optHangSanXuat.get();
+			if (optHangSanXuat.isPresent()) {
+				HangSanXuat hangSanXuat = optHangSanXuat.get();
 
-			List<LoaiGiay> loaiGiays = this.loaiGiayRepository.findByHangSanXuat(hangSanXuat);
+				List<LoaiGiay> loaiGiays = this.loaiGiayRepository.findByHangSanXuat(hangSanXuat);
 
-			for (LoaiGiay loaiGiay : loaiGiays) {
-				List<Giay> giays = this.giayRepository.findByLoaiGiay(loaiGiay);
+				for (LoaiGiay loaiGiay : loaiGiays) {
+					List<Giay> giays = this.giayRepository.findByLoaiGiay(loaiGiay);
 
-				for (Giay giay : giays) {
-					GiayDto dto = new GiayDto();
-					this.giayConverter.convertEntityToDto(giay, dto);
-					listGiay.add(dto);
+					for (Giay giay : giays) {
+						GiayDto dto = new GiayDto();
+						this.giayConverter.convertEntityToDto(giay, dto);
+						listGiay.add(dto);
+					}
 				}
 			}
 		}
@@ -122,15 +140,15 @@ public class DanhSachGiayController {
 	@GetMapping("/giay/{min}/{max}")
 	public Collection<GiayDto> getGiayByGiaBan(@PathVariable("min") String min, @PathVariable("max") String max) {
 		List<GiayDto> listGiay = new ArrayList<>();
-		
+
 		List<Giay> giays = this.giayRepository.findByGiaBanBetween(Integer.parseInt(min), Integer.parseInt(max));
-		
+
 		for (Giay giay : giays) {
 			GiayDto dto = new GiayDto();
 			this.giayConverter.convertEntityToDto(giay, dto);
 			listGiay.add(dto);
 		}
-		
+
 		return listGiay;
 	}
 }
