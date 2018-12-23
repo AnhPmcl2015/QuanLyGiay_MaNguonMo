@@ -93,9 +93,11 @@ public class TrangChuController {
 
 		List<GiayDto> listGiayNoiBac = new ArrayList<>();
 		giayRepository.findTop8().forEach(giay->{
-			GiayDto giayDto = new GiayDto();
-			this.giayConverter.convertEntityToDto(giay, giayDto);
-			listGiayNoiBac.add(giayDto);
+			if(!giay.getXoaFlag()){
+				TenGiayDto tenGiayDto = new TenGiayDto();
+				this.tenGiayConverter.convertEntityToDto(giay, tenGiayDto);
+				listGiayNoiBac.add(tenGiayDto);
+			}
 		});
 		return listGiayNoiBac;
 	}
@@ -105,9 +107,11 @@ public class TrangChuController {
 		
 		List<GiayDto> listGiayBanChay = new ArrayList<>();
 		giayRepository.findTopSeller().forEach(giay->{
-			GiayDto giayDto = new GiayDto();
-			this.giayConverter.convertEntityToDto(giay, giayDto);
-			listGiayBanChay.add(giayDto);
+			if(!giay.getXoaFlag()) {
+				GiayDto giayDto = new GiayDto();
+				this.giayConverter.convertEntityToDto(giay, giayDto);
+				listGiayBanChay.add(giayDto);
+			}
 		});
 		return listGiayBanChay;
 	}

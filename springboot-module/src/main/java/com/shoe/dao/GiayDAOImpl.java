@@ -33,7 +33,17 @@ public class GiayDAOImpl implements GiayDAO {
 
     @Override
     public void saveShoe(ShoeDTO giayDto) {
-        Giay giay = new Giay();
+        Giay giay;
+        if(giayDto.getIdGiay() != 0){
+            giay = jpa.findById(giayDto.getIdGiay()).get();
+            if(giay != null){
+                giayDto.setImg1(giay.getImg1());
+                giayDto.setImg2(giay.getImg2());
+                giayDto.setImg3(giay.getImg3());
+                giayDto.setImg4(giay.getImg4());
+            }
+        }
+        giay = new Giay();
         converter.convertDtoToEntity(giayDto, giay);
         giay.setXoaFlag(false);
         jpa.save(giay);

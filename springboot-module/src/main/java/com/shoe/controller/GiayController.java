@@ -60,6 +60,7 @@ public class GiayController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> editGiay(@Valid @RequestBody GiayForm model, Errors error) {
         ResponseEntity<String> resp = null;
+
         if (!giayDAO.checkUniqueOnEdit(model)) {
             resp = new ResponseEntity<>("{\"status\":\"unique\"}", HttpStatus.BAD_REQUEST);
         } else if (error.hasFieldErrors("tenGiay")
@@ -162,6 +163,7 @@ public class GiayController {
                                           @RequestParam("idGiay") String idGiay,
                                           @RequestParam("filepart") MultipartFile[] filePart) throws IOException {
         ResponseEntity<String> resp = null;
+        System.out.println("running save img");
         if (filePart.length <= 4) {
             imgBus.saveImage(files,filePart, idGiay);
             resp = new ResponseEntity<>("{\"status\":\"success\"}", HttpStatus.OK);

@@ -41,6 +41,7 @@ class EditShoeForm extends Component {
     callback();
   };
   save = form => {
+    console.log(form)
     request({
       url: "/admin/api/shoe/edit",
       method: "POST",

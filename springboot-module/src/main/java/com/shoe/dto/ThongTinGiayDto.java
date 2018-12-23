@@ -22,5 +22,6 @@ public class ThongTinGiayDto {
 	private String img4;
 	private List<ChiTietGiayDTO> listCTG;
 	private String giaBan;
+	private boolean xoaFlag;
 
 }

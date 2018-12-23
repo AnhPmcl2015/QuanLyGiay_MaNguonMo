@@ -47,9 +47,11 @@ public class DanhSachGiayController {
         if (Integer.parseInt(idLoaiGiay) == -1) {
             List<Giay> giays = this.giayRepository.findAll();
             for (Giay giay : giays) {
-                GiayDto dto = new GiayDto();
-                this.giayConverter.convertEntityToDto(giay, dto);
-                listGiay.add(dto);
+                if(!giay.getXoaFlag()){
+                    GiayDto dto = new GiayDto();
+                    this.giayConverter.convertEntityToDto(giay, dto);
+                    listGiay.add(dto);
+                }
             }
         } else {
             Optional<LoaiGiay> optLoaiGiay = this.loaiGiayRepository.findById(Integer.parseInt(idLoaiGiay));
@@ -60,9 +62,11 @@ public class DanhSachGiayController {
                 List<Giay> giays = this.giayRepository.findByLoaiGiay(loaiGiay);
 
                 for (Giay giay : giays) {
-                    GiayDto dto = new GiayDto();
-                    this.giayConverter.convertEntityToDto(giay, dto);
-                    listGiay.add(dto);
+                    if(!giay.getXoaFlag()){
+                        GiayDto dto = new GiayDto();
+                        this.giayConverter.convertEntityToDto(giay, dto);
+                        listGiay.add(dto);
+                    }
                 }
             }
         }
@@ -77,9 +81,11 @@ public class DanhSachGiayController {
         if (Integer.parseInt(idHangSanXuat) == -1) {
             List<Giay> giays = this.giayRepository.findAll();
             for (Giay giay : giays) {
-                GiayDto dto = new GiayDto();
-                this.giayConverter.convertEntityToDto(giay, dto);
-                listGiay.add(dto);
+                if(!giay.getXoaFlag()){
+                    GiayDto dto = new GiayDto();
+                    this.giayConverter.convertEntityToDto(giay, dto);
+                    listGiay.add(dto);
+                }
             }
         } else {
             Optional<HangSanXuat> optHangSanXuat = this.hangSanXuatRepository.findById(Integer.parseInt(idHangSanXuat));
@@ -93,9 +99,11 @@ public class DanhSachGiayController {
                     List<Giay> giays = this.giayRepository.findByLoaiGiay(loaiGiay);
 
                     for (Giay giay : giays) {
-                        GiayDto dto = new GiayDto();
-                        this.giayConverter.convertEntityToDto(giay, dto);
-                        listGiay.add(dto);
+                        if(!giay.getXoaFlag()){
+                            GiayDto dto = new GiayDto();
+                            this.giayConverter.convertEntityToDto(giay, dto);
+                            listGiay.add(dto);
+                        }
                     }
                 }
             }
@@ -129,9 +137,11 @@ public class DanhSachGiayController {
         }
 
         for (Giay giay : giays) {
-            GiayDto dto = new GiayDto();
-            this.giayConverter.convertEntityToDto(giay, dto);
-            listGiay.add(dto);
+            if(!giay.getXoaFlag()){
+                GiayDto dto = new GiayDto();
+                this.giayConverter.convertEntityToDto(giay, dto);
+                listGiay.add(dto);
+            }
         }
 
         return listGiay;
@@ -144,9 +154,11 @@ public class DanhSachGiayController {
         List<Giay> giays = this.giayRepository.findByGiaBanBetween(Integer.parseInt(min), Integer.parseInt(max));
 
         for (Giay giay : giays) {
-            GiayDto dto = new GiayDto();
-            this.giayConverter.convertEntityToDto(giay, dto);
-            listGiay.add(dto);
+            if(!giay.getXoaFlag()){
+                GiayDto dto = new GiayDto();
+                this.giayConverter.convertEntityToDto(giay, dto);
+                listGiay.add(dto);
+            }
         }
 
         return listGiay;

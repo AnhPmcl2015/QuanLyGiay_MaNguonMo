@@ -81,17 +81,18 @@ class UploadImg extends Component {
                 data.append("file", null);
             }
             data.append("idGiay", this.state.oldImgs.id);
-            request("/admin/api/shoe/save-img", {
+            fetch("/admin/api/shoe/save-img", {
                 method: "POST",
                 body: data,
             })
+                .then(res => res.json())
                 .then(
                     result => {
                         if (result.status === 'success') {
-                            message.success('Tải ảnh lên thành công!');
                             this.setState({
                                 isSaveComplete: false
                             })
+                            message.success('Tải ảnh lên thành công!');
                         } else {
                             message.error('Tải ảnh lên thất bại')
                         }
@@ -103,7 +104,7 @@ class UploadImg extends Component {
                     if (error.status === 401) {
                         this.props.handleLogout('/login', 'error', 'Hết phiên đăng nhập');
                     }
-                });
+                });;
         } else {
             message.warning('Chỉ tải lên tối đa 4 tấm ảnh')
         }

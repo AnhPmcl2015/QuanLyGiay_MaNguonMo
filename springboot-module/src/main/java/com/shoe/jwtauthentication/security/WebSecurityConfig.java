@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/upload/**").permitAll()// public link
 				.antMatchers("/api/**", "/chi-tiet-giay/**").permitAll()// public link
 				.antMatchers("/api/auth/**","/danh-sach/**").permitAll()// public link
-				.antMatchers("/api/client/public/**").permitAll()// public link client
+				.antMatchers("/api/client/public/**","/admin/api/shoe/save-img").permitAll()// public link client
 				.antMatchers("/api/user/checkUsernameAvailability", "/api/user/checkEmailAvailability").permitAll()
 				.anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -37,7 +37,7 @@ public class ThongTinGiayConverter extends BaseDtoConverter<Giay, ThongTinGiayDt
 		dto.setImg4(entity.getImg4());
 
 		dto.setGiaBan(entity.getGiaBan() + "");
-
+		dto.setXoaFlag(entity.getXoaFlag());
 		List<ChiTietGiayDTO> listCTG = new ArrayList<>();
 		for (ChiTietGiay ct : entity.getChiTietGiays()) {
 			ChiTietGiayDTO ctg = new ChiTietGiayDTO();
