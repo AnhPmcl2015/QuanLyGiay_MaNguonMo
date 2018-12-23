@@ -21,6 +21,7 @@ class GoodsReceipt extends Component {
         brands: [],
         dateOfReciept: null,
         selectedBrand: 5,
+        isSaved: false,
     };
 
     columnsConfig = [
@@ -108,8 +109,8 @@ class GoodsReceipt extends Component {
             shoeCode: value,
             shoeName: shoe[0].tenGiay,
             amount: 1,
-            price: shoe[0].giaBan,
-            total: shoe[0].giaBan
+            price: shoe[0].giaban,
+            total: shoe[0].giaban
         };
 
         this.setState({
@@ -184,7 +185,7 @@ class GoodsReceipt extends Component {
     }
 
     onChangeDate = (date, dateString) => {
-        if(dateString.trim() === '')
+        if (dateString.trim() === '')
             dateString = moment().format('DD-MM-YYYY');
         this.setState({
             dateOfReciept: dateString
@@ -192,8 +193,13 @@ class GoodsReceipt extends Component {
     }
 
     handleBrandChange = (key, value) => {
+        var newData = this.state.dataSourceShoes.filter(item => item.tenHangSanXuat === value.props.children)
+        var items = [];
+        newData.forEach(function (shoe) {
+            items.push(<Option key={shoe.maGiay}>{'#' + shoe.maGiay + ' | ' + shoe.tenGiay}</Option>);
+        });
         this.setState({
-            selectedBrand: key
+            listItemShoe: items
         })
     }
 
@@ -216,6 +222,7 @@ class GoodsReceipt extends Component {
                         message: 'Thông báo',
                         description: "Lưu phiếu nhập thành công",
                     });
+                    this.setState({ isSaved: true })
                 }).catch(error => {
                     if (error.status === 401) {
                         this.props.handleLogout('/login', 'error', 'You have been logged out. Please login');
@@ -306,6 +313,7 @@ class GoodsReceipt extends Component {
     }
 
     render() {
+        const { isSaved } = this.state;
         const components = {
             body: {
                 row: EditableFormRow,
@@ -365,12 +373,12 @@ class GoodsReceipt extends Component {
                         components={components}
                         rowClassName={() => 'editable-row'}
                         bordered
-                        locale={{emptyText : "Chưa có dữ liệu"}}
+                        locale={{ emptyText: "Chưa có dữ liệu" }}
                         dataSource={this.state.dataSourceTable}
                         columns={columns}
                     />
                     <br />
-                    <Button onClick={this.saveReceipt} style={{ float: 'right' }} type="primary">Lưu</Button>
+                    <Button disabled={isSaved} onClick={this.saveReceipt} style={{ float: 'right' }} type="primary">Lưu</Button>
                 </Card>
             </div>
         );

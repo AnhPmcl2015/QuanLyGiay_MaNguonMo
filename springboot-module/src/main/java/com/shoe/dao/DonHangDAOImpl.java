@@ -1,5 +1,6 @@
 package com.shoe.dao;
 
+import java.util.Date;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -53,6 +54,8 @@ public class DonHangDAOImpl implements DonHangDAO {
 			tinhTrang.setIdTinhTrang(stt);
 			DonHang donhang = donHangOptional.get();
 			donhang.setTinhTrangDonHang(tinhTrang);
+			if (stt == 3)
+				donhang.setNgayGiao(new Date());
 		}
 	}
 

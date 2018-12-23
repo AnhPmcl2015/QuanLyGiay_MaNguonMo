@@ -3,7 +3,6 @@ import { signup, checkUsernameAvailability, checkEmailAvailability } from './Sig
 import './Signup.css';
 import { Link } from 'react-router-dom';
 import { 
-    NAME_MIN_LENGTH, NAME_MAX_LENGTH, 
     USERNAME_MIN_LENGTH, USERNAME_MAX_LENGTH,
     EMAIL_MAX_LENGTH,
     PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
@@ -16,9 +15,6 @@ class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: {
-                value: ''
-            },
             username: {
                 value: ''
             },
@@ -53,11 +49,10 @@ class Signup extends Component {
         event.preventDefault();
     
         const signupRequest = {
-            name: this.state.name.value,
             email: this.state.email.value,
             username: this.state.username.value,
             password: this.state.password.value,
-            role: ['user']       
+            role: ['admin']
         };
 
         signup(signupRequest)
@@ -77,8 +72,7 @@ class Signup extends Component {
     }
 
     isFormInvalid() {
-        return !(this.state.name.validateStatus === 'success' &&
-            this.state.username.validateStatus === 'success' &&
+        return !(this.state.username.validateStatus === 'success' &&
             this.state.email.validateStatus === 'success' &&
             this.state.password.validateStatus === 'success'
         );
@@ -90,7 +84,7 @@ class Signup extends Component {
                 <h1 className="page-title">Đăng ký</h1>
                 <div className="signup-content">
                     <Form onSubmit={this.handleSubmit} className="signup-form">
-                        <FormItem 
+                        {/* <FormItem 
                             label="Tên"
                             validateStatus={this.state.name.validateStatus}
                             help={this.state.name.errorMsg}>
@@ -101,7 +95,7 @@ class Signup extends Component {
                                 placeholder="Nhập tên của bạn"
                                 value={this.state.name.value} 
                                 onChange={(event) => this.handleInputChange(event, this.validateName)} />    
-                        </FormItem>
+                        </FormItem> */}
                         <FormItem label="Tên tài khoản"
                             hasFeedback
                             validateStatus={this.state.username.validateStatus}
@@ -158,25 +152,6 @@ class Signup extends Component {
     }
 
     // Validation Functions
-
-    validateName = (name) => {
-        if(name.length < NAME_MIN_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `Tên phải lớn hơn ${NAME_MIN_LENGTH} kí tự`
-            }
-        } else if (name.length > NAME_MAX_LENGTH) {
-            return {
-                validationStatus: 'error',
-                errorMsg: `Tên không được vượt quá  ${NAME_MAX_LENGTH} ký tự`
-            }
-        } else {
-            return {
-                validateStatus: 'success',
-                errorMsg: null,
-              };            
-        }
-    }
 
     validateEmail = (email) => {
         if(!email) {

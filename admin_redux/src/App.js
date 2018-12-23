@@ -89,21 +89,21 @@ class App extends Component {
 
     return (
       <div>
-
-        <Header isAuthenticated={this.state.isAuthenticated}
+        {this.state.isAuthenticated && <Header isAuthenticated={this.state.isAuthenticated}
           currentUser={this.state.currentUser}
-          onLogout={this.handleLogout} />
+          onLogout={this.handleLogout} />}
+
         <div className="m-2">
           <Switch>
             <Route path="/login" render={(props) => this.state.isAuthenticated ?
-              <BadRequest /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
+              <StatisticsRevenue /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
+            <PrivateRoute path="/admin/dang-ky" component={Signup} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
             <PrivateRoute
               path="/admin/danh-sach-giay/them-giay"
               authenticated={this.state.isAuthenticated}
               component={CreateShoe}
               handleLogout={this.handleLogout}
             />
-
             <PrivateRoute
               path="/admin/danh-sach-giay/sua-giay"
               authenticated={this.state.isAuthenticated}
@@ -117,9 +117,8 @@ class App extends Component {
               handleLogout={this.handleLogout}
             />
             <PrivateRoute path="/admin/danh-sach-giay" component={ListShoe} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout} />
-            <Route path="/dang-ky" component={Signup} />
-            <PrivateRoute path="/don-hang" component={Invoice} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
-            <PrivateRoute path="/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
+            <PrivateRoute path="/admin/don-hang" component={Invoice} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
+            <PrivateRoute path="/admin/nhap-hang" component={GoodsReceipt} authenticated={this.state.isAuthenticated} handleLogout={this.handleLogout}></PrivateRoute>
             <PrivateRoute
               exact
               path={["/admin/trang-chu", "/"]}

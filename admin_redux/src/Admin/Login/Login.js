@@ -12,6 +12,7 @@ class Login extends React.Component {
         const AntWrappedLoginForm = Form.create()(LoginForm)
         return (
             <div className="login-container">
+            <br/><br/>
                 <h1>ĐĂNG NHẬP</h1>
                 <AntWrappedLoginForm onLogin={this.props.onLogin} />
             </div>
@@ -80,7 +81,6 @@ class LoginForm extends Component {
                 </FormItem>
                 <FormItem>
                     <Button type="primary" htmlType="submit" size="large" className="login-form-button">Đăng nhập</Button>
-                    Chưa có tài khoản ? <Link to="/signup">Đăng kí ngay</Link>
                 </FormItem>
             </Form>
         );

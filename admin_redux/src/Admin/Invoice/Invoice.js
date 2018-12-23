@@ -228,9 +228,6 @@ class Invoice extends Component {
     }
 
     loadStatus() {
-        this.setState({
-            isLoading: true
-        });
         getStatus()
             .then(response => {
                 console.log(response);
@@ -240,18 +237,15 @@ class Invoice extends Component {
                 });
                 this.setState({
                     listStatus: items,
-                    isLoading: false
                 });
             }).catch(error => {
                 if (error.status === 404) {
                     this.setState({
                         notFound: true,
-                        isLoading: false
                     });
                 } else {
                     this.setState({
                         serverError: true,
-                        isLoading: false
                     });
                 }
             });
@@ -433,7 +427,7 @@ class Invoice extends Component {
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[
-                        <Select key="status" style={{ width: 200 }} labelInValue defaultValue ={{ key: '1' }}  onChange={this.handleChangeStatus}>
+                        <Select key="status" style={{ width: 200 }} labelInValue defaultValue={{ key: '1' }} onChange={this.handleChangeStatus}>
                             {this.state.listStatus}
                         </Select>,
 
@@ -444,28 +438,73 @@ class Invoice extends Component {
                         </Button>,
                     ]}
                 >
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Tên khách hàng:</td>
-                                <td>{selectedOrder.customerName}</td>
-                            </tr>
-                            <tr>
-                                <td>Ngày mua:</td>
-                                <td>{selectedOrder.orderDate}</td>
-                            </tr>
-                            <tr>
-                                <td>Số điện thoại:</td>
-                                <td>{selectedOrder.customerPhone}</td>
-                            </tr>
-                            <tr>
-                                <td>Trạng thái:</td>
-                                <td>
-                                    {selectedOrder.status}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <Row>
+                        <Col span={12}>
+                            <table style={{ 'width': '100%' }}>
+                                <tbody>
+                                    <tr>
+                                        <td>Tên khách hàng:</td>
+                                        <td>{selectedOrder.customerName}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td>{selectedOrder.customerEmail}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số điện thoại:</td>
+                                        <td>{selectedOrder.customerPhone}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Điạ chỉ:</td>
+                                        <td>
+                                            {selectedOrder.customerAddress}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Col>
+                        <Col span={12}>
+                            <table style={{ 'width': '100%' }}>
+                                <tbody>
+                                    <tr>
+                                        <td>Trạng thái:</td>
+                                        <td>{selectedOrder.status}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày mua:</td>
+                                        <td>{selectedOrder.orderDate}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phương thức thanh toán</td>
+                                        <td>{
+                                            selectedOrder.paymentMethod === 'creditcard' &&
+                                            <div>Thanh toán qua thẻ tín dụng <Icon type="credit-card" theme="twoTone" /></div>
+                                        }
+                                            {
+                                                selectedOrder.paymentMethod === 'bank' &&
+                                                <div>Thanh toán qua ngân hàng nội địa <Icon type="bank" theme="twoTone" /></div>
+                                            }
+                                            {
+                                                selectedOrder.paymentMethod === 'paypal' &&
+                                                <div>Thanh toán qua cổng thanh toán Paypal <Icon type="safety-certificate" theme="twoTone" /></div>
+                                            }
+                                            {
+                                                selectedOrder.paymentMethod === 'cod' &&
+                                                <div>Thanh toán khi nhận hàng <Icon type="dollar" theme="twoTone" /></div>
+                                            }</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phương thức vận chuyển:</td>
+                                        <td>
+                                            {selectedOrder.shipMethod === 'default' && 'Mặc định'}
+                                            {selectedOrder.shipMethod === 'normal' && 'Tiêu chuẩn'}
+                                            {selectedOrder.shipMethod === 'fast' && 'Nhanh'}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Col>
+                    </Row>
                     <br />
                     <Table rowKey='idChiTietDonHang'
                         locale={{ emptyText: "Chưa có dữ liệu" }}

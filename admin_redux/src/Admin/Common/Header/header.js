@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
-import { Icon } from 'antd';
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
   Button,
   UncontrolledDropdown,
   DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from "reactstrap";
 class Header extends Component {
   constructor(props) {
@@ -45,7 +41,10 @@ class Header extends Component {
               <Link to="/admin/danh-sach-giay">Danh sách giày</Link>
             </NavbarBrand>
             <NavbarBrand>
-              <Link to="/login">Danh sách đơn hàng</Link>
+              <Link to="/admin/nhap-hang">Nhập hàng</Link>
+            </NavbarBrand>
+            <NavbarBrand>
+              <Link to="/admin/don-hang">Danh sách đơn hàng</Link>
             </NavbarBrand>
             <Nav className="ml-auto" navbar>
               {/* <NavItem>
