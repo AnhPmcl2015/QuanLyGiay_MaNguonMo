@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Tabs } from 'antd';
 import Info from './Info';
 import Order from './Ordered';
-import Address from './Address';
-import Header from './../header/Header';
-import Menu from './../menu/Menu';
 
 const TabPane = Tabs.TabPane;
 
@@ -25,9 +22,9 @@ class Profile extends Component {
 
     render() {
         const user = this.state.loggedUser;
-        console.log(user)
         return (
             <div>
+                <br/>
                 <Tabs
                     defaultActiveKey="1"
                     tabPosition="left"

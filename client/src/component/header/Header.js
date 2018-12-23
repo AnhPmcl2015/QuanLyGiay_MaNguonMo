@@ -4,8 +4,7 @@ import SelectGiay from './SelectGiay';
 
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/index';
-import { list_giay_ban_chay } from './../../redux/actions/index';
-import { Icon, Badge, Modal, Col, Row, Button, Input } from 'antd';
+import { Icon, Badge } from 'antd';
 import { Link } from 'react-router-dom';
 import { ACCESS_TOKEN } from '../../common/Constant/common';
 
@@ -30,14 +29,14 @@ class Header extends Component {
             isLogged = true;
         } else
             isLogged = false;
-        this.setState({isLogged});
+        this.setState({ isLogged });
     }
 
     clickLogout = () => {
         this.props.onLogout();
-        this.setState({isLogged: false});
+        this.setState({ isLogged: false });
     }
-    
+
     // lấy danh sách tên giày
     getListTenGiay() {
         fetch("/api/ten-giay")
@@ -82,10 +81,14 @@ class Header extends Component {
                     </div>
                     <div className="col-2 text-right">
                         <ul className="list-inline">
-                            <li className="list-inline-item">
-                                <a className="icon-size mr-4">
-                                    <Link to="/thong-tin"><Icon type="user" /></Link></a>
-                            </li>
+                            {
+                                isLogged &&
+                                <li className="list-inline-item">
+                                    <a className="icon-size mr-4">
+                                        <Link to="/thong-tin"><Icon type="user" /></Link></a>
+                                </li>
+                            }
+
                             <li className="list-inline-item">
                                 <Badge count={count} className="mr-4">
                                     <a className="icon-size">
