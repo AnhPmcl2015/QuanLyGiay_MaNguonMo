@@ -37,9 +37,11 @@ public class KhachHangDAOImpl implements KhachHangDAO {
 		KhachHang khachHang = new KhachHang();
 		KhachHangDTO khachHangdto = new KhachHangDTO();
 		khachHang = jpaKhachHang.findByUserUserId(idUser);
-		if (khachHang != null)
+		if (khachHang != null) {
 			khachHangEco.convertEntityToDto(khachHang, khachHangdto);
-		return khachHangdto;
+			return khachHangdto;
+		}
+		return null;
 	}
 
 	@Override

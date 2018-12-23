@@ -55,7 +55,8 @@ class AddressForm extends Component {
         }
 
         const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
-        if (loggedUser !== null) {
+        if (loggedUser !== null && loggedUser.idKhachHang !== 0) {
+            console.log(loggedUser);
             const customer = {
                 email: loggedUser.user.email,
                 name: loggedUser.tenKhachHang,

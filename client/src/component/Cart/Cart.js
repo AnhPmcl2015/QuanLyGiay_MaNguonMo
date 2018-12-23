@@ -36,6 +36,7 @@ class Cart extends Component {
         });
         this.setState({ items: _newItems });
         localStorage.setItem('items', JSON.stringify(newItems));
+        this.props.handleUpdateCart();
     }
     
     userCheckout = () => {

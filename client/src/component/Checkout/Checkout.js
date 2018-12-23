@@ -172,6 +172,7 @@ class Checkout extends Component {
         }, 0)
         this.setState({ items: _newItems, summary });
         localStorage.setItem('items', JSON.stringify(newItems));
+        this.props.handleUpdateCart();
     }
 
     handleRedirect = () => {
