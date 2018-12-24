@@ -31,11 +31,18 @@ class Order extends Component {
     }
 
     componentDidMount() {
+        const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+        var idKhachHang;
+        if (loggedUser !== null) {
+            idKhachHang =  loggedUser.idKhachHang;
+        }
         database.ref("/orders").once('value', (snapshot) => {
             var orders = [];
             snapshot.forEach(function (childSnapshot) {
                 var value = childSnapshot.val();
-                orders.push(value);
+                if (value.idCustomer === idKhachHang) {
+                    orders.push(value);
+                }
             })
             this.setState({
                 dataSourceOrders: orders,

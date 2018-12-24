@@ -29,7 +29,7 @@ class App extends Component {
     }
 
     loadCurrentUser = () => {
-     
+
         this.setState({
             isLoading: true
         });
@@ -81,6 +81,11 @@ class App extends Component {
             })
         }
     }
+    handleClearCart = () => {
+        this.setState({
+            count: 0,
+        })
+    }
 
     componentWillMount() {
         this.loadCurrentUser();
@@ -106,11 +111,11 @@ class App extends Component {
                         <PrivateRoute path='/thong-tin' isAuthenticated={this.state.isAuthenticated}
                             onLogout={this.handleLogout} component={Profile} />
                         <Route path="/dang-nhap" render={(props) => this.state.isAuthenticated ?
-                            <Profile/> : <Login onLogin={this.handleLogin} {...props} />}></Route>
+                            <Profile /> : <Login onLogin={this.handleLogin} {...props} />}></Route>
                         <Route path="/dang-ky" component={Signup} />
                         <Route path="/gio-hang" render={(props) => <Cart handleUpdateCart={this.handleUpdateCart} {...props} />}></Route>
-                        <Route path="/thanh-toan" render={(props) => <Checkout handleUpdateCart={this.handleUpdateCart} {...props} />} />
-                        <Route path='/danh-sach/:id' component={ListShoe}/>
+                        <Route path="/thanh-toan" render={(props) => <Checkout handleClearCart={this.handleClearCart} handleUpdateCart={this.handleUpdateCart} {...props} />}></Route>
+                        <Route path='/danh-sach/:id' component={ListShoe} />
                     </Switch>
                 </div>
                 <Footer />

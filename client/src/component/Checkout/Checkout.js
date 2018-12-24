@@ -102,11 +102,12 @@ class Checkout extends Component {
                 console.log('Lưu đơn hàng xuống db thành công');
                 this.addNewOrderToFirebase(response, idCustomer, customer, products, shipMethod, paymentMethod, total, discount, summary).then(function () {
                     // success
+                    console.log('Lưu đơn hàng lên firebase thành công');
                     localStorage.removeItem('items');
                 }).catch(function (error) {
                     notification.error({
                         message: 'Thông báo',
-                        description: 'Thanh toán thất bại, vui lòng thanh toán lại !'
+                        description: 'Thanh toán thất bại, vui lòng thanh toán lại !' + error
                     });
                 });
             }).catch(error => {
@@ -115,6 +116,7 @@ class Checkout extends Component {
                     description: 'Thanh toán thất bại, vui lòng thanh toán lại !'
                 });
             });
+        this.props.handleClearCart();
     }
 
     addNewOrderToFirebase(idDonHang, idCustomer, customer, products, shipMethod, paymentMethod, total, discount, summary) {
@@ -124,6 +126,7 @@ class Checkout extends Component {
         // A order entry.
         var order = {
             orderId: idDonHang,
+            idCustomer: idCustomer,
             orderDate: moment().format("DD-MM-YYYY"),
             customerEmail: customer.email,
             customerName: customer.name,
@@ -165,18 +168,19 @@ class Checkout extends Component {
             return item.id.toString() !== id.toString();
         });
         const _newItems = this.state.items.filter(function (item) {
-            return item.shoe.giay.idGiay.toString() !== id.toString();
+            return item.shoe.idChiTietGiay.toString() !== id.toString();
         });
         const summary = _newItems.reduce(function (accumulator, currentValue) {
             return accumulator + (currentValue.amount * currentValue.shoe.giay.giaBan);
         }, 0)
+
         this.setState({ items: _newItems, summary });
         localStorage.setItem('items', JSON.stringify(newItems));
         this.props.handleUpdateCart();
     }
 
     handleRedirect = () => {
-        this.props.history.push("/gio-hang");
+        this.props.history.push("/");
     }
 
     componentWillMount() {

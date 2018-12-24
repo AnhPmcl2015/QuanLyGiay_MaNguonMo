@@ -30,7 +30,6 @@ class Cart extends Component {
         const newItems = items.filter(function (item) {
             return item.id.toString() !== id.toString();
         });
-        console.log(newItems, id);
         const _newItems = this.state.items.filter(function (item) {
             return item.shoe.idChiTietGiay.toString() !== id.toString();
         });
@@ -113,7 +112,7 @@ class Cart extends Component {
         }, 0)
         return (
             <div>
-                <Button onClick={() => localStorage.clear()}>clear cart</Button>
+                {/* <Button onClick={() => localStorage.clear()}>clear cart</Button> */}
                 <Row gutter={50}>
                     <Col {...layout.cartZone}>
                         <Alert

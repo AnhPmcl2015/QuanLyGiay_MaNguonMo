@@ -12,6 +12,7 @@ import com.shoe.converter.DonHangConverter;
 import com.shoe.dto.DonHangDTO;
 import com.shoe.entities.ChiTietGiay;
 import com.shoe.entities.DonHang;
+import com.shoe.entities.Giay;
 import com.shoe.entities.TinhTrangDonHang;
 import com.shoe.jpa.JpaChiTietDonHang;
 import com.shoe.jpa.JpaChiTietGiay;
@@ -76,6 +77,12 @@ public class DonHangDAOImpl implements DonHangDAO {
 				ctg = optionalCTG.get();
 				int newAmount = ctg.getSoLuong() - ctdh.getSoLuong();
 				ctg.setSoLuong(newAmount);
+
+				int oldSLB = ctg.getGiay().getSoLuongBan();
+				int newSLB = oldSLB + ctdh.getSoLuong();
+				Giay giay = ctg.getGiay();
+				giay.setSoLuongBan(newSLB);
+				ctg.setGiay(giay);
 				jpaChiTietGiay.save(ctg);
 			}
 
