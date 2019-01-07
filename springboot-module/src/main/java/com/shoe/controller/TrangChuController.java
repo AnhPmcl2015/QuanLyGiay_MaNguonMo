@@ -94,9 +94,9 @@ public class TrangChuController {
 		List<GiayDto> listGiayNoiBac = new ArrayList<>();
 		giayRepository.findTop8().forEach(giay->{
 			if(!giay.getXoaFlag()){
-				TenGiayDto tenGiayDto = new TenGiayDto();
-				this.tenGiayConverter.convertEntityToDto(giay, tenGiayDto);
-				listGiayNoiBac.add(tenGiayDto);
+				GiayDto giayDto = new GiayDto();
+				this.giayConverter.convertEntityToDto(giay, giayDto);
+				listGiayNoiBac.add(giayDto);
 			}
 		});
 		return listGiayNoiBac;

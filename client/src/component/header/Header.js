@@ -49,10 +49,13 @@ class Header extends Component {
     }
 
     handleChange = (value) => {
-        this
+        if(value != null){
+            this
             .props
             .history
             .push('/chi-tiet-giay/' + value);
+        }
+       
     }
 
     componentWillReceiveProps(props) {

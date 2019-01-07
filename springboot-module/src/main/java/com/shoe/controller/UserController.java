@@ -20,6 +20,7 @@ import com.shoe.entities.User;
 import com.shoe.jpa.UserRepository;
 import com.shoe.jwtauthentication.security.services.CurrentUser;
 import com.shoe.jwtauthentication.security.services.UserPrinciple;
+import com.shoe.payload.SeverResponse;
 
 @RestController
 @RequestMapping("/api/user")
@@ -50,7 +51,10 @@ public class UserController {
 
 	@GetMapping("/me")
 	public ResponseEntity<?> getCurrentUser(@CurrentUser UserPrinciple currentUser) {
-		System.out.println(currentUser.getId());
+//		if (currentUser == null) {
+//			return new ResponseEntity(new SeverResponse(false, "unloggin"), HttpStatus.FORBIDDEN);
+//		}
+		
 		KhachHangDTO khachHang = new KhachHangDTO();
 		khachHang = khachHangDAO.getKhachHangByUser(currentUser.getId());
 		if (khachHang == null) {
@@ -60,7 +64,6 @@ public class UserController {
 				userConverter.convertEntityToDto(optionalUser.get(), userDTO);
 				KhachHangDTO khachHangDTO = new KhachHangDTO();
 				khachHangDTO.setUser(userDTO);
-				System.out.println(khachHangDTO.getUser().getEmail());
 				return ResponseEntity.ok(khachHangDTO);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);

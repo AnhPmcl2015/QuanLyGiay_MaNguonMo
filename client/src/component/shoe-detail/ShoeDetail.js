@@ -158,7 +158,7 @@ class ShoeDetail extends Component {
                         </li>
                     </ol>
                 </nav>
-                {exist && <h5>Không tồn tại</h5>}
+                {exist && <h5 style={{marginBottom: 300}}>Không tồn tại</h5>}
                 {!exist &&
                     <div>
                         <div className="row">

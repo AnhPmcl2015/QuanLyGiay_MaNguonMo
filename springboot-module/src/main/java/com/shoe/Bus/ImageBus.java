@@ -33,22 +33,26 @@ public class ImageBus {
         File uploadRootDir = new File(pathImg);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
+            System.out.println("running" +uploadRootDir.getAbsolutePath());
         }
         List<String> pathImgs = new ArrayList<>();
         for (MultipartFile file : files) {
             if (file.isEmpty()) {
                 continue;
             }
+            
             byte[] bytes = file.getBytes();
             Path path = Paths.get(pathImg + file.getOriginalFilename());
-            String pathImg = "http://localhost:8080/upload/image/" + file.getOriginalFilename();
+            String pathImg = "file:///Users/dieunguyen/Documents/GitHub/project-uit/ShoeStore/springboot-module/upload/image/" + file.getOriginalFilename();
             System.out.println(pathImg);
             pathImgs.add(pathImg.trim());
+            System.out.println(path);
             Files.write(path, bytes);
         }
         if (pathImgs.size() <= 4) {
             Optional<Giay> giayOpt = jpa.findById(Integer.parseInt(idGiay));
             if (giayOpt.isPresent()) {
+            	System.out.println("running123");
                 Giay giay = giayOpt.get();
                 giay.setImg1(pathImgs.get(0));
                 giay.setImg2(pathImgs.get(1));

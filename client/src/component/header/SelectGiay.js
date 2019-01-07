@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Header.css';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-import {Select} from 'antd';
+import { Select } from 'antd';
 const Option = Select.Option;
 
 class SelectGiay extends Component {
@@ -15,16 +15,19 @@ class SelectGiay extends Component {
     }
 
     handleChange(value) {
-        this
-            .props
-            .history
-            .push('/chi-tiet-giay/' + value);
+        if (value != null) {
+            this
+                .props
+                .history
+                .push('/chi-tiet-giay/' + value);
+
+        }
     }
 
     render() {
 
         var { listTenGiay } = this.props;
- 
+
         var eleList = listTenGiay
             .map((tenGiay, index) => {
                 return <Option value={tenGiay.id} key={tenGiay.id}>{tenGiay.tenGiay}</Option>;
@@ -38,8 +41,8 @@ class SelectGiay extends Component {
                     allowClear
                     showSearch
                     style={{
-                    width: 300
-                }}
+                        width: 300
+                    }}
                     placeholder="Chọn tên giày"
                     optionFilterProp="children"
                     onChange={this.handleChange}
